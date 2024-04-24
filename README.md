@@ -95,8 +95,8 @@ for additional information.
 When you want to upgrade to a newer version, then just copy the new files into the folder
 and repeat the steps 4. to 7.
 
-Normally a random password is generated when the admin user is created during inital database creation,
-however you can set the inital admin password, by setting the `INITIAL_ADMIN_PW` env var.
+Normally a random password is generated when the admin user is created during initial database creation,
+however you can set the initial admin password, by setting the `INITIAL_ADMIN_PW` env var.
 
 You can configure Part-DB to your needs by changing environment variables in the `.env.local` file. 
 See [here](https://docs.part-db.de/configuration.html) for more information.
