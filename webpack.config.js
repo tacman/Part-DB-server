@@ -36,17 +36,16 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
-    // public path used by the web server to access the output path
+    // This value doesn't matter, as the public path is set to auto later down. This is just to prevent a warning
     .setPublicPath('/build')
-    // only needed for CDN's or subdirectory deploy
+    // only needed for CDN's or subdirectory deploy (this should not be needeed, as we use auto public path)
     //.setManifestKeyPrefix('build/')
 
-    /**
-     * If you are putting Part-DB into a sub directory you have to uncomment these lines and
-     * replace "part-db/" with your path to Part-DB
-     */
-    //.setPublicPath('/part-db/build')
-    //.setManifestKeyPrefix('build/')
+    //Use build/ as public path inisde the manifest.json (instead of "auto")
+    //Without this all webpack managed stuff which is loaded via the assets() twig function will not work
+    .configureManifestPlugin(options => {
+        options.publicPath = 'build/';
+    })
 
     /*
      * ENTRY CONFIG
@@ -60,11 +59,12 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('webauthn_tfa', './assets/js/webauthn_tfa.js')
 
+    //Configure to just output the zxing wasm file, without parsing it
+    .addRule({
+        test: /zxing_reader\.wasm$/,
+        type: "asset/resource"
+    })
 
-
-
-    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    .enableStimulusBridge('./assets/controllers.json')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -194,3 +194,11 @@ if (Encore.isDev()) {
 
 
 module.exports = Encore.getWebpackConfig();
+
+//Enable webassembly support
+module.exports.experiments = module.exports.experiments || {};
+module.exports.experiments.asyncWebAssembly = true;
+
+//Enable webpack auto public path (this only works in combination with WebpackAutoPathSubscriber!!)
+//We do it here to supress a warning caused by webpack Encore
+module.exports.output.publicPath = 'auto';

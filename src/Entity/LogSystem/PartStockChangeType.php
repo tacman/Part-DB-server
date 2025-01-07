@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of Part-DB (https://github.com/Part-DB/Part-DB-symfony).
  *
@@ -17,7 +20,6 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 namespace App\Entity\LogSystem;
 
 enum PartStockChangeType: string
@@ -37,6 +39,11 @@ enum PartStockChangeType: string
             self::WITHDRAW => 'w',
             self::MOVE => 'm',
         };
+    }
+
+    public function toTranslationKey(): string
+    {
+        return 'log.part_stock_changed.' . $this->value;
     }
 
     public static function fromExtraShortType(string $value): self

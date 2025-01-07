@@ -234,8 +234,8 @@ final class Version20190902140506 extends AbstractMultiPlatformMigration
             'orderdetails', 'pricedetails', 'storelocations', 'suppliers', ];
 
         foreach ($tables as $table) {
-            $this->addSql("UPDATE ${table} SET datetime_added = NOW() WHERE datetime_added = '0000-00-00 00:00:00'");
-            $this->addSql("UPDATE ${table} SET last_modified = datetime_added WHERE last_modified = '0000-00-00 00:00:00'");
+            $this->addSql("UPDATE $table SET datetime_added = NOW() WHERE datetime_added = '0000-00-00 00:00:00'");
+            $this->addSql("UPDATE $table SET last_modified = datetime_added WHERE last_modified = '0000-00-00 00:00:00'");
         }
 
         //Set the dbVersion to a high value, to prevent the old Part-DB versions to upgrade DB!
@@ -379,5 +379,15 @@ final class Version20190902140506 extends AbstractMultiPlatformMigration
     public function sqLiteDown(Schema $schema): void
     {
         $this->warnIf(true, "Migration not needed for SQLite. Skipping...");
+    }
+
+    public function postgreSQLUp(Schema $schema): void
+    {
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
+    }
+
+    public function postgreSQLDown(Schema $schema): void
+    {
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
     }
 }

@@ -26,8 +26,8 @@ namespace App\Services\InfoProviderSystem;
 use App\Entity\Attachments\AttachmentType;
 use App\Entity\Attachments\PartAttachment;
 use App\Entity\Base\AbstractStructuralDBElement;
-use App\Entity\Parameters\AbstractParameter;
 use App\Entity\Parameters\PartParameter;
+use App\Entity\Parts\Category;
 use App\Entity\Parts\Footprint;
 use App\Entity\Parts\InfoProviderReference;
 use App\Entity\Parts\Manufacturer;
@@ -37,16 +37,17 @@ use App\Entity\Parts\Supplier;
 use App\Entity\PriceInformations\Currency;
 use App\Entity\PriceInformations\Orderdetail;
 use App\Entity\PriceInformations\Pricedetail;
+use App\Repository\Parts\CategoryRepository;
 use App\Services\InfoProviderSystem\DTOs\FileDTO;
 use App\Services\InfoProviderSystem\DTOs\ParameterDTO;
 use App\Services\InfoProviderSystem\DTOs\PartDetailDTO;
 use App\Services\InfoProviderSystem\DTOs\PriceDTO;
 use App\Services\InfoProviderSystem\DTOs\PurchaseInfoDTO;
-use Brick\Math\BigDecimal;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * This class converts DTOs to entities which can be persisted in the DB
+ * @see \App\Tests\Services\InfoProviderSystem\DTOtoEntityConverterTest
  */
 final class DTOtoEntityConverter
 {
@@ -87,6 +88,7 @@ final class DTOtoEntityConverter
     {
         $entity->setMinDiscountQuantity($dto->minimum_discount_amount);
         $entity->setPrice($dto->getPriceAsBigDecimal());
+        $entity->setPriceRelatedQuantity($dto->price_related_quantity);
 
         //Currency TODO
         if ($dto->currency_iso_code !== null) {
@@ -94,7 +96,6 @@ final class DTOtoEntityConverter
         } else {
             $entity->setCurrency(null);
         }
-
 
         return $entity;
     }
@@ -129,7 +130,7 @@ final class DTOtoEntityConverter
         $entity->setAttachmentType($type);
 
         //If no name is given, try to extract the name from the URL
-        if (empty($dto->name)) {
+        if ($dto->name === null || $dto->name === '' || $dto->name === '0') {
             $entity->setName($this->getAttachmentNameFromURL($dto->url));
         } else {
             $entity->setName($dto->name);
@@ -156,6 +157,12 @@ final class DTOtoEntityConverter
         $entity->setComment($dto->notes ?? '');
 
         $entity->setMass($dto->mass);
+
+        //Try to map the category to an existing entity (but never create a new one)
+        if ($dto->category) {
+            //@phpstan-ignore-next-line For some reason php does not recognize the repo returns a category
+            $entity->setCategory($this->em->getRepository(Category::class)->findForInfoProvider($dto->category));
+        }
 
         $entity->setManufacturer($this->getOrCreateEntity(Manufacturer::class, $dto->manufacturer));
         $entity->setFootprint($this->getOrCreateEntity(Footprint::class, $dto->footprint));
@@ -186,7 +193,8 @@ final class DTOtoEntityConverter
         }
 
         //Add other images
-        foreach ($dto->images ?? [] as $image) {
+        $images = $this->files_unique($dto->images ?? []);
+        foreach ($images as $image) {
             //Ensure that the image is not the same as the preview image
             if ($image->url === $dto->preview_image_url) {
                 continue;
@@ -195,10 +203,10 @@ final class DTOtoEntityConverter
             $entity->addAttachment($this->convertFile($image, $image_type));
         }
 
-
         //Add datasheets
         $datasheet_type = $this->getDatasheetType();
-        foreach ($dto->datasheets ?? [] as $datasheet) {
+        $datasheets = $this->files_unique($dto->datasheets ?? []);
+        foreach ($datasheets as $datasheet) {
             $entity->addAttachment($this->convertFile($datasheet, $datasheet_type));
         }
 
@@ -208,6 +216,27 @@ final class DTOtoEntityConverter
         }
 
         return $entity;
+    }
+
+    /**
+     * Returns the given array of files with all duplicates removed.
+     * @param  FileDTO[]  $files
+     * @return FileDTO[]
+     */
+    private function files_unique(array $files): array
+    {
+        $unique = [];
+        //We use the URL and name as unique identifier. If two file DTO have the same URL and name, they are considered equal
+        //and get filtered out, if it already exists in the array
+        foreach ($files as $file) {
+            //Skip already existing files, to preserve the order. The second condition ensure that we keep the version with a name over the one without a name
+            if (isset($unique[$file->url]) && $unique[$file->url]->name !== null) {
+                continue;
+            }
+            $unique[$file->url] = $file;
+        }
+
+        return array_values($unique);
     }
 
     /**
@@ -289,7 +318,7 @@ final class DTOtoEntityConverter
         //If the entity was newly created, set the file filter
         if ($tmp->getID() === null) {
             $tmp->setFiletypeFilter('image/*');
-            $tmp->setAlternativeNames(self::TYPE_DATASHEETS_NAME);
+            $tmp->setAlternativeNames(self::TYPE_IMAGE_NAME);
         }
 
         return $tmp;

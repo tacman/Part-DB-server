@@ -26,17 +26,28 @@ namespace App\Services\InfoProviderSystem\DTOs;
 /**
  * This DTO represents a file that can be downloaded from a URL.
  * This could be a datasheet, a 3D model, a picture or similar.
+ * @see \App\Tests\Services\InfoProviderSystem\DTOs\FileDTOTest
  */
 class FileDTO
 {
+    /**
+     * @var string The URL where to get this file
+     */
+    public readonly string $url;
+
     /**
      * @param  string  $url The URL where to get this file
      * @param  string|null  $name Optionally the name of this file
      */
     public function __construct(
-        public readonly string $url,
+        string $url,
         public readonly ?string $name = null,
-    ) {}
+    ) {
+        //Find all occurrences of non URL safe characters and replace them with their URL encoded version.
+        //We only want to replace characters which can not have a valid meaning in a URL (what would break the URL).
+        //Digikey provided some wrong URLs with a ^ in them, which is not a valid URL character. (https://github.com/Part-DB/Part-DB-server/issues/521)
+        $this->url = preg_replace_callback('/[^a-zA-Z0-9_\-.$+!*();\/?:@=&#%]/', static fn($matches) => rawurlencode($matches[0]), $url);
+    }
 
 
 }

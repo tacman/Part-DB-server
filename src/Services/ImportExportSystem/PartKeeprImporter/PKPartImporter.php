@@ -173,20 +173,20 @@ class PKPartImporter
             $entity->setName($name);
 
             $entity->setValueText($partparameter['stringValue'] ?? '');
-            if ($partparameter['unit_id'] === null) {
+            if ($partparameter['unit_id'] !== null && (int) $partparameter['unit_id'] !== 0) {
                 $entity->setUnit($this->getUnitSymbol($data, (int)$partparameter['unit_id']));
             } else {
                 $entity->setUnit("");
             }
 
-            if ($partparameter['normalizedMinValue'] !== null) {
-                $entity->setValueMin((float) $partparameter['normalizedMinValue']);
+            if ($partparameter['value'] !== null) {
+                $entity->setValueTypical((float) $partparameter['value'] * $this->getSIPrefixFactor($data, (int) $partparameter['siPrefix_id']));
             }
-            if ($partparameter['normalizedValue'] !== null) {
-                $entity->setValueTypical((float) $partparameter['normalizedValue']);
+            if ($partparameter['minimumValue'] !== null) {
+                $entity->setValueMin((float) $partparameter['minimumValue'] * $this->getSIPrefixFactor($data, (int) $partparameter['minSiPrefix_id']));
             }
-            if ($partparameter['normalizedMaxValue'] !== null) {
-                $entity->setValueMax((float) $partparameter['normalizedMaxValue']);
+            if ($partparameter['maximumValue'] !== null) {
+                $entity->setValueMax((float) $partparameter['maximumValue'] * $this->getSIPrefixFactor($data, (int) $partparameter['maxSiPrefix_id']));
             }
 
             $part = $this->em->find(Part::class, (int) $partparameter['part_id']);
@@ -218,7 +218,7 @@ class PKPartImporter
             'iso_code' => $currency_iso_code,
         ]);
 
-        if (!$currency) {
+        if ($currency === null) {
             $currency = new Currency();
             $currency->setIsoCode($currency_iso_code);
             $currency->setName(Currencies::getName($currency_iso_code));
@@ -255,7 +255,7 @@ class PKPartImporter
             } elseif (!empty($partdistributor['orderNumber']) && !empty($partdistributor['sku'])) {
                 $spn = $partdistributor['orderNumber'] . ' (' . $partdistributor['sku'] . ')';
             } else {
-                $spn = 'PartKeepr Import';
+                $spn = '';
             }
 
             $orderdetail = $this->em->getRepository(Orderdetail::class)->findOneBy([
@@ -265,7 +265,7 @@ class PKPartImporter
             ]);
 
             //When no orderdetail exists, create one
-            if (!$orderdetail) {
+            if ($orderdetail === null) {
                 $orderdetail = new Orderdetail();
                 $orderdetail->setSupplier($supplier);
                 $orderdetail->setSupplierpartnr($spn);
@@ -273,8 +273,8 @@ class PKPartImporter
                 $this->em->persist($orderdetail);
             }
 
-            //Add the price information to the orderdetail
-            if (!empty($partdistributor['price'])) {
+            //Add the price information to the orderdetail (only if the price is not zero, as this was a placeholder in PartKeepr)
+            if (!empty($partdistributor['price']) && !BigDecimal::of($partdistributor['price'])->isZero()) {
                 $pricedetail = new Pricedetail();
                 $orderdetail->addPricedetail($pricedetail);
                 //Partkeepr stores the price per item, we need to convert it to the price per packaging unit

@@ -53,6 +53,7 @@ export default class extends Controller {
 
         const config = {
             language: language,
+            licenseKey: "GPL",
         }
 
         const watchdog = new EditorWatchdog();
@@ -70,7 +71,9 @@ export default class extends Controller {
                         editor_div.classList.add(...new_classes.split(","));
                     }
 
-                    console.log(editor);
+                    //This return is important! Otherwise we get mysterious errors in the console
+                    //See: https://github.com/ckeditor/ckeditor5/issues/5897#issuecomment-628471302
+                    return editor;
                 })
                 .catch(error => {
                     console.error(error);

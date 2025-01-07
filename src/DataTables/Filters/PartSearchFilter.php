@@ -21,8 +21,6 @@ declare(strict_types=1);
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 namespace App\DataTables\Filters;
-
-use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 
 class PartSearchFilter implements FilterInterface
@@ -82,7 +80,7 @@ class PartSearchFilter implements FilterInterface
             $fields_to_search[] = 'part.name';
         }
         if($this->category) {
-            $fields_to_search[] = 'category.name';
+            $fields_to_search[] = '_category.name';
         }
         if($this->description) {
             $fields_to_search[] = 'part.description';
@@ -94,22 +92,22 @@ class PartSearchFilter implements FilterInterface
             $fields_to_search[] = 'part.tags';
         }
         if($this->storelocation) {
-            $fields_to_search[] = 'storelocations.name';
+            $fields_to_search[] = '_storelocations.name';
         }
         if($this->ordernr) {
-            $fields_to_search[] = 'orderdetails.supplierpartnr';
+            $fields_to_search[] = '_orderdetails.supplierpartnr';
         }
         if($this->mpn) {
             $fields_to_search[] = 'part.manufacturer_product_number';
         }
         if($this->supplier) {
-            $fields_to_search[] = 'suppliers.name';
+            $fields_to_search[] = '_suppliers.name';
         }
         if($this->manufacturer) {
-            $fields_to_search[] = 'manufacturer.name';
+            $fields_to_search[] = '_manufacturer.name';
         }
         if($this->footprint) {
-            $fields_to_search[] = 'footprint.name';
+            $fields_to_search[] = '_footprint.name';
         }
         if ($this->ipn) {
             $fields_to_search[] = 'part.ipn';
@@ -130,18 +128,18 @@ class PartSearchFilter implements FilterInterface
         //Convert the fields to search to a list of expressions
         $expressions = array_map(function (string $field): string {
             if ($this->regex) {
-                return sprintf("REGEXP(%s, :search_query) = 1", $field);
+                return sprintf("REGEXP(%s, :search_query) = TRUE", $field);
             }
 
-            return sprintf("%s LIKE :search_query", $field);
+            return sprintf("ILIKE(%s, :search_query) = TRUE", $field);
         }, $fields_to_search);
 
-        //Add Or concatation of the expressions to our query
+        //Add Or concatenation of the expressions to our query
         $queryBuilder->andWhere(
             $queryBuilder->expr()->orX(...$expressions)
         );
 
-        //For regex we pass the query as is, for like we add % to the start and end as wildcards
+        //For regex, we pass the query as is, for like we add % to the start and end as wildcards
         if ($this->regex) {
             $queryBuilder->setParameter('search_query', $this->keyword);
         } else {

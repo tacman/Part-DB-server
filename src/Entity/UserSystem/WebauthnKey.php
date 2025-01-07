@@ -22,16 +22,18 @@ declare(strict_types=1);
  */
 namespace App\Entity\UserSystem;
 
+use App\Entity\Contracts\TimeStampableInterface;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\Base\TimestampTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Webauthn\PublicKeyCredentialSource as BasePublicKeyCredentialSource;
 
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'webauthn_keys')]
-class WebauthnKey extends BasePublicKeyCredentialSource
+class WebauthnKey extends BasePublicKeyCredentialSource implements TimeStampableInterface
 {
     use TimestampTrait;
 
@@ -42,10 +44,14 @@ class WebauthnKey extends BasePublicKeyCredentialSource
 
     #[ORM\Column(type: Types::STRING)]
     #[NotBlank]
+    #[Length(max: 255)]
     protected string $name = '';
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'webauthn_keys')]
     protected ?User $user = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    protected ?\DateTimeImmutable $last_time_used = null;
 
     public function getName(): string
     {
@@ -74,9 +80,22 @@ class WebauthnKey extends BasePublicKeyCredentialSource
         return $this->id;
     }
 
+    /**
+     * Retrieve the last time when the key was used.
+     */
+    public function getLastTimeUsed(): ?\DateTimeImmutable
+    {
+        return $this->last_time_used;
+    }
 
-
-
+    /**
+     * Update the last time when the key was used.
+     * @return void
+     */
+    public function updateLastTimeUsed(): void
+    {
+        $this->last_time_used = new \DateTimeImmutable('now');
+    }
 
     public static function fromRegistration(BasePublicKeyCredentialSource $registration): self
     {

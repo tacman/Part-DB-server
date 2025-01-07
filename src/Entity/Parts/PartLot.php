@@ -22,11 +22,13 @@ declare(strict_types=1);
 
 namespace App\Entity\Parts;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -35,7 +37,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
 use App\ApiPlatform\Filter\LikeFilter;
-use App\Repository\PartLotRepository;
+use App\Validator\Constraints\Year2038BugWorkaround;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\Base\AbstractDBElement;
 use App\Entity\Base\TimestampTrait;
@@ -47,8 +49,10 @@ use App\Validator\Constraints\ValidPartLot;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
@@ -60,9 +64,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table(name: 'part_lots')]
-#[ORM\Index(name: 'part_lots_idx_instock_un_expiration_id_part', columns: ['instock_unknown', 'expiration_date', 'id_part'])]
-#[ORM\Index(name: 'part_lots_idx_needs_refill', columns: ['needs_refill'])]
+#[ORM\Index(columns: ['instock_unknown', 'expiration_date', 'id_part'], name: 'part_lots_idx_instock_un_expiration_id_part')]
+#[ORM\Index(columns: ['needs_refill'], name: 'part_lots_idx_needs_refill')]
+#[ORM\Index(columns: ['vendor_barcode'], name: 'part_lots_idx_barcode')]
 #[ValidPartLot]
+#[UniqueEntity(['user_barcode'], message: 'validator.part_lot.vendor_barcode_must_be_unique')]
 #[ApiResource(
     operations: [
         new Get(security: 'is_granted("read", object)'),
@@ -76,7 +82,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 )]
 #[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(LikeFilter::class, properties: ["description", "comment"])]
-#[ApiFilter(DateFilter::class, strategy: DateFilter::EXCLUDE_NULL)]
+#[ApiFilter(DateFilter::class, strategy: DateFilterInterface::EXCLUDE_NULL)]
 #[ApiFilter(BooleanFilter::class, properties: ['instock_unknown', 'needs_refill'])]
 #[ApiFilter(RangeFilter::class, properties: ['amount'])]
 #[ApiFilter(OrderFilter::class, properties: ['description', 'comment', 'addedDate', 'lastModified'])]
@@ -99,12 +105,13 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     protected string $comment = '';
 
     /**
-     * @var \DateTimeInterface|null Set a time until when the lot must be used.
+     * @var \DateTimeImmutable|null Set a time until when the lot must be used.
      *                Set to null, if the lot can be used indefinitely.
      */
     #[Groups(['extended', 'full', 'import', 'part_lot:read', 'part_lot:write'])]
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, name: 'expiration_date', nullable: true)]
-    protected ?\DateTimeInterface $expiration_date = null;
+    #[ORM\Column(name: 'expiration_date', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Year2038BugWorkaround]
+    protected ?\DateTimeImmutable $expiration_date = null;
 
     /**
      * @var StorageLocation|null The storelocation of this lot
@@ -112,7 +119,7 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     #[Groups(['simple', 'extended', 'full', 'import', 'part_lot:read', 'part_lot:write'])]
     #[ORM\ManyToOne(targetEntity: StorageLocation::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(name: 'id_store_location')]
-    #[Selectable()]
+    #[Selectable]
     protected ?StorageLocation $storage_location = null;
 
     /**
@@ -144,6 +151,7 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     #[ORM\ManyToOne(targetEntity: Part::class, inversedBy: 'partLots')]
     #[ORM\JoinColumn(name: 'id_part', nullable: false, onDelete: 'CASCADE')]
     #[Groups(['part_lot:read:standalone', 'part_lot:write'])]
+    #[ApiProperty(writableLink: false)]
     protected ?Part $part = null;
 
     /**
@@ -152,7 +160,16 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'id_owner', onDelete: 'SET NULL')]
     #[Groups(['part_lot:read', 'part_lot:write'])]
+    #[ApiProperty(writableLink: false)]
     protected ?User $owner = null;
+
+    /**
+     * @var string|null The content of the barcode of this part lot (e.g. a barcode on the package put by the vendor)
+     */
+    #[ORM\Column(name: "vendor_barcode", type: Types::STRING, nullable: true)]
+    #[Groups(['part_lot:read', 'part_lot:write'])]
+    #[Length(max: 255)]
+    protected ?string $user_barcode = null;
 
     public function __clone()
     {
@@ -168,7 +185,6 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
      *
      * @return bool|null True, if the part lot is expired. Returns null, if no expiration date was set.
      *
-     * @throws Exception If an error with the DateTime occurs
      */
     public function isExpired(): ?bool
     {
@@ -177,7 +193,7 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
         }
 
         //Check if the expiration date is bigger then current time
-        return $this->expiration_date < new DateTime('now');
+        return $this->expiration_date < new \DateTimeImmutable('now');
     }
 
     /**
@@ -219,7 +235,7 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     /**
      * Gets the expiration date for the part lot. Returns null, if no expiration date was set.
      */
-    public function getExpirationDate(): ?\DateTimeInterface
+    public function getExpirationDate(): ?\DateTimeImmutable
     {
         return $this->expiration_date;
     }
@@ -229,7 +245,7 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
      *
      *
      */
-    public function setExpirationDate(?\DateTimeInterface $expiration_date): self
+    public function setExpirationDate(?\DateTimeImmutable $expiration_date): self
     {
         $this->expiration_date = $expiration_date;
 
@@ -353,6 +369,29 @@ class PartLot extends AbstractDBElement implements TimeStampableInterface, Named
     {
         return $this->description;
     }
+
+    /**
+     * The content of the barcode of this part lot (e.g. a barcode on the package put by the vendor), or
+     * null if no barcode is set.
+     * @return string|null
+     */
+    public function getUserBarcode(): ?string
+    {
+        return $this->user_barcode;
+    }
+
+    /**
+     * Set the content of the barcode of this part lot (e.g. a barcode on the package put by the vendor).
+     * @param  string|null  $user_barcode
+     * @return $this
+     */
+    public function setUserBarcode(?string $user_barcode): PartLot
+    {
+        $this->user_barcode = $user_barcode;
+        return $this;
+    }
+
+
 
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, $payload): void

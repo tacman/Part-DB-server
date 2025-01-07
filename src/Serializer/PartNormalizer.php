@@ -29,19 +29,23 @@ use App\Entity\Parts\Supplier;
 use App\Entity\PriceInformations\Orderdetail;
 use App\Entity\PriceInformations\Pricedetail;
 use Brick\Math\BigDecimal;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * @see \App\Tests\Serializer\PartNormalizerTest
  */
-class PartNormalizer implements NormalizerInterface, DenormalizerInterface
+class PartNormalizer implements NormalizerInterface, DenormalizerInterface, NormalizerAwareInterface, DenormalizerAwareInterface
 {
+
+    use NormalizerAwareTrait;
+    use DenormalizerAwareTrait;
+
+    private const ALREADY_CALLED = 'PART_NORMALIZER_ALREADY_CALLED';
 
     private const DENORMALIZE_KEY_MAPPING = [
         'notes' => 'comment',
@@ -55,28 +59,27 @@ class PartNormalizer implements NormalizerInterface, DenormalizerInterface
 
     public function __construct(
         private readonly StructuralElementFromNameDenormalizer $locationDenormalizer,
-        #[Autowire(service: ObjectNormalizer::class)]
-        private readonly NormalizerInterface $normalizer,
-        #[Autowire(service: ObjectNormalizer::class)]
-        private readonly DenormalizerInterface $denormalizer,
     )
     {
     }
 
     public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
-        return $data instanceof Part;
+        //We only remove the type field for CSV export
+        return !isset($context[self::ALREADY_CALLED]) && $format === 'csv' && $data instanceof Part ;
     }
 
-    /**
-     * @return (float|mixed)[]|\ArrayObject|null|scalar
-     *
-     * @psalm-return \ArrayObject|array{total_instock: float|mixed,...}|null|scalar
-     */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): array
     {
         if (!$object instanceof Part) {
             throw new \InvalidArgumentException('This normalizer only supports Part objects!');
+        }
+
+        $context[self::ALREADY_CALLED] = true;
+
+        //Prevent exception in API Platform
+        if ($object->getID() === null) {
+            $context['iri'] = 'not-persisted';
         }
 
         $data = $this->normalizer->normalize($object, $format, $context);
@@ -86,14 +89,19 @@ class PartNormalizer implements NormalizerInterface, DenormalizerInterface
             unset($data['type']);
         }
 
-        $data['total_instock'] = $object->getAmountSum();
-
         return $data;
     }
 
     public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
     {
-        return is_array($data) && is_a($type, Part::class, true);
+        //Only denormalize if we are doing a file import operation
+        if (!($context['partdb_import'] ?? false)) {
+            return false;
+        }
+
+        //Only make the denormalizer available on import operations
+        return !isset($context[self::ALREADY_CALLED])
+            && is_array($data) && is_a($type, Part::class, true);
     }
 
     private function normalizeKeys(array &$data): array
@@ -129,6 +137,8 @@ class PartNormalizer implements NormalizerInterface, DenormalizerInterface
             $data['minamount'] = 0.0;
         }
 
+        $context[self::ALREADY_CALLED] = true;
+
         $object = $this->denormalizer->denormalize($data, $type, $format, $context);
 
         if (!$object instanceof Part) {
@@ -158,7 +168,7 @@ class PartNormalizer implements NormalizerInterface, DenormalizerInterface
         if (isset($data['supplier']) && $data['supplier'] !== "") {
             $supplier = $this->locationDenormalizer->denormalize($data['supplier'], Supplier::class, $format, $context);
 
-            if ($supplier) {
+            if ($supplier !== null) {
                 $orderdetail = new Orderdetail();
                 $orderdetail->setSupplier($supplier);
 

@@ -22,9 +22,10 @@ declare(strict_types=1);
 
 namespace App\Entity\Parts;
 
+use Doctrine\Common\Collections\Criteria;
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -34,10 +35,11 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
 use App\ApiPlatform\Filter\LikeFilter;
 use App\Entity\Attachments\Attachment;
-use App\Entity\Attachments\AttachmentTypeAttachment;
+use App\Entity\EDA\EDAFootprintInfo;
 use App\Repository\Parts\FootprintRepository;
 use App\Entity\Base\AbstractStructuralDBElement;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -56,8 +58,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity(repositoryClass: FootprintRepository::class)]
 #[ORM\Table('`footprints`')]
-#[ORM\Index(name: 'footprint_idx_name', columns: ['name'])]
-#[ORM\Index(name: 'footprint_idx_parent_name', columns: ['parent_id', 'name'])]
+#[ORM\Index(columns: ['name'], name: 'footprint_idx_name')]
+#[ORM\Index(columns: ['parent_id', 'name'], name: 'footprint_idx_parent_name')]
 #[ApiResource(
     operations: [
         new Get(security: 'is_granted("read", object)'),
@@ -67,13 +69,15 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Delete(security: 'is_granted("delete", object)'),
     ],
     normalizationContext: ['groups' => ['footprint:read', 'api:basic:read'], 'openapi_definition_name' => 'Read'],
-    denormalizationContext: ['groups' => ['footprint:write', 'api:basic:write'], 'openapi_definition_name' => 'Write'],
+    denormalizationContext: ['groups' => ['footprint:write', 'api:basic:write', 'attachment:write', 'parameter:write'], 'openapi_definition_name' => 'Write'],
 )]
 #[ApiResource(
     uriTemplate: '/footprints/{id}/children.{_format}',
     operations: [
-        new GetCollection(openapiContext: ['summary' => 'Retrieves the children elements of a footprint.'],
-            security: 'is_granted("@footprints.read")')
+        new GetCollection(
+            openapi: new Operation(summary: 'Retrieves the children elements of a footprint.'),
+            security: 'is_granted("@footprints.read")'
+        )
     ],
     uriVariables: [
         'id' => new Link(fromProperty: 'children', fromClass: Footprint::class)
@@ -82,7 +86,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 #[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(LikeFilter::class, properties: ["name", "comment"])]
-#[ApiFilter(DateFilter::class, strategy: DateFilter::EXCLUDE_NULL)]
+#[ApiFilter(DateFilter::class, strategy: DateFilterInterface::EXCLUDE_NULL)]
 #[ApiFilter(OrderFilter::class, properties: ['name', 'id', 'addedDate', 'lastModified'])]
 class Footprint extends AbstractPartsContainingDBElement
 {
@@ -92,8 +96,8 @@ class Footprint extends AbstractPartsContainingDBElement
     #[ApiProperty(readableLink: false, writableLink: false)]
     protected ?AbstractStructuralDBElement $parent = null;
 
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
-    #[ORM\OrderBy(['name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    #[ORM\OrderBy(['name' => Criteria::ASC])]
     protected Collection $children;
 
     #[Groups(['footprint:read', 'footprint:write'])]
@@ -103,8 +107,8 @@ class Footprint extends AbstractPartsContainingDBElement
      * @var Collection<int, FootprintAttachment>
      */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: FootprintAttachment::class, mappedBy: 'element', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'element', targetEntity: FootprintAttachment::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['name' => Criteria::ASC])]
     #[Groups(['footprint:read', 'footprint:write'])]
     protected Collection $attachments;
 
@@ -124,16 +128,29 @@ class Footprint extends AbstractPartsContainingDBElement
     /** @var Collection<int, FootprintParameter>
      */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: FootprintParameter::class, mappedBy: 'element', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['group' => 'ASC', 'name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'element', targetEntity: FootprintParameter::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['group' => Criteria::ASC, 'name' => 'ASC'])]
     #[Groups(['footprint:read', 'footprint:write'])]
     protected Collection $parameters;
 
     #[Groups(['footprint:read'])]
-    protected ?\DateTimeInterface $addedDate = null;
+    protected ?\DateTimeImmutable $addedDate = null;
     #[Groups(['footprint:read'])]
-    protected ?\DateTimeInterface $lastModified = null;
+    protected ?\DateTimeImmutable $lastModified = null;
 
+    #[Assert\Valid]
+    #[ORM\Embedded(class: EDAFootprintInfo::class)]
+    #[Groups(['full', 'footprint:read', 'footprint:write'])]
+    protected EDAFootprintInfo $eda_info;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->children = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
+        $this->parameters = new ArrayCollection();
+        $this->eda_info = new EDAFootprintInfo();
+    }
 
     /****************************************
      * Getters
@@ -163,11 +180,15 @@ class Footprint extends AbstractPartsContainingDBElement
 
         return $this;
     }
-    public function __construct()
+
+    public function getEdaInfo(): EDAFootprintInfo
     {
-        parent::__construct();
-        $this->children = new ArrayCollection();
-        $this->attachments = new ArrayCollection();
-        $this->parameters = new ArrayCollection();
+        return $this->eda_info;
+    }
+
+    public function setEdaInfo(EDAFootprintInfo $eda_info): Footprint
+    {
+        $this->eda_info = $eda_info;
+        return $this;
     }
 }

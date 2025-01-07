@@ -23,6 +23,8 @@ declare(strict_types=1);
 
 namespace App\Entity\PriceInformations;
 
+use Doctrine\Common\Collections\Criteria;
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -34,6 +36,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
 use App\ApiPlatform\Filter\LikeFilter;
 use Doctrine\DBAL\Types\Types;
@@ -43,13 +46,14 @@ use App\Entity\Contracts\NamedElementInterface;
 use App\Entity\Contracts\TimeStampableInterface;
 use App\Entity\Parts\Part;
 use App\Entity\Parts\Supplier;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * Class Orderdetail.
@@ -58,7 +62,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Table('`orderdetails`')]
-#[ORM\Index(name: 'orderdetails_supplier_part_nr', columns: ['supplierpartnr'])]
+#[ORM\Index(columns: ['supplierpartnr'], name: 'orderdetails_supplier_part_nr')]
 #[ApiResource(
     operations: [
         new Get(security: 'is_granted("read", object)'),
@@ -73,8 +77,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     uriTemplate: '/parts/{id}/orderdetails.{_format}',
     operations: [
-        new GetCollection(openapiContext: ['summary' => 'Retrieves the orderdetails of a part.'],
-            security: 'is_granted("@parts.read")')
+        new GetCollection(
+            openapi: new Operation(summary: 'Retrieves the orderdetails of a part.'),
+            security: 'is_granted("@parts.read")'
+        )
     ],
     uriVariables: [
         'id' => new Link(toProperty: 'part', fromClass: Part::class)
@@ -85,16 +91,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(LikeFilter::class, properties: ["supplierpartnr", "supplier_product_url"])]
 #[ApiFilter(BooleanFilter::class, properties: ["obsolete"])]
-#[ApiFilter(DateFilter::class, strategy: DateFilter::EXCLUDE_NULL)]
+#[ApiFilter(DateFilter::class, strategy: DateFilterInterface::EXCLUDE_NULL)]
 #[ApiFilter(OrderFilter::class, properties: ['supplierpartnr', 'id', 'addedDate', 'lastModified'])]
 class Orderdetail extends AbstractDBElement implements TimeStampableInterface, NamedElementInterface
 {
     use TimestampTrait;
 
+    /**
+     * @var Collection<int, Pricedetail>
+     */
     #[Assert\Valid]
     #[Groups(['extended', 'full', 'import', 'orderdetail:read', 'orderdetail:write'])]
-    #[ORM\OneToMany(targetEntity: Pricedetail::class, mappedBy: 'orderdetail', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['min_discount_quantity' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'orderdetail', targetEntity: Pricedetail::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['min_discount_quantity' => Criteria::ASC])]
     protected Collection $pricedetails;
 
     /**
@@ -102,6 +111,7 @@ class Orderdetail extends AbstractDBElement implements TimeStampableInterface, N
      */
     #[Groups(['extended', 'full', 'import', 'orderdetail:read', 'orderdetail:write'])]
     #[ORM\Column(type: Types::STRING)]
+    #[Length(max: 255)]
     protected string $supplierpartnr = '';
 
     /**
@@ -163,9 +173,9 @@ class Orderdetail extends AbstractDBElement implements TimeStampableInterface, N
     #[ORM\PreUpdate]
     public function updateTimestamps(): void
     {
-        $this->lastModified = new DateTime('now');
+        $this->lastModified = new DateTimeImmutable('now');
         if (!$this->addedDate instanceof \DateTimeInterface) {
-            $this->addedDate = new DateTime('now');
+            $this->addedDate = new DateTimeImmutable('now');
         }
 
         if ($this->part instanceof Part) {
@@ -221,6 +231,11 @@ class Orderdetail extends AbstractDBElement implements TimeStampableInterface, N
     public function getObsolete(): bool
     {
         return $this->obsolete;
+    }
+
+    public function isObsolete(): bool
+    {
+        return $this->getObsolete();
     }
 
     /**

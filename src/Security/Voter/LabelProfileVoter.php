@@ -42,11 +42,13 @@ declare(strict_types=1);
 namespace App\Security\Voter;
 
 use App\Entity\LabelSystem\LabelProfile;
-use App\Entity\UserSystem\User;
 use App\Services\UserSystem\VoterHelper;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
+/**
+ * @phpstan-extends Voter<non-empty-string, LabelProfile|class-string>
+ */
 final class LabelProfileVoter extends Voter
 {
     protected const MAPPING = [
@@ -68,7 +70,7 @@ final class LabelProfileVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if ($subject instanceof LabelProfile) {
+        if (is_a($subject, LabelProfile::class, true)) {
             if (!isset(self::MAPPING[$attribute])) {
                 return false;
             }
@@ -86,6 +88,6 @@ final class LabelProfileVoter extends Voter
 
     public function supportsType(string $subjectType): bool
     {
-        return is_a($subjectType, LabelProfile::class, true);
+        return $subjectType === 'string' || is_a($subjectType, LabelProfile::class, true);
     }
 }

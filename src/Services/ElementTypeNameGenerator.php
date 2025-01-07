@@ -26,8 +26,8 @@ use App\Entity\Attachments\AttachmentContainingDBElement;
 use App\Entity\Attachments\Attachment;
 use App\Entity\Attachments\AttachmentType;
 use App\Entity\Base\AbstractDBElement;
-use App\Entity\Base\AbstractNamedDBElement;
 use App\Entity\Contracts\NamedElementInterface;
+use App\Entity\Parts\PartAssociation;
 use App\Entity\ProjectSystem\Project;
 use App\Entity\LabelSystem\LabelProfile;
 use App\Entity\Parameters\AbstractParameter;
@@ -46,8 +46,6 @@ use App\Entity\ProjectSystem\ProjectBOMEntry;
 use App\Entity\UserSystem\Group;
 use App\Entity\UserSystem\User;
 use App\Exceptions\EntityNotSupportedException;
-use Doctrine\ORM\Mapping\Entity;
-use function get_class;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -80,6 +78,7 @@ class ElementTypeNameGenerator
             User::class => $this->translator->trans('user.label'),
             AbstractParameter::class => $this->translator->trans('parameter.label'),
             LabelProfile::class => $this->translator->trans('label_profile.label'),
+            PartAssociation::class => $this->translator->trans('part_association.label'),
         ];
     }
 
@@ -131,7 +130,7 @@ class ElementTypeNameGenerator
     {
         $type = $this->getLocalizedTypeLabel($entity);
         if ($use_html) {
-            return '<i>'.$type.':</i> '.htmlspecialchars((string) $entity->getName());
+            return '<i>'.$type.':</i> '.htmlspecialchars($entity->getName());
         }
 
         return $type.': '.$entity->getName();

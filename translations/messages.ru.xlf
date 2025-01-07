@@ -147,6 +147,37 @@
         <target>Новая валюта</target>
       </segment>
     </unit>
+    <unit id="zNlEdQs" name="project.caption">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\templates\AdminPages\DeviceAdmin.html.twig:4</note>
+        <note priority="1">Part-DB1\templates\AdminPages\DeviceAdmin.html.twig:4</note>
+        <note priority="1">templates\AdminPages\DeviceAdmin.html.twig:4</note>
+      </notes>
+      <segment state="translated">
+        <source>project.caption</source>
+        <target>Проект</target>
+      </segment>
+    </unit>
+    <unit id="DTt5Co7" name="project.edit">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\templates\AdminPages\DeviceAdmin.html.twig:8</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment state="translated">
+        <source>project.edit</source>
+        <target>Редактировать проект</target>
+      </segment>
+    </unit>
+    <unit id="O_iNK2O" name="project.new">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\templates\AdminPages\DeviceAdmin.html.twig:12</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment state="translated">
+        <source>project.new</source>
+        <target>Новый проект</target>
+      </segment>
+    </unit>
     <unit id="lQ8QeGr" name="search.placeholder">
       <notes>
         <note category="file-source" priority="1">Part-DB1\templates\AdminPages\EntityAdminBase.html.twig:19</note>
@@ -4011,6 +4042,22 @@
         <target>Поехали!</target>
       </segment>
     </unit>
+    <unit id="w0jVACo" name="project.labelp">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\templates\_sidebar.html.twig:37</note>
+        <note category="file-source" priority="1">Part-DB1\templates\_sidebar.html.twig:12</note>
+        <note priority="1">Part-DB1\templates\_sidebar.html.twig:37</note>
+        <note priority="1">Part-DB1\templates\_sidebar.html.twig:12</note>
+        <note priority="1">templates\base.html.twig:175</note>
+        <note priority="1">templates\base.html.twig:189</note>
+        <note priority="1">templates\base.html.twig:202</note>
+        <note priority="1">templates\base.html.twig:230</note>
+      </notes>
+      <segment state="translated">
+        <source>project.labelp</source>
+        <target>Проекты</target>
+      </segment>
+    </unit>
     <unit id="Kw3N1AA" name="actions">
       <notes>
         <note category="file-source" priority="1">Part-DB1\templates\_sidebar.html.twig:2</note>
@@ -4295,7 +4342,7 @@
       </notes>
       <segment state="translated">
         <source>part.created_flash</source>
-        <target>Деталь создана!</target>
+        <target>Компонент создан!</target>
       </segment>
     </unit>
     <unit id="LOw_XJ." name="part.created_flash.invalid">
@@ -5925,6 +5972,16 @@
         <target>Тип вложения</target>
       </segment>
     </unit>
+    <unit id="w.zcG5D" name="project.label">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\src\Services\ElementTypeNameGenerator.php:82</note>
+        <note priority="1">Part-DB1\src\Services\ElementTypeNameGenerator.php:82</note>
+      </notes>
+      <segment state="translated">
+        <source>project.label</source>
+        <target>Проект</target>
+      </segment>
+    </unit>
     <unit id="QPnDbnv" name="measurement_unit.label">
       <notes>
         <note category="file-source" priority="1">Part-DB1\src\Services\ElementTypeNameGenerator.php:85</note>
@@ -6103,6 +6160,17 @@
       <segment state="translated">
         <source>tree.tools.edit.categories</source>
         <target>Категории</target>
+      </segment>
+    </unit>
+    <unit id="0I8lDuo" name="tree.tools.edit.projects">
+      <notes>
+        <note category="file-source" priority="1">Part-DB1\src\Services\Trees\ToolsTreeBuilder.php:161</note>
+        <note priority="1">Part-DB1\src\Services\Trees\ToolsTreeBuilder.php:138</note>
+        <note priority="1">src\Services\ToolsTreeBuilder.php:66</note>
+      </notes>
+      <segment state="translated">
+        <source>tree.tools.edit.projects</source>
+        <target>Проекты</target>
       </segment>
     </unit>
     <unit id="BFfweU_" name="tree.tools.edit.suppliers">
@@ -7192,7 +7260,7 @@
       </notes>
       <segment state="translated">
         <source>storelocation.edit.is_full.help</source>
-        <target>Если выбран этот параметр, невозможно добавить новые детали в это хранилище или увеличить количество существующих деталей.</target>
+        <target>Если выбран этот параметр, невозможно добавить новые детали в это хранилище или увеличить количество существующих компонентов.</target>
       </segment>
     </unit>
     <unit id="jenFqgq" name="storelocation.limit_to_existing.label">
@@ -7212,7 +7280,7 @@
       </notes>
       <segment state="translated">
         <source>storelocation.limit_to_existing.help</source>
-        <target>Если эта опция активирована, невозможно добавить новые детали в это хранилище, но количество существующих деталей может быть увеличено.</target>
+        <target>Если эта опция активирована, невозможно добавить новые компоненты в это хранилище, но количество существующих компонентов может быть увеличено.</target>
       </segment>
     </unit>
     <unit id="1DWk7ny" name="storelocation.only_single_part.label">
@@ -7905,6 +7973,16 @@
         <target>Производители</target>
       </segment>
     </unit>
+    <unit id="1AtDlX." name="perm.projects">
+      <notes>
+        <note priority="1">obsolete</note>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment state="translated">
+        <source>perm.projects</source>
+        <target>Проекты</target>
+      </segment>
+    </unit>
     <unit id="hgZrqP_" name="perm.part.attachment_types">
       <notes>
         <note priority="1">obsolete</note>
@@ -7962,7 +8040,7 @@
       </notes>
       <segment state="translated">
         <source>perm.tools.ic_logos</source>
-        <target>логотипы ИС</target>
+        <target>Логотипы производителей</target>
       </segment>
     </unit>
     <unit id="soh_cnt" name="perm.tools.statistics">
@@ -8463,6 +8541,12 @@
       <segment state="translated">
         <source>google</source>
         <target>Google</target>
+      </segment>
+    </unit>
+    <unit id="RAX6xpX" name="tfa.provider.webauthn_two_factor_provider">
+      <segment state="translated">
+        <source>tfa.provider.webauthn_two_factor_provider</source>
+        <target>Ключ безопасности</target>
       </segment>
     </unit>
     <unit id="XTe6pUU" name="tfa.provider.google">
@@ -9069,10 +9153,3060 @@
         <target>Калькулятор катушки SMD</target>
       </segment>
     </unit>
+    <unit id="7FpEp24" name="user.pw_change_needed.flash">
+      <segment state="translated">
+        <source>user.pw_change_needed.flash</source>
+        <target>Вам нужно сменить пароль! Пожалуйста, задайте новый.</target>
+      </segment>
+    </unit>
+    <unit id="uEMvuw8" name="tree.root_node.text">
+      <segment state="translated">
+        <source>tree.root_node.text</source>
+        <target>Корень</target>
+      </segment>
+    </unit>
+    <unit id="EieqscF" name="part_list.action.select_null">
+      <segment state="translated">
+        <source>part_list.action.select_null</source>
+        <target>Пустой элемент</target>
+      </segment>
+    </unit>
+    <unit id="4IH1qgL" name="part_list.action.delete-title">
+      <segment state="translated">
+        <source>part_list.action.delete-title</source>
+        <target>Вы точно уверены, что хотите удалить эти компоненты?</target>
+      </segment>
+    </unit>
+    <unit id="te3YmqA" name="part_list.action.delete-message">
+      <segment state="translated">
+        <source>part_list.action.delete-message</source>
+        <target>Эти компоненты и вся связанная с ними информация (прикрепленные документы, ценники и т.п.) будут удалены. Отменить действие будет невозможно!</target>
+      </segment>
+    </unit>
+    <unit id="xd6OiPE" name="part.table.actions.success">
+      <segment state="translated">
+        <source>part.table.actions.success</source>
+        <target>Успешно исполнено.</target>
+      </segment>
+    </unit>
+    <unit id="_3l6FO_" name="attachment.edit.delete.confirm">
+      <segment state="translated">
+        <source>attachment.edit.delete.confirm</source>
+        <target>Вы точно хотите удалить это прикрепление?</target>
+      </segment>
+    </unit>
+    <unit id="JtGEdQP" name="filter.text_constraint.value.operator.EQ">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.EQ</source>
+        <target>Равно</target>
+      </segment>
+    </unit>
+    <unit id="9RAGNGw" name="filter.text_constraint.value.operator.NEQ">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.NEQ</source>
+        <target>Не равно</target>
+      </segment>
+    </unit>
+    <unit id="N1AQsNF" name="filter.text_constraint.value.operator.STARTS">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.STARTS</source>
+        <target>Начинается с</target>
+      </segment>
+    </unit>
+    <unit id="3Rr21xj" name="filter.text_constraint.value.operator.CONTAINS">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.CONTAINS</source>
+        <target>Содержит</target>
+      </segment>
+    </unit>
+    <unit id="S_U21kw" name="filter.text_constraint.value.operator.ENDS">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.ENDS</source>
+        <target>Оканчивается на</target>
+      </segment>
+    </unit>
+    <unit id="l2ojG4Z" name="filter.text_constraint.value.operator.LIKE">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.LIKE</source>
+        <target>СООТВЕТСТВУЕТ шаблону</target>
+      </segment>
+    </unit>
+    <unit id="hAcin33" name="filter.text_constraint.value.operator.REGEX">
+      <segment state="translated">
+        <source>filter.text_constraint.value.operator.REGEX</source>
+        <target>Регулярное выражение</target>
+      </segment>
+    </unit>
+    <unit id="hWtqvI3" name="filter.number_constraint.value.operator.BETWEEN">
+      <segment state="translated">
+        <source>filter.number_constraint.value.operator.BETWEEN</source>
+        <target>Между</target>
+      </segment>
+    </unit>
+    <unit id="Pho_nY5" name="filter.number_constraint.AND">
+      <segment state="translated">
+        <source>filter.number_constraint.AND</source>
+        <target>и</target>
+      </segment>
+    </unit>
+    <unit id="NOmRxFG" name="filter.entity_constraint.operator.EQ">
+      <segment state="translated">
+        <source>filter.entity_constraint.operator.EQ</source>
+        <target>Равно (исключая дочерние)</target>
+      </segment>
+    </unit>
+    <unit id="7zxBnzb" name="filter.entity_constraint.operator.NEQ">
+      <segment state="translated">
+        <source>filter.entity_constraint.operator.NEQ</source>
+        <target>Не равно (исключая дочерние)</target>
+      </segment>
+    </unit>
+    <unit id="oX1nk5D" name="filter.entity_constraint.operator.INCLUDING_CHILDREN">
+      <segment state="translated">
+        <source>filter.entity_constraint.operator.INCLUDING_CHILDREN</source>
+        <target>Равно (включая дочерние)</target>
+      </segment>
+    </unit>
+    <unit id="AS9s6LU" name="filter.entity_constraint.operator.EXCLUDING_CHILDREN">
+      <segment state="translated">
+        <source>filter.entity_constraint.operator.EXCLUDING_CHILDREN</source>
+        <target>Не равно (включая дочерние)</target>
+      </segment>
+    </unit>
+    <unit id="7.bq.cZ" name="part.filter.dbId">
+      <segment state="translated">
+        <source>part.filter.dbId</source>
+        <target>ID базы данных</target>
+      </segment>
+    </unit>
+    <unit id="RphtSCZ" name="filter.tags_constraint.operator.ANY">
+      <segment state="translated">
+        <source>filter.tags_constraint.operator.ANY</source>
+        <target>Любая из меток</target>
+      </segment>
+    </unit>
+    <unit id="So3q9VW" name="filter.tags_constraint.operator.ALL">
+      <segment state="translated">
+        <source>filter.tags_constraint.operator.ALL</source>
+        <target>Все отметки</target>
+      </segment>
+    </unit>
+    <unit id="mqkIc_4" name="filter.tags_constraint.operator.NONE">
+      <segment state="translated">
+        <source>filter.tags_constraint.operator.NONE</source>
+        <target>Ни одна из отметок</target>
+      </segment>
+    </unit>
+    <unit id="wgXINWq" name="part.filter.lot_count">
+      <segment state="translated">
+        <source>part.filter.lot_count</source>
+        <target>Количество лотов</target>
+      </segment>
+    </unit>
+    <unit id="tjfJAIq" name="part.filter.attachments_count">
+      <segment state="translated">
+        <source>part.filter.attachments_count</source>
+        <target>Количество вложений</target>
+      </segment>
+    </unit>
+    <unit id="6Bt9ZhB" name="part.filter.orderdetails_count">
+      <segment state="translated">
+        <source>part.filter.orderdetails_count</source>
+        <target>Количество подробностей о заказе.</target>
+      </segment>
+    </unit>
+    <unit id="QnS490v" name="part.filter.lotExpirationDate">
+      <segment state="translated">
+        <source>part.filter.lotExpirationDate</source>
+        <target>Дата истечения лота</target>
+      </segment>
+    </unit>
+    <unit id="fIZmzas" name="part.filter.lotNeedsRefill">
+      <segment state="translated">
+        <source>part.filter.lotNeedsRefill</source>
+        <target>Любой лот требующий пополнения</target>
+      </segment>
+    </unit>
+    <unit id="_ERegGt" name="part.filter.lotUnknwonAmount">
+      <segment state="translated">
+        <source>part.filter.lotUnknwonAmount</source>
+        <target>Любой лот с неизвестным количеством</target>
+      </segment>
+    </unit>
+    <unit id="lRKoTj_" name="part.filter.attachmentName">
+      <segment state="translated">
+        <source>part.filter.attachmentName</source>
+        <target>Имя вложения</target>
+      </segment>
+    </unit>
+    <unit id=".gg9fsx" name="filter.choice_constraint.operator.ANY">
+      <segment state="translated">
+        <source>filter.choice_constraint.operator.ANY</source>
+        <target>Любой из</target>
+      </segment>
+    </unit>
+    <unit id="dbzWAHM" name="filter.choice_constraint.operator.NONE">
+      <segment state="translated">
+        <source>filter.choice_constraint.operator.NONE</source>
+        <target>Ни один из</target>
+      </segment>
+    </unit>
+    <unit id="ZnYcxRf" name="part.filter.amount_sum">
+      <segment state="translated">
+        <source>part.filter.amount_sum</source>
+        <target>Общее количество</target>
+      </segment>
+    </unit>
+    <unit id="FGuEete" name="filter.submit">
+      <segment state="translated">
+        <source>filter.submit</source>
+        <target>Обновить</target>
+      </segment>
+    </unit>
+    <unit id="4jJXUNM" name="filter.discard">
+      <segment state="translated">
+        <source>filter.discard</source>
+        <target>Сбросить изменения</target>
+      </segment>
+    </unit>
+    <unit id="uVrP0no" name="filter.clear_filters">
+      <segment state="translated">
+        <source>filter.clear_filters</source>
+        <target>Очистить все фильтры</target>
+      </segment>
+    </unit>
+    <unit id="Rd0n9wc" name="filter.title">
+      <segment state="translated">
+        <source>filter.title</source>
+        <target>Фильтр</target>
+      </segment>
+    </unit>
+    <unit id="kTizqBM" name="filter.parameter_value_constraint.operator.=">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.=</source>
+        <target>Тип. Значение =</target>
+      </segment>
+    </unit>
+    <unit id="2Nf2h2a" name="filter.parameter_value_constraint.operator.!=">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.!=</source>
+        <target>Тип. Значение !=</target>
+      </segment>
+    </unit>
+    <unit id="0fmepxx" name="filter.parameter_value_constraint.operator.&lt;">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.&lt;</source>
+        <target>Тип. Значение &lt;</target>
+      </segment>
+    </unit>
+    <unit id="ubkcT6U" name="filter.parameter_value_constraint.operator.&gt;">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.&gt;</source>
+        <target>Тип. Значение &gt;</target>
+      </segment>
+    </unit>
+    <unit id="O4x0opb" name="filter.parameter_value_constraint.operator.&lt;=">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.&lt;=</source>
+        <target>Тип. Значение &lt;=</target>
+      </segment>
+    </unit>
+    <unit id="ituiTs9" name="filter.parameter_value_constraint.operator.&gt;=">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.&gt;=</source>
+        <target>Тип. Значение &gt;=</target>
+      </segment>
+    </unit>
+    <unit id="Y8B3A9X" name="filter.parameter_value_constraint.operator.BETWEEN">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.BETWEEN</source>
+        <target>Тип. Значение между</target>
+      </segment>
+    </unit>
+    <unit id="FqUoIEy" name="filter.parameter_value_constraint.operator.IN_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.IN_RANGE</source>
+        <target>В диапазоне значений</target>
+      </segment>
+    </unit>
+    <unit id="v_1AWPE" name="filter.parameter_value_constraint.operator.NOT_IN_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.NOT_IN_RANGE</source>
+        <target>Выходит за диапазон значений</target>
+      </segment>
+    </unit>
+    <unit id="X4hI3kL" name="filter.parameter_value_constraint.operator.GREATER_THAN_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.GREATER_THAN_RANGE</source>
+        <target>Больше диапазона значений</target>
+      </segment>
+    </unit>
+    <unit id="yQO92R2" name="filter.parameter_value_constraint.operator.GREATER_EQUAL_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.GREATER_EQUAL_RANGE</source>
+        <target>Больше или равно диапазону значений</target>
+      </segment>
+    </unit>
+    <unit id="h8zJtL5" name="filter.parameter_value_constraint.operator.LESS_THAN_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.LESS_THAN_RANGE</source>
+        <target>Меньше диапазона значений</target>
+      </segment>
+    </unit>
+    <unit id="sxSjUOg" name="filter.parameter_value_constraint.operator.LESS_EQUAL_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.LESS_EQUAL_RANGE</source>
+        <target>Меньше или равно диапазону значений</target>
+      </segment>
+    </unit>
+    <unit id="fqRL5fp" name="filter.parameter_value_constraint.operator.RANGE_IN_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.RANGE_IN_RANGE</source>
+        <target>Диапазон полностью внутри диапазона значений</target>
+      </segment>
+    </unit>
+    <unit id="PJgHP5E" name="filter.parameter_value_constraint.operator.RANGE_INTERSECT_RANGE">
+      <segment state="translated">
+        <source>filter.parameter_value_constraint.operator.RANGE_INTERSECT_RANGE</source>
+        <target>Диапазон пересекает диапазон значений</target>
+      </segment>
+    </unit>
+    <unit id="5Svrc5E" name="filter.text_constraint.value">
+      <segment state="translated">
+        <source>filter.text_constraint.value</source>
+        <target>Значение не установлено</target>
+      </segment>
+    </unit>
+    <unit id="EIwFuHJ" name="filter.number_constraint.value1">
+      <segment state="translated">
+        <source>filter.number_constraint.value1</source>
+        <target>Значение не установлено</target>
+      </segment>
+    </unit>
+    <unit id="nb9L_bM" name="filter.number_constraint.value2">
+      <segment state="translated">
+        <source>filter.number_constraint.value2</source>
+        <target>Максимальное значение</target>
+      </segment>
+    </unit>
+    <unit id="Chr6I.s" name="filter.datetime_constraint.value1">
+      <segment state="translated">
+        <source>filter.datetime_constraint.value1</source>
+        <target>Дата/время не установлены</target>
+      </segment>
+    </unit>
+    <unit id="OX2SbVT" name="filter.datetime_constraint.value2">
+      <segment state="translated">
+        <source>filter.datetime_constraint.value2</source>
+        <target>Максимальная дата/время</target>
+      </segment>
+    </unit>
+    <unit id="HsxzALM" name="filter.constraint.add">
+      <segment state="translated">
+        <source>filter.constraint.add</source>
+        <target>Добавить ограничение</target>
+      </segment>
+    </unit>
+    <unit id=".CuxL5L" name="part.filter.parameters_count">
+      <segment state="translated">
+        <source>part.filter.parameters_count</source>
+        <target>Количество параметров</target>
+      </segment>
+    </unit>
+    <unit id="Dn0SKIi" name="part.filter.lotDescription">
+      <segment state="translated">
+        <source>part.filter.lotDescription</source>
+        <target>Описание лота</target>
+      </segment>
+    </unit>
+    <unit id="W1rWF5g" name="parts_list.search.searching_for">
+      <segment state="translated">
+        <source>parts_list.search.searching_for</source>
+        <target>Поиск деталей по ключевому слову &lt;b&gt;%keyword%&lt;/b&gt;</target>
+      </segment>
+    </unit>
+    <unit id="lkQ2zTi" name="parts_list.search_options.caption">
+      <segment state="translated">
+        <source>parts_list.search_options.caption</source>
+        <target>Включенные параметры поиска</target>
+      </segment>
+    </unit>
+    <unit id="biszSr8" name="attachment.table.element_type">
+      <segment state="translated">
+        <source>attachment.table.element_type</source>
+        <target>Тип связанного элемента</target>
+      </segment>
+    </unit>
+    <unit id="nUZamS5" name="log.level.debug">
+      <segment state="translated">
+        <source>log.level.debug</source>
+        <target>Отладочный</target>
+      </segment>
+    </unit>
+    <unit id="ZPxm2Ee" name="log.level.info">
+      <segment state="translated">
+        <source>log.level.info</source>
+        <target>Информационный</target>
+      </segment>
+    </unit>
+    <unit id="NVXjDhG" name="log.level.notice">
+      <segment state="translated">
+        <source>log.level.notice</source>
+        <target>Уведомления</target>
+      </segment>
+    </unit>
+    <unit id="9ObjWuR" name="log.level.warning">
+      <segment state="translated">
+        <source>log.level.warning</source>
+        <target>Предупреждения</target>
+      </segment>
+    </unit>
+    <unit id="WxMwuLP" name="log.level.error">
+      <segment state="translated">
+        <source>log.level.error</source>
+        <target>Ошибки</target>
+      </segment>
+    </unit>
+    <unit id="idch78J" name="log.level.critical">
+      <segment state="translated">
+        <source>log.level.critical</source>
+        <target>Критические</target>
+      </segment>
+    </unit>
+    <unit id="jehoQTd" name="log.level.alert">
+      <segment state="translated">
+        <source>log.level.alert</source>
+        <target>Тревожный</target>
+      </segment>
+    </unit>
+    <unit id="XvKEDM0" name="log.level.emergency">
+      <segment state="translated">
+        <source>log.level.emergency</source>
+        <target>Чрезвычайные</target>
+      </segment>
+    </unit>
+    <unit id="sEvRe10" name="log.type.security">
+      <segment state="translated">
+        <source>log.type.security</source>
+        <target>Безопасность</target>
+      </segment>
+    </unit>
+    <unit id="gJDmvym" name="log.type.instock_changed">
+      <segment state="translated">
+        <source>log.type.instock_changed</source>
+        <target>[СТАРОЕ] Наличие изменено</target>
+      </segment>
+    </unit>
+    <unit id="lJZCHHM" name="log.target_id">
+      <segment state="translated">
+        <source>log.target_id</source>
+        <target>ID целевого элемента</target>
+      </segment>
+    </unit>
+    <unit id="dU7EyhM" name="entity.info.parts_count_recursive">
+      <segment state="translated">
+        <source>entity.info.parts_count_recursive</source>
+        <target>Количество компонентов с этим элементом или его подэлементами.</target>
+      </segment>
+    </unit>
+    <unit id="_hKlKv." name="tools.server_infos.title">
+      <segment state="translated">
+        <source>tools.server_infos.title</source>
+        <target>Информация сервера</target>
+      </segment>
+    </unit>
+    <unit id="NvclBUL" name="permission.preset.read_only">
+      <segment state="translated">
+        <source>permission.preset.read_only</source>
+        <target>Только чтение</target>
+      </segment>
+    </unit>
+    <unit id="HD3j3BW" name="permission.preset.read_only.desc">
+      <segment state="translated">
+        <source>permission.preset.read_only.desc</source>
+        <target>Разрешить только операции чтения данных</target>
+      </segment>
+    </unit>
+    <unit id="Ge20aJg" name="permission.preset.all_inherit">
+      <segment state="translated">
+        <source>permission.preset.all_inherit</source>
+        <target>Наследовать все</target>
+      </segment>
+    </unit>
+    <unit id="DJpsLcr" name="permission.preset.all_inherit.desc">
+      <segment state="translated">
+        <source>permission.preset.all_inherit.desc</source>
+        <target>Установить все разрешения в Наследовать</target>
+      </segment>
+    </unit>
+    <unit id="lzjvvzm" name="permission.preset.all_forbid">
+      <segment state="translated">
+        <source>permission.preset.all_forbid</source>
+        <target>Запретить всё</target>
+      </segment>
+    </unit>
+    <unit id="QqQDTyH" name="permission.preset.all_forbid.desc">
+      <segment state="translated">
+        <source>permission.preset.all_forbid.desc</source>
+        <target>Установить все разрешения в Запретить</target>
+      </segment>
+    </unit>
+    <unit id="DV2fh6l" name="permission.preset.all_allow">
+      <segment state="translated">
+        <source>permission.preset.all_allow</source>
+        <target>Разрешить всё</target>
+      </segment>
+    </unit>
+    <unit id="_m.Pbza" name="permission.preset.all_allow.desc">
+      <segment state="translated">
+        <source>permission.preset.all_allow.desc</source>
+        <target>Установить все разрешения в Разрешено</target>
+      </segment>
+    </unit>
+    <unit id="VIDdo5K" name="perm.server_infos">
+      <segment state="translated">
+        <source>perm.server_infos</source>
+        <target>Информация сервера</target>
+      </segment>
+    </unit>
+    <unit id="d6SOlzR" name="permission.preset.editor">
+      <segment state="translated">
+        <source>permission.preset.editor</source>
+        <target>Редактор</target>
+      </segment>
+    </unit>
+    <unit id="8KYl_wh" name="permission.preset.editor.desc">
+      <segment state="translated">
+        <source>permission.preset.editor.desc</source>
+        <target>Разрешить изменять компоненты и структуры данных</target>
+      </segment>
+    </unit>
+    <unit id="dYudjp." name="permission.preset.admin">
+      <segment state="translated">
+        <source>permission.preset.admin</source>
+        <target>Администратор</target>
+      </segment>
+    </unit>
+    <unit id="0o2M0uj" name="permission.preset.admin.desc">
+      <segment state="translated">
+        <source>permission.preset.admin.desc</source>
+        <target>Разрешить административные действия</target>
+      </segment>
+    </unit>
+    <unit id="SnAIVQf" name="permission.preset.button">
+      <segment state="translated">
+        <source>permission.preset.button</source>
+        <target>Применить шаблон</target>
+      </segment>
+    </unit>
+    <unit id="6q4uHDx" name="perm.attachments.show_private">
+      <segment state="translated">
+        <source>perm.attachments.show_private</source>
+        <target>Показать личные вложения</target>
+      </segment>
+    </unit>
+    <unit id="NL9t5hy" name="perm.attachments.list_attachments">
+      <segment state="translated">
+        <source>perm.attachments.list_attachments</source>
+        <target>Показать список всех вложений</target>
+      </segment>
+    </unit>
+    <unit id="PYh9dNP" name="user.edit.permission_success">
+      <segment state="translated">
+        <source>user.edit.permission_success</source>
+        <target>Шаблон разрешений успешно применён. Проверьте что они удовлетворяют вашим требованиям.</target>
+      </segment>
+    </unit>
+    <unit id="cP8VNKS" name="perm.group.data">
+      <segment state="translated">
+        <source>perm.group.data</source>
+        <target>Дата</target>
+      </segment>
+    </unit>
+    <unit id="AAoGo_X" name="part_list.action.action.group.needs_review">
+      <segment state="translated">
+        <source>part_list.action.action.group.needs_review</source>
+        <target>Требуется Ревизия</target>
+      </segment>
+    </unit>
+    <unit id="hcvOTrH" name="part_list.action.action.set_needs_review">
+      <segment state="translated">
+        <source>part_list.action.action.set_needs_review</source>
+        <target>Установить статус "Требуется ревизия"</target>
+      </segment>
+    </unit>
+    <unit id="E1AQubV" name="part_list.action.action.unset_needs_review">
+      <segment state="translated">
+        <source>part_list.action.action.unset_needs_review</source>
+        <target>Убрать статус "Требуется ревизия"</target>
+      </segment>
+    </unit>
+    <unit id="DNEEkTy" name="part.edit.ipn">
+      <segment state="translated">
+        <source>part.edit.ipn</source>
+        <target>Внутренний номер компонента (IPN)</target>
+      </segment>
+    </unit>
+    <unit id="bT6yxOA" name="part.ipn.not_defined">
+      <segment state="translated">
+        <source>part.ipn.not_defined</source>
+        <target>Не задан</target>
+      </segment>
+    </unit>
+    <unit id="SHo2Ejq" name="part.table.ipn">
+      <segment state="translated">
+        <source>part.table.ipn</source>
+        <target>IPN</target>
+      </segment>
+    </unit>
+    <unit id="1HcqCmo" name="currency.edit.update_rate">
+      <segment state="translated">
+        <source>currency.edit.update_rate</source>
+        <target>Загрузить обменный курс</target>
+      </segment>
+    </unit>
+    <unit id="jSf6Wmz" name="currency.edit.exchange_rate_update.unsupported_currency">
+      <segment state="translated">
+        <source>currency.edit.exchange_rate_update.unsupported_currency</source>
+        <target>Данная валюта не поддерживается поставщиком обменных курсов. Проверьте конфигурацию поставщика.</target>
+      </segment>
+    </unit>
+    <unit id="D481NZD" name="currency.edit.exchange_rate_update.generic_error">
+      <segment state="translated">
+        <source>currency.edit.exchange_rate_update.generic_error</source>
+        <target>Не удалось запросить курс обмена. Пожалуйста, проверьте конфигурацию поставщика обменных курсов.</target>
+      </segment>
+    </unit>
+    <unit id="E_M7mZ5" name="currency.edit.exchange_rate_updated.success">
+      <segment state="translated">
+        <source>currency.edit.exchange_rate_updated.success</source>
+        <target>Обменный курс успешно загружен.</target>
+      </segment>
+    </unit>
+    <unit id="HbPND5j" name="project.bom.quantity">
+      <segment state="translated">
+        <source>project.bom.quantity</source>
+        <target>BOM Кол-во</target>
+      </segment>
+    </unit>
+    <unit id="gqYIO6x" name="project.bom.mountnames">
+      <segment state="translated">
+        <source>project.bom.mountnames</source>
+        <target>Имена сборок</target>
+      </segment>
+    </unit>
+    <unit id="29QITRx" name="project.bom.name">
+      <segment state="translated">
+        <source>project.bom.name</source>
+        <target>Имя</target>
+      </segment>
+    </unit>
+    <unit id="PucC1gg" name="project.bom.comment">
+      <segment state="translated">
+        <source>project.bom.comment</source>
+        <target>Заметки</target>
+      </segment>
+    </unit>
+    <unit id="fR.vNpd" name="project.bom.part">
+      <segment state="translated">
+        <source>project.bom.part</source>
+        <target>Компонент</target>
+      </segment>
+    </unit>
+    <unit id="apnWXEq" name="project.bom.add_entry">
+      <segment state="translated">
+        <source>project.bom.add_entry</source>
+        <target>Добавить запись</target>
+      </segment>
+    </unit>
+    <unit id="gwloIYB" name="part_list.action.group.projects">
+      <segment state="translated">
+        <source>part_list.action.group.projects</source>
+        <target>Проекты</target>
+      </segment>
+    </unit>
+    <unit id="QDvlT74" name="part_list.action.projects.add_to_project">
+      <segment state="translated">
+        <source>part_list.action.projects.add_to_project</source>
+        <target>Добавить компонент в проект</target>
+      </segment>
+    </unit>
+    <unit id="ZVrMX6T" name="project.bom.delete.confirm">
+      <segment state="translated">
+        <source>project.bom.delete.confirm</source>
+        <target>Вы уверены, что хотите удалить это запись BOM ?</target>
+      </segment>
+    </unit>
+    <unit id="T_wVWg_" name="project.add_parts_to_project">
+      <segment state="translated">
+        <source>project.add_parts_to_project</source>
+        <target>Добавить компонент в BOM проекта</target>
+      </segment>
+    </unit>
+    <unit id="02xC690" name="part.info.add_part_to_project">
+      <segment state="translated">
+        <source>part.info.add_part_to_project</source>
+        <target>Добавить этот компонент в проект</target>
+      </segment>
+    </unit>
+    <unit id="OLIZm7S" name="project_bom_entry.label">
+      <segment state="translated">
+        <source>project_bom_entry.label</source>
+        <target>BOM запись</target>
+      </segment>
+    </unit>
+    <unit id="HYlztPH" name="project.edit.status">
+      <segment state="translated">
+        <source>project.edit.status</source>
+        <target>Статус проекта</target>
+      </segment>
+    </unit>
+    <unit id="g63LZsn" name="project.status.draft">
+      <segment state="translated">
+        <source>project.status.draft</source>
+        <target>Черновик</target>
+      </segment>
+    </unit>
+    <unit id="agiQw0z" name="project.status.planning">
+      <segment state="translated">
+        <source>project.status.planning</source>
+        <target>Планирование</target>
+      </segment>
+    </unit>
+    <unit id="8eTvW1x" name="project.status.in_production">
+      <segment state="translated">
+        <source>project.status.in_production</source>
+        <target>В производстве</target>
+      </segment>
+    </unit>
+    <unit id="xtDIXe_" name="project.status.finished">
+      <segment state="translated">
+        <source>project.status.finished</source>
+        <target>Завершен</target>
+      </segment>
+    </unit>
+    <unit id="wpp2047" name="project.status.archived">
+      <segment state="translated">
+        <source>project.status.archived</source>
+        <target>Архивный</target>
+      </segment>
+    </unit>
+    <unit id="jcf.5wX" name="part.new_build_part.error.build_part_already_exists">
+      <segment state="translated">
+        <source>part.new_build_part.error.build_part_already_exists</source>
+        <target>В проекте уже есть результирующий компонент!</target>
+      </segment>
+    </unit>
+    <unit id="usGnetL" name="project.edit.associated_build_part">
+      <segment state="translated">
+        <source>project.edit.associated_build_part</source>
+        <target>Связанный результирующий компонент</target>
+      </segment>
+    </unit>
+    <unit id="xXpskqU" name="project.edit.associated_build_part.add">
+      <segment state="translated">
+        <source>project.edit.associated_build_part.add</source>
+        <target>Добавить результирующий компонент</target>
+      </segment>
+    </unit>
+    <unit id="5rnE1fK" name="project.edit.associated_build.hint">
+      <segment state="translated">
+        <source>project.edit.associated_build.hint</source>
+        <target>Этот компонент представляет собой произведенные экземпляры проекта, которые где-то хранятся.</target>
+      </segment>
+    </unit>
+    <unit id="Ze.0yTx" name="part.info.projectBuildPart.hint">
+      <segment state="translated">
+        <source>part.info.projectBuildPart.hint</source>
+        <target>Этот компонент представляет собой построенные экземпляры следующего проекта и связан с ним.</target>
+      </segment>
+    </unit>
+    <unit id="coJxmoK" name="part.is_build_part">
+      <segment state="translated">
+        <source>part.is_build_part</source>
+        <target>Это результирующий компонент</target>
+      </segment>
+    </unit>
+    <unit id="YiFf2jl" name="project.info.title">
+      <segment state="translated">
+        <source>project.info.title</source>
+        <target>Информация о проекте</target>
+      </segment>
+    </unit>
+    <unit id="Y7z_Lil" name="project.info.bom_entries_count">
+      <segment state="translated">
+        <source>project.info.bom_entries_count</source>
+        <target>Записи BOM</target>
+      </segment>
+    </unit>
+    <unit id="jdkve2C" name="project.info.sub_projects_count">
+      <segment state="translated">
+        <source>project.info.sub_projects_count</source>
+        <target>Подпроекты</target>
+      </segment>
+    </unit>
+    <unit id="keeSexh" name="project.info.bom_add_parts">
+      <segment state="translated">
+        <source>project.info.bom_add_parts</source>
+        <target>Добавить записи BOM</target>
+      </segment>
+    </unit>
+    <unit id="sgaRuly" name="project.info.info.label">
+      <segment state="translated">
+        <source>project.info.info.label</source>
+        <target>Информация</target>
+      </segment>
+    </unit>
+    <unit id="vaFaY8r" name="project.info.sub_projects.label">
+      <segment state="translated">
+        <source>project.info.sub_projects.label</source>
+        <target>Подпроекты</target>
+      </segment>
+    </unit>
+    <unit id="CTIbEF6" name="project.bom.price">
+      <segment state="translated">
+        <source>project.bom.price</source>
+        <target>Цена</target>
+      </segment>
+    </unit>
+    <unit id="hO.xnng" name="part.info.withdraw_modal.title.withdraw">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.title.withdraw</source>
+        <target>Убрать компонент из лота</target>
+      </segment>
+    </unit>
+    <unit id="ci6FaUj" name="part.info.withdraw_modal.title.add">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.title.add</source>
+        <target>Добавить компоненты в лот</target>
+      </segment>
+    </unit>
+    <unit id="kGal3M_" name="part.info.withdraw_modal.title.move">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.title.move</source>
+        <target>Переместить компоненты в другой лот</target>
+      </segment>
+    </unit>
+    <unit id="zxFeQRY" name="part.info.withdraw_modal.amount">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.amount</source>
+        <target>Количество</target>
+      </segment>
+    </unit>
+    <unit id="iblpgc7" name="part.info.withdraw_modal.move_to">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.move_to</source>
+        <target>Переместить в</target>
+      </segment>
+    </unit>
+    <unit id="pYCfHzw" name="part.info.withdraw_modal.comment">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.comment</source>
+        <target>Комментарий</target>
+      </segment>
+    </unit>
+    <unit id="ARNLGgz" name="part.info.withdraw_modal.comment.hint">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.comment.hint</source>
+        <target>Здесь вы можете ввести комментарий, описывающий, почему было выполнено это действие (например, зачем нужен этот компонент). Эта информация сохраняется в журнале.</target>
+      </segment>
+    </unit>
+    <unit id="Sumeg5G" name="modal.close">
+      <segment state="translated">
+        <source>modal.close</source>
+        <target>Закрыть</target>
+      </segment>
+    </unit>
+    <unit id="sye5gxs" name="modal.submit">
+      <segment state="translated">
+        <source>modal.submit</source>
+        <target>Отправить</target>
+      </segment>
+    </unit>
+    <unit id="jl7xM1O" name="part.withdraw.success">
+      <segment state="translated">
+        <source>part.withdraw.success</source>
+        <target>Компоненты успешно удалены/добавлены/перемещены.</target>
+      </segment>
+    </unit>
+    <unit id="oghrs8X" name="perm.parts_stock">
+      <segment state="translated">
+        <source>perm.parts_stock</source>
+        <target>Компоненты в наличии</target>
+      </segment>
+    </unit>
+    <unit id="YjbdSVx" name="perm.parts_stock.withdraw">
+      <segment state="translated">
+        <source>perm.parts_stock.withdraw</source>
+        <target>Снять компоненты со склада</target>
+      </segment>
+    </unit>
+    <unit id="P4saY9b" name="perm.parts_stock.add">
+      <segment state="translated">
+        <source>perm.parts_stock.add</source>
+        <target>Добавить компоненты на склад</target>
+      </segment>
+    </unit>
+    <unit id="JR4LXfJ" name="perm.parts_stock.move">
+      <segment state="translated">
+        <source>perm.parts_stock.move</source>
+        <target>Переместить компоненты между лотами</target>
+      </segment>
+    </unit>
+    <unit id="DQ_FAfi" name="user.permissions_schema_updated">
+      <segment state="translated">
+        <source>user.permissions_schema_updated</source>
+        <target>Схема разрешений вашей учетной записи пользователя обновлена ​​до последней версии.</target>
+      </segment>
+    </unit>
+    <unit id="OohNh_M" name="log.type.part_stock_changed">
+      <segment state="translated">
+        <source>log.type.part_stock_changed</source>
+        <target>Запас компонента изменен</target>
+      </segment>
+    </unit>
+    <unit id="ZIcw_8V" name="log.part_stock_changed.withdraw">
+      <segment state="translated">
+        <source>log.part_stock_changed.withdraw</source>
+        <target>Запас убран</target>
+      </segment>
+    </unit>
+    <unit id="jIm.ZAZ" name="log.part_stock_changed.add">
+      <segment state="translated">
+        <source>log.part_stock_changed.add</source>
+        <target>Запас добавлен</target>
+      </segment>
+    </unit>
+    <unit id="Q8itu0n" name="log.part_stock_changed.move">
+      <segment state="translated">
+        <source>log.part_stock_changed.move</source>
+        <target>Запас перемещён</target>
+      </segment>
+    </unit>
+    <unit id="Z_uM8dG" name="log.part_stock_changed.comment">
+      <segment state="translated">
+        <source>log.part_stock_changed.comment</source>
+        <target>Комментарий</target>
+      </segment>
+    </unit>
+    <unit id="vEWZ248" name="log.part_stock_changed.change">
+      <segment state="translated">
+        <source>log.part_stock_changed.change</source>
+        <target>Изменение</target>
+      </segment>
+    </unit>
+    <unit id="8kmtQLq" name="log.part_stock_changed.move_target">
+      <segment state="translated">
+        <source>log.part_stock_changed.move_target</source>
+        <target>Перенесен в</target>
+      </segment>
+    </unit>
+    <unit id="e2xzHIo" name="tools.builtin_footprints_viewer.title">
+      <segment state="translated">
+        <source>tools.builtin_footprints_viewer.title</source>
+        <target>Галерея посадочных мест</target>
+      </segment>
+    </unit>
+    <unit id="jtxbmbi" name="tools.builtin_footprints_viewer.hint">
+      <segment state="translated">
+        <source>tools.builtin_footprints_viewer.hint</source>
+        <target>Эта галерея показывает все доступные встроенные посадочные места. Если вы захотите использовать их во вложениях, наберите имя (или ключевое слово) в поле пути вложения и выберите изображение в появившемся выпадающем списке.</target>
+      </segment>
+    </unit>
+    <unit id="Dw4KG4Y" name="tools.ic_logos.title">
+      <segment state="translated">
+        <source>tools.ic_logos.title</source>
+        <target>Логотипы производителей</target>
+      </segment>
+    </unit>
+    <unit id="9a9Yu9u" name="part_list.action.group.labels">
+      <segment state="translated">
+        <source>part_list.action.group.labels</source>
+        <target>Этикетки</target>
+      </segment>
+    </unit>
+    <unit id="gaFZMnW" name="part_list.action.projects.generate_label">
+      <segment state="translated">
+        <source>part_list.action.projects.generate_label</source>
+        <target>Сформировать этикетки (для компонентов)</target>
+      </segment>
+    </unit>
+    <unit id="cKJeBZl" name="part_list.action.projects.generate_label_lot">
+      <segment state="translated">
+        <source>part_list.action.projects.generate_label_lot</source>
+        <target>Сформировать этикетки (для лотов)</target>
+      </segment>
+    </unit>
+    <unit id="obOVNB9" name="part_list.action.generate_label.empty">
+      <segment state="translated">
+        <source>part_list.action.generate_label.empty</source>
+        <target>Пустая этикетка</target>
+      </segment>
+    </unit>
+    <unit id="YddcwVg" name="project.info.builds.label">
+      <segment state="translated">
+        <source>project.info.builds.label</source>
+        <target>Создать</target>
+      </segment>
+    </unit>
+    <unit id="6uUxHyg" name="project.builds.build_not_possible">
+      <segment state="translated">
+        <source>project.builds.build_not_possible</source>
+        <target>Создание невозможно: Недостаточно компонентов.</target>
+      </segment>
+    </unit>
+    <unit id="HY05vl8" name="project.builds.following_bom_entries_miss_instock">
+      <segment state="translated">
+        <source>project.builds.following_bom_entries_miss_instock</source>
+        <target>Запас следующих компонентов недостаточен даже для однократного производства проекта:</target>
+      </segment>
+    </unit>
+    <unit id="VHUY79k" name="project.builds.stocked">
+      <segment state="translated">
+        <source>project.builds.stocked</source>
+        <target>запасено</target>
+      </segment>
+    </unit>
+    <unit id="mwL3d70" name="project.builds.needed">
+      <segment state="translated">
+        <source>project.builds.needed</source>
+        <target>нужно</target>
+      </segment>
+    </unit>
+    <unit id="jZKw98F" name="project.builds.build_possible">
+      <segment state="translated">
+        <source>project.builds.build_possible</source>
+        <target>Производство возможно</target>
+      </segment>
+    </unit>
+    <unit id="rRMnoEh" name="project.builds.number_of_builds_possible">
+      <segment state="translated">
+        <source>project.builds.number_of_builds_possible</source>
+        <target>У вас есть достаточно запасов для производства &lt;b&gt;%max_builds%&lt;/b&gt; копий этого проекта.</target>
+      </segment>
+    </unit>
+    <unit id="fZhqvmk" name="project.builds.check_project_status">
+      <segment state="translated">
+        <source>project.builds.check_project_status</source>
+        <target>Статус производства текущего проекта &lt;b&gt;"%project_status%"&lt;/b&gt;. Убедитесь что вы точно хотите произвести проект с таким статусом!</target>
+      </segment>
+    </unit>
+    <unit id="57BNIbl" name="project.builds.following_bom_entries_miss_instock_n">
+      <segment state="translated">
+        <source>project.builds.following_bom_entries_miss_instock_n</source>
+        <target>У вас недостаточно запасов для производства %number_of_builds% копий данного проекта. Следующих компонентов нехватает:</target>
+      </segment>
+    </unit>
+    <unit id="dB.JmYm" name="project.build.flash.invalid_input">
+      <segment state="translated">
+        <source>project.build.flash.invalid_input</source>
+        <target>Проект не может быть произведен. Пожалуйста, проверьте свои записи!</target>
+      </segment>
+    </unit>
+    <unit id="_sFMgby" name="project.build.required_qty">
+      <segment state="translated">
+        <source>project.build.required_qty</source>
+        <target>Требуемое количество</target>
+      </segment>
+    </unit>
+    <unit id="5gpbL_k" name="project.build.btn_build">
+      <segment state="translated">
+        <source>project.build.btn_build</source>
+        <target>Построить</target>
+      </segment>
+    </unit>
+    <unit id="AqGFkiA" name="project.build.help">
+      <segment state="translated">
+        <source>project.build.help</source>
+        <target>Выберите, из каких запасов следует взять необходимые для производства компоненты (и в каком количестве). Установите флажок для каждой записи спецификации или используйте верхний флажок, чтобы установить все флажки одновременно.</target>
+      </segment>
+    </unit>
+    <unit id="rvdUHEn" name="project.build.buildsPartLot.new_lot">
+      <segment state="translated">
+        <source>project.build.buildsPartLot.new_lot</source>
+        <target>Создать новый лот</target>
+      </segment>
+    </unit>
+    <unit id="Kn_jkyo" name="project.build.add_builds_to_builds_part">
+      <segment state="translated">
+        <source>project.build.add_builds_to_builds_part</source>
+        <target>Добавить построенные экземпляры в производственную часть проекта.</target>
+      </segment>
+    </unit>
+    <unit id="92b1_QD" name="project.build.builds_part_lot">
+      <segment state="translated">
+        <source>project.build.builds_part_lot</source>
+        <target>Целевой лот</target>
+      </segment>
+    </unit>
+    <unit id="pyv0k6b" name="project.builds.number_of_builds">
+      <segment state="translated">
+        <source>project.builds.number_of_builds</source>
+        <target>Произвести экземпляров</target>
+      </segment>
+    </unit>
+    <unit id="RjYY9MA" name="project.builds.no_stocked_builds">
+      <segment state="translated">
+        <source>project.builds.no_stocked_builds</source>
+        <target>Количество сохраненных экземпляров сборки</target>
+      </segment>
+    </unit>
+    <unit id="Mken7uv" name="user.change_avatar.label">
+      <segment state="translated">
+        <source>user.change_avatar.label</source>
+        <target>Изменить аватар профиля</target>
+      </segment>
+    </unit>
+    <unit id="QFNPD0_" name="user_settings.change_avatar.label">
+      <segment state="translated">
+        <source>user_settings.change_avatar.label</source>
+        <target>Изменить аватар профиля</target>
+      </segment>
+    </unit>
+    <unit id="GLYVqz2" name="user_settings.remove_avatar.label">
+      <segment state="translated">
+        <source>user_settings.remove_avatar.label</source>
+        <target>Удалить аватар профиля</target>
+      </segment>
+    </unit>
+    <unit id="Y1Aes28" name="part.edit.name.category_hint">
+      <segment state="translated">
+        <source>part.edit.name.category_hint</source>
+        <target>Примечание из категории</target>
+      </segment>
+    </unit>
+    <unit id="_vbPEFP" name="category.edit.partname_regex.placeholder">
+      <segment state="translated">
+        <source>category.edit.partname_regex.placeholder</source>
+        <target>e.g "/Конденсатор \d+ nF/i"</target>
+      </segment>
+    </unit>
+    <unit id="QFgP__5" name="category.edit.partname_regex.help">
+      <segment state="translated">
+        <source>category.edit.partname_regex.help</source>
+        <target>PCRE-совместимое регулярное выражение которому должно соответствовать имя компонента.</target>
+      </segment>
+    </unit>
+    <unit id="vr7oZKL" name="entity.select.add_hint">
+      <segment state="translated">
+        <source>entity.select.add_hint</source>
+        <target>Используй -&gt; для создания вложенных структур, н.р. "Элемент 1-&gt;Элемент 1.1"</target>
+      </segment>
+    </unit>
+    <unit id="_cXCaLo" name="entity.select.group.new_not_added_to_DB">
+      <segment state="translated">
+        <source>entity.select.group.new_not_added_to_DB</source>
+        <target>Новый (еще не добавленный в БД)</target>
+      </segment>
+    </unit>
+    <unit id="i6.vjBW" name="part.edit.save_and_new">
+      <segment state="translated">
+        <source>part.edit.save_and_new</source>
+        <target>Сохранить и открыть форму для нового компонента</target>
+      </segment>
+    </unit>
+    <unit id="q2IWd9b" name="homepage.first_steps.title">
+      <segment state="translated">
+        <source>homepage.first_steps.title</source>
+        <target>Первые шаги</target>
+      </segment>
+    </unit>
+    <unit id="qoK8lss" name="homepage.first_steps.introduction">
+      <segment state="translated">
+        <source>homepage.first_steps.introduction</source>
+        <target>База данных на данный момент пуста. Возможно, вы захотите прочитать &lt;a href="%url%"&gt;documentation&lt;/a&gt; или начнете создавать следующие структуры данных:</target>
+      </segment>
+    </unit>
+    <unit id="8RkT6ZQ" name="homepage.first_steps.create_part">
+      <segment state="translated">
+        <source>homepage.first_steps.create_part</source>
+        <target>Или вы можете непосредственно &lt;a href="%url%"&gt;создать новый компонент&lt;/a&gt;.</target>
+      </segment>
+    </unit>
+    <unit id="mBSlTrA" name="homepage.first_steps.hide_hint">
+      <segment state="translated">
+        <source>homepage.first_steps.hide_hint</source>
+        <target>Это уведомление будет скрыто после создания первого компонента.</target>
+      </segment>
+    </unit>
     <unit id="nfBdkzp" name="homepage.forum.text">
       <segment state="translated">
         <source>homepage.forum.text</source>
         <target>Все вопросы по Part-DB в ветке обсуждения на &lt;a href="%href%" class="link-external" target="_blank"&gt;mikrocontroller.net&lt;/a&gt;</target>
+      </segment>
+    </unit>
+    <unit id="qmnrptL" name="log.element_edited.changed_fields.category">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.category</source>
+        <target>Категория</target>
+      </segment>
+    </unit>
+    <unit id="h2yNq58" name="log.element_edited.changed_fields.footprint">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.footprint</source>
+        <target>Посадочное место</target>
+      </segment>
+    </unit>
+    <unit id="TYrqEhh" name="log.element_edited.changed_fields.manufacturer">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.manufacturer</source>
+        <target>Производитель</target>
+      </segment>
+    </unit>
+    <unit id="gD7hYx2" name="log.element_edited.changed_fields.value_typical">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.value_typical</source>
+        <target>тип. значение</target>
+      </segment>
+    </unit>
+    <unit id="0I9yC96" name="log.element_edited.changed_fields.pw_reset_expires">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.pw_reset_expires</source>
+        <target>Сброс пароля</target>
+      </segment>
+    </unit>
+    <unit id="0yxA3bg" name="log.element_edited.changed_fields.comment">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.comment</source>
+        <target>Заметки</target>
+      </segment>
+    </unit>
+    <unit id="ZX180Uu" name="log.element_edited.changed_fields.supplierpartnr">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.supplierpartnr</source>
+        <target>Код компонента у поставщика</target>
+      </segment>
+    </unit>
+    <unit id="Bzp4a3p" name="log.element_edited.changed_fields.supplier_product_url">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.supplier_product_url</source>
+        <target>Ссылка на продукт</target>
+      </segment>
+    </unit>
+    <unit id="X2KjgsJ" name="log.element_edited.changed_fields.price">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.price</source>
+        <target>Цена</target>
+      </segment>
+    </unit>
+    <unit id="zlKYtvI" name="log.element_edited.changed_fields.min_discount_quantity">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.min_discount_quantity</source>
+        <target>Минимум для заказа со скидкой</target>
+      </segment>
+    </unit>
+    <unit id="IrL23Tw" name="log.element_edited.changed_fields.original_filename">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.original_filename</source>
+        <target>Исходное имя файла</target>
+      </segment>
+    </unit>
+    <unit id="qvgIER7" name="log.element_edited.changed_fields.path">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.path</source>
+        <target>Путь до файла</target>
+      </segment>
+    </unit>
+    <unit id="B7rbOAi" name="log.element_edited.changed_fields.description">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.description</source>
+        <target>Описание</target>
+      </segment>
+    </unit>
+    <unit id="iRpQ.r4" name="log.element_edited.changed_fields.manufacturing_status">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.manufacturing_status</source>
+        <target>Статус производства</target>
+      </segment>
+    </unit>
+    <unit id="aQlVtZN" name="log.element_edited.changed_fields.options.barcode_type">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.barcode_type</source>
+        <target>Тип штрихкода</target>
+      </segment>
+    </unit>
+    <unit id="GrbTB8Q" name="log.element_edited.changed_fields.status">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.status</source>
+        <target>Статус</target>
+      </segment>
+    </unit>
+    <unit id="2MH9WjL" name="log.element_edited.changed_fields.quantity">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.quantity</source>
+        <target>BOM Кол-во</target>
+      </segment>
+    </unit>
+    <unit id="XRhN7QN" name="log.element_edited.changed_fields.mountnames">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.mountnames</source>
+        <target>Имена сборок</target>
+      </segment>
+    </unit>
+    <unit id="j5npGa6" name="log.element_edited.changed_fields.name">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.name</source>
+        <target>Имя</target>
+      </segment>
+    </unit>
+    <unit id="NjHccov" name="log.element_edited.changed_fields.part">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.part</source>
+        <target>Компонент</target>
+      </segment>
+    </unit>
+    <unit id="SCBolPs" name="log.element_edited.changed_fields.price_currency">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.price_currency</source>
+        <target>Валюта цены</target>
+      </segment>
+    </unit>
+    <unit id="qVqwVf0" name="log.element_edited.changed_fields.partname_hint">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.partname_hint</source>
+        <target>Подсказка по названию</target>
+      </segment>
+    </unit>
+    <unit id="HE8CkUq" name="log.element_edited.changed_fields.partname_regex">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.partname_regex</source>
+        <target>Фильтр по имени</target>
+      </segment>
+    </unit>
+    <unit id="waUb8Sn" name="log.element_edited.changed_fields.disable_footprints">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.disable_footprints</source>
+        <target>Отключить посадочные места</target>
+      </segment>
+    </unit>
+    <unit id="jysLxE8" name="log.element_edited.changed_fields.disable_manufacturers">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.disable_manufacturers</source>
+        <target>Отключить производителей</target>
+      </segment>
+    </unit>
+    <unit id="7SOq4dc" name="log.element_edited.changed_fields.disable_autodatasheets">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.disable_autodatasheets</source>
+        <target>Отключить автопривязку спецификации</target>
+      </segment>
+    </unit>
+    <unit id="VXVZch0" name="log.element_edited.changed_fields.disable_properties">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.disable_properties</source>
+        <target>Отключить свойства</target>
+      </segment>
+    </unit>
+    <unit id="gEePBMo" name="log.element_edited.changed_fields.default_description">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.default_description</source>
+        <target>Описание по умолчанию</target>
+      </segment>
+    </unit>
+    <unit id="nxg002v" name="log.element_edited.changed_fields.default_comment">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.default_comment</source>
+        <target>Заметки по умолчанию</target>
+      </segment>
+    </unit>
+    <unit id="EzrwA.V" name="log.element_edited.changed_fields.filetype_filter">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.filetype_filter</source>
+        <target>Разрешенные расширения файла</target>
+      </segment>
+    </unit>
+    <unit id="Fu4Pkpd" name="log.element_edited.changed_fields.not_selectable">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.not_selectable</source>
+        <target>Недоступно</target>
+      </segment>
+    </unit>
+    <unit id="HOMIDJA" name="log.element_edited.changed_fields.parent">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.parent</source>
+        <target>Родительский элемент</target>
+      </segment>
+    </unit>
+    <unit id="gZ_rDFJ" name="log.element_edited.changed_fields.shipping_costs">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.shipping_costs</source>
+        <target>Стоимость пересылки</target>
+      </segment>
+    </unit>
+    <unit id="7yyrZp7" name="log.element_edited.changed_fields.default_currency">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.default_currency</source>
+        <target>Валюта по умолчанию</target>
+      </segment>
+    </unit>
+    <unit id="T_67Yyo" name="log.element_edited.changed_fields.address">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.address</source>
+        <target>Адрес</target>
+      </segment>
+    </unit>
+    <unit id="o6PKTJA" name="log.element_edited.changed_fields.phone_number">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.phone_number</source>
+        <target>Номер телефона</target>
+      </segment>
+    </unit>
+    <unit id="W5rKz.M" name="log.element_edited.changed_fields.fax_number">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.fax_number</source>
+        <target>Номер факса</target>
+      </segment>
+    </unit>
+    <unit id="BlkJXPJ" name="log.element_edited.changed_fields.email_address">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.email_address</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="jQ2bFEK" name="log.element_edited.changed_fields.website">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.website</source>
+        <target>Web сайт</target>
+      </segment>
+    </unit>
+    <unit id="hQUV7ZC" name="log.element_edited.changed_fields.auto_product_url">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.auto_product_url</source>
+        <target>Ссылка на продукт</target>
+      </segment>
+    </unit>
+    <unit id="ZRxLMgU" name="log.element_edited.changed_fields.is_full">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.is_full</source>
+        <target>Место хранения заполнено</target>
+      </segment>
+    </unit>
+    <unit id="hMc.US1" name="log.element_edited.changed_fields.limit_to_existing_parts">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.limit_to_existing_parts</source>
+        <target>Только существующие компоненты</target>
+      </segment>
+    </unit>
+    <unit id="czzufVD" name="log.element_edited.changed_fields.only_single_part">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.only_single_part</source>
+        <target>Только один компонент</target>
+      </segment>
+    </unit>
+    <unit id="BFHeYb7" name="log.element_edited.changed_fields.storage_type">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.storage_type</source>
+        <target>Тип хранилища</target>
+      </segment>
+    </unit>
+    <unit id="7c.vSJ5" name="log.element_edited.changed_fields.footprint_3d">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.footprint_3d</source>
+        <target>3D модель</target>
+      </segment>
+    </unit>
+    <unit id="EhKSmFQ" name="log.element_edited.changed_fields.master_picture_attachment">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.master_picture_attachment</source>
+        <target>Миниатюра</target>
+      </segment>
+    </unit>
+    <unit id="0Qixo51" name="log.element_edited.changed_fields.exchange_rate">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.exchange_rate</source>
+        <target>Курс обмена</target>
+      </segment>
+    </unit>
+    <unit id="EippsOk" name="log.element_edited.changed_fields.iso_code">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.iso_code</source>
+        <target>Код ISO</target>
+      </segment>
+    </unit>
+    <unit id="JPVZRzH" name="log.element_edited.changed_fields.unit">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.unit</source>
+        <target>Символ единицы</target>
+      </segment>
+    </unit>
+    <unit id="bNKi.oP" name="log.element_edited.changed_fields.is_integer">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.is_integer</source>
+        <target>Целое число</target>
+      </segment>
+    </unit>
+    <unit id="XkLHxqf" name="log.element_edited.changed_fields.use_si_prefix">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.use_si_prefix</source>
+        <target>Использовать префиксы СИ</target>
+      </segment>
+    </unit>
+    <unit id="bgeqM2B" name="log.element_edited.changed_fields.options.width">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.width</source>
+        <target>Ширина</target>
+      </segment>
+    </unit>
+    <unit id="UJNmG3d" name="log.element_edited.changed_fields.options.height">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.height</source>
+        <target>Высота</target>
+      </segment>
+    </unit>
+    <unit id="M7z_SCq" name="log.element_edited.changed_fields.options.supported_element">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.supported_element</source>
+        <target>Тип элемента</target>
+      </segment>
+    </unit>
+    <unit id="WnWfGoW" name="log.element_edited.changed_fields.options.additional_css">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.additional_css</source>
+        <target>Дополнительные стили (CSS)</target>
+      </segment>
+    </unit>
+    <unit id="0wsPXyV" name="log.element_edited.changed_fields.options.lines">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.options.lines</source>
+        <target>Содержимое</target>
+      </segment>
+    </unit>
+    <unit id="SsbpFX0" name="log.element_edited.changed_fields.permissions.data">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.permissions.data</source>
+        <target>Разрешения</target>
+      </segment>
+    </unit>
+    <unit id="GYoJ2_d" name="log.element_edited.changed_fields.disabled">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.disabled</source>
+        <target>Отключено</target>
+      </segment>
+    </unit>
+    <unit id="q7TPEPu" name="log.element_edited.changed_fields.theme">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.theme</source>
+        <target>Тема</target>
+      </segment>
+    </unit>
+    <unit id="Qlf8uK3" name="log.element_edited.changed_fields.timezone">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.timezone</source>
+        <target>Временная зона</target>
+      </segment>
+    </unit>
+    <unit id="2GWIhsp" name="log.element_edited.changed_fields.language">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.language</source>
+        <target>Язык</target>
+      </segment>
+    </unit>
+    <unit id="Sw3SmBJ" name="log.element_edited.changed_fields.email">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="7FpvTOI" name="log.element_edited.changed_fields.department">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.department</source>
+        <target>Отдел</target>
+      </segment>
+    </unit>
+    <unit id="jWNSk.e" name="log.element_edited.changed_fields.last_name">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.last_name</source>
+        <target>Фамилия</target>
+      </segment>
+    </unit>
+    <unit id="49zb3b7" name="log.element_edited.changed_fields.first_name">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.first_name</source>
+        <target>Имя</target>
+      </segment>
+    </unit>
+    <unit id="b55U6o6" name="log.element_edited.changed_fields.group">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.group</source>
+        <target>Группа</target>
+      </segment>
+    </unit>
+    <unit id="fgxi1Rb" name="log.element_edited.changed_fields.currency">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.currency</source>
+        <target>Выбранная валюта</target>
+      </segment>
+    </unit>
+    <unit id="YjMeEAn" name="log.element_edited.changed_fields.enforce2FA">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.enforce2FA</source>
+        <target>Требовать 2FA</target>
+      </segment>
+    </unit>
+    <unit id="Ekpsda2" name="log.element_edited.changed_fields.symbol">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.symbol</source>
+        <target>Символ</target>
+      </segment>
+    </unit>
+    <unit id="VUH1O1d" name="log.element_edited.changed_fields.value_min">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.value_min</source>
+        <target>Мин. значение</target>
+      </segment>
+    </unit>
+    <unit id="DqyfYKK" name="log.element_edited.changed_fields.value_max">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.value_max</source>
+        <target>Макс. значение</target>
+      </segment>
+    </unit>
+    <unit id="qX_n4ud" name="log.element_edited.changed_fields.value_text">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.value_text</source>
+        <target>Текстовое значение</target>
+      </segment>
+    </unit>
+    <unit id="T2zweRa" name="log.element_edited.changed_fields.show_in_table">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.show_in_table</source>
+        <target>Показать в таблице</target>
+      </segment>
+    </unit>
+    <unit id="TkaXDi7" name="log.element_edited.changed_fields.attachment_type">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.attachment_type</source>
+        <target>Тип вложения</target>
+      </segment>
+    </unit>
+    <unit id="YPerF93" name="log.element_edited.changed_fields.needs_review">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.needs_review</source>
+        <target>Требует рассмотрения</target>
+      </segment>
+    </unit>
+    <unit id="gF_Zo45" name="log.element_edited.changed_fields.tags">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.tags</source>
+        <target>Метки</target>
+      </segment>
+    </unit>
+    <unit id="fjo2JY_" name="log.element_edited.changed_fields.mass">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.mass</source>
+        <target>Масса</target>
+      </segment>
+    </unit>
+    <unit id="f7YI8uk" name="log.element_edited.changed_fields.ipn">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.ipn</source>
+        <target>IPN</target>
+      </segment>
+    </unit>
+    <unit id="vAHGo60" name="log.element_edited.changed_fields.favorite">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.favorite</source>
+        <target>Любимый</target>
+      </segment>
+    </unit>
+    <unit id="TUBvDxJ" name="log.element_edited.changed_fields.minamount">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.minamount</source>
+        <target>Минимальный запас</target>
+      </segment>
+    </unit>
+    <unit id="pVJ9vgg" name="log.element_edited.changed_fields.manufacturer_product_url">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.manufacturer_product_url</source>
+        <target>Ссылка на страницу продукта</target>
+      </segment>
+    </unit>
+    <unit id="JW.PgxU" name="log.element_edited.changed_fields.manufacturer_product_number">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.manufacturer_product_number</source>
+        <target>MPN</target>
+      </segment>
+    </unit>
+    <unit id="tV.PNy_" name="log.element_edited.changed_fields.partUnit">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.partUnit</source>
+        <target>Единица измерения</target>
+      </segment>
+    </unit>
+    <unit id="nwxlI_C" name="log.element_edited.changed_fields.expiration_date">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.expiration_date</source>
+        <target>Дата истечения</target>
+      </segment>
+    </unit>
+    <unit id="cPY3MD7" name="log.element_edited.changed_fields.amount">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.amount</source>
+        <target>Количество</target>
+      </segment>
+    </unit>
+    <unit id="eSrNkis" name="log.element_edited.changed_fields.storage_location">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.storage_location</source>
+        <target>Место хранения</target>
+      </segment>
+    </unit>
+    <unit id="Qt585vm" name="attachment.max_file_size">
+      <segment state="translated">
+        <source>attachment.max_file_size</source>
+        <target>Максимальный размер файла</target>
+      </segment>
+    </unit>
+    <unit id="tkkbiag" name="user.saml_user">
+      <segment state="translated">
+        <source>user.saml_user</source>
+        <target>SSO / SAML пользователь</target>
+      </segment>
+    </unit>
+    <unit id="fhepjKr" name="user.saml_user.pw_change_hint">
+      <segment state="translated">
+        <source>user.saml_user.pw_change_hint</source>
+        <target>Вы зашли используя систему единого входа (SSO). Поэтому вы не можете настроить здесь свой пароль и двухфакторную аутентификацию. Конфигурируйте их в настройках вашего SSO провайдера!</target>
+      </segment>
+    </unit>
+    <unit id="32beTBH" name="login.sso_saml_login">
+      <segment state="translated">
+        <source>login.sso_saml_login</source>
+        <target>Система единого входа (SSO)</target>
+      </segment>
+    </unit>
+    <unit id="wnMLanX" name="login.local_login_hint">
+      <segment state="translated">
+        <source>login.local_login_hint</source>
+        <target>Форму ниже можно использовать только для входа в систему под локальным пользователем. Если вы хотите вместо этого войти через систему единого входа, используйте кнопку выше.</target>
+      </segment>
+    </unit>
+    <unit id="fa76Qc9" name="part_list.action.action.export">
+      <segment state="translated">
+        <source>part_list.action.action.export</source>
+        <target>Экспорт компонентов</target>
+      </segment>
+    </unit>
+    <unit id="OfOI7tn" name="part_list.action.export_json">
+      <segment state="translated">
+        <source>part_list.action.export_json</source>
+        <target>Экспорт в виде JSON</target>
+      </segment>
+    </unit>
+    <unit id="8Y5uz7l" name="part_list.action.export_csv">
+      <segment state="translated">
+        <source>part_list.action.export_csv</source>
+        <target>Экспорт в виде CSV</target>
+      </segment>
+    </unit>
+    <unit id="gtllBTO" name="part_list.action.export_yaml">
+      <segment state="translated">
+        <source>part_list.action.export_yaml</source>
+        <target>Экспорт в виде YAML</target>
+      </segment>
+    </unit>
+    <unit id="IW9wGBS" name="part_list.action.export_xml">
+      <segment state="translated">
+        <source>part_list.action.export_xml</source>
+        <target>Экспорт в виде XML</target>
+      </segment>
+    </unit>
+    <unit id="kCT2Emc" name="parts.import.title">
+      <segment state="translated">
+        <source>parts.import.title</source>
+        <target>Импорт компонентов</target>
+      </segment>
+    </unit>
+    <unit id="6oVjTY." name="parts.import.errors.title">
+      <segment state="translated">
+        <source>parts.import.errors.title</source>
+        <target>Импорт проблем</target>
+      </segment>
+    </unit>
+    <unit id="2sWmr2k" name="parts.import.flash.error">
+      <segment state="translated">
+        <source>parts.import.flash.error</source>
+        <target>Во время экспорта возникли ошибки. Вероятно, это вызвано неверными данными.</target>
+      </segment>
+    </unit>
+    <unit id="hJHxH3J" name="parts.import.format.auto">
+      <segment state="translated">
+        <source>parts.import.format.auto</source>
+        <target>Автоматически (в зависимости от расширения файла)</target>
+      </segment>
+    </unit>
+    <unit id="E1zm0rb" name="parts.import.flash.error.unknown_format">
+      <segment state="translated">
+        <source>parts.import.flash.error.unknown_format</source>
+        <target>Формат не может быть определен автоматически. Пожалуйста, выберите правильный формат вручную!</target>
+      </segment>
+    </unit>
+    <unit id="y2UaCL7" name="parts.import.flash.error.invalid_file">
+      <segment state="translated">
+        <source>parts.import.flash.error.invalid_file</source>
+        <target>Файл поврежден/неправильно отформатирован. Убедитесь, что вы выбрали правильный формат.</target>
+      </segment>
+    </unit>
+    <unit id="ih.wsVn" name="parts.import.part_category.label">
+      <segment state="translated">
+        <source>parts.import.part_category.label</source>
+        <target>Переопределение категории</target>
+      </segment>
+    </unit>
+    <unit id="mLczcax" name="parts.import.part_category.help">
+      <segment state="translated">
+        <source>parts.import.part_category.help</source>
+        <target>Если вы выберете здесь категорию, все импортированные компоненты будут отнесены к этой категории, независимо от того, что содержится в данных импорта.</target>
+      </segment>
+    </unit>
+    <unit id="W09n3nV" name="import.create_unknown_datastructures">
+      <segment state="translated">
+        <source>import.create_unknown_datastructures</source>
+        <target>Создать неизвестные структуры данных</target>
+      </segment>
+    </unit>
+    <unit id="QkzTk.8" name="import.create_unknown_datastructures.help">
+      <segment state="translated">
+        <source>import.create_unknown_datastructures.help</source>
+        <target>Если выбран этот параметр, структуры данных (например, категории, посадочные места и т. д.), которые еще не существуют в базе данных, будут созданы автоматически. Если этот параметр не выбран, будут использоваться только те структуры данных, которые уже существуют в базе данных, а если подходящей структуры не существует, соответствующее поле компонента останется пустым.</target>
+      </segment>
+    </unit>
+    <unit id="p6fTkCQ" name="import.path_delimiter">
+      <segment state="translated">
+        <source>import.path_delimiter</source>
+        <target>Разделитель пути</target>
+      </segment>
+    </unit>
+    <unit id="gSn6XRk" name="import.path_delimiter.help">
+      <segment state="translated">
+        <source>import.path_delimiter.help</source>
+        <target>Разделитель используется для разделения различных уровней структур данных таких как категории, посадочные места и т. д.</target>
+      </segment>
+    </unit>
+    <unit id="aNR2tK9" name="parts.import.help_documentation">
+      <segment state="translated">
+        <source>parts.import.help_documentation</source>
+        <target>Смотри &lt;a href="%link%"&gt;documentation&lt;/a&gt; для большей информации о формате файла.</target>
+      </segment>
+    </unit>
+    <unit id="bOHORjK" name="parts.import.help">
+      <segment state="translated">
+        <source>parts.import.help</source>
+        <target>С помощью этого инструмента вы можете импортировать компоненты из существующих файлов. Компоненты сохраняются непосредственно в базу данных (без возможности предварительной их повторной проверки). Пожалуйста, проверьте файл импорта здесь перед загрузкой!</target>
+      </segment>
+    </unit>
+    <unit id="sweByB7" name="parts.import.flash.success">
+      <segment state="translated">
+        <source>parts.import.flash.success</source>
+        <target>Компонент успешно импортирован!</target>
+      </segment>
+    </unit>
+    <unit id="j7NAkR." name="parts.import.errors.imported_entities">
+      <segment state="translated">
+        <source>parts.import.errors.imported_entities</source>
+        <target>Импортированные компоненты</target>
+      </segment>
+    </unit>
+    <unit id="W7NWPFx" name="perm.import">
+      <segment state="translated">
+        <source>perm.import</source>
+        <target>Импортировать данные</target>
+      </segment>
+    </unit>
+    <unit id="sYQswdX" name="parts.import.part_needs_review.label">
+      <segment state="translated">
+        <source>parts.import.part_needs_review.label</source>
+        <target>Пометить все импортированные компоненты как "Требуется проверки"</target>
+      </segment>
+    </unit>
+    <unit id="5DhI5ZW" name="parts.import.part_needs_review.help">
+      <segment state="translated">
+        <source>parts.import.part_needs_review.help</source>
+        <target>Если выбран этот параметр, все импортированные детали будут помечены как «Требуется проверка», независимо от того, что записано в данных импорта.</target>
+      </segment>
+    </unit>
+    <unit id="eVvGwjn" name="project.bom_import.flash.success">
+      <segment state="translated">
+        <source>project.bom_import.flash.success</source>
+        <target>Успешно импортировано %count% записей BOM.</target>
+      </segment>
+    </unit>
+    <unit id="5mJNteq" name="project.bom_import.type">
+      <segment state="translated">
+        <source>project.bom_import.type</source>
+        <target>Тип</target>
+      </segment>
+    </unit>
+    <unit id="._nn_MY" name="project.bom_import.type.kicad_pcbnew">
+      <segment state="translated">
+        <source>project.bom_import.type.kicad_pcbnew</source>
+        <target>KiCAD Pcbnew BOM (CSV файл)</target>
+      </segment>
+    </unit>
+    <unit id="iTVcfIk" name="project.bom_import.clear_existing_bom">
+      <segment state="translated">
+        <source>project.bom_import.clear_existing_bom</source>
+        <target>Удалить существующие записи BOM перед импортом.</target>
+      </segment>
+    </unit>
+    <unit id="ijGhrbQ" name="project.bom_import.clear_existing_bom.help">
+      <segment state="translated">
+        <source>project.bom_import.clear_existing_bom.help</source>
+        <target>Если выбран этот параметр, все записи спецификации, которые уже существуют в проекте, будут удалены и перезаписаны импортированными данными спецификации.</target>
+      </segment>
+    </unit>
+    <unit id="_FX5OYh" name="project.bom_import.flash.invalid_file">
+      <segment state="translated">
+        <source>project.bom_import.flash.invalid_file</source>
+        <target>Не удалось импортировать файл. Убедитесь, что вы выбрали правильный тип файла. Сообщение об ошибке: %message%</target>
+      </segment>
+    </unit>
+    <unit id="1bpfKwW" name="project.bom_import.flash.invalid_entries">
+      <segment state="translated">
+        <source>project.bom_import.flash.invalid_entries</source>
+        <target>Ошибка проверки! Пожалуйста, убедитесь что данные корректны!</target>
+      </segment>
+    </unit>
+    <unit id="0oQjMQO" name="project.import_bom">
+      <segment state="translated">
+        <source>project.import_bom</source>
+        <target>Импортировать BOM для проекта</target>
+      </segment>
+    </unit>
+    <unit id="sPZbhUL" name="project.edit.bom.import_bom">
+      <segment state="translated">
+        <source>project.edit.bom.import_bom</source>
+        <target>Импортировать BOM</target>
+      </segment>
+    </unit>
+    <unit id="qDVJg2i" name="measurement_unit.new">
+      <segment state="translated">
+        <source>measurement_unit.new</source>
+        <target>Новая единица измерения</target>
+      </segment>
+    </unit>
+    <unit id="WKzr7h0" name="measurement_unit.edit">
+      <segment state="translated">
+        <source>measurement_unit.edit</source>
+        <target>Изменить единицу измерения</target>
+      </segment>
+    </unit>
+    <unit id="gRatnCn" name="user.aboutMe.label">
+      <segment state="translated">
+        <source>user.aboutMe.label</source>
+        <target>Обо мне</target>
+      </segment>
+    </unit>
+    <unit id="WsHXARp" name="storelocation.owner.label">
+      <segment state="translated">
+        <source>storelocation.owner.label</source>
+        <target>Владелец</target>
+      </segment>
+    </unit>
+    <unit id="VQ97Dh0" name="storelocation.part_owner_must_match.label">
+      <segment state="translated">
+        <source>storelocation.part_owner_must_match.label</source>
+        <target>Владелец лота должен совпадать с владельцем места хранения.</target>
+      </segment>
+    </unit>
+    <unit id="sddE1L." name="part_lot.owner">
+      <segment state="translated">
+        <source>part_lot.owner</source>
+        <target>Владелец</target>
+      </segment>
+    </unit>
+    <unit id="XKIMr8j" name="part_lot.owner.help">
+      <segment state="translated">
+        <source>part_lot.owner.help</source>
+        <target>Только владелец может удалять или добавлять компоненты из этого лота.</target>
+      </segment>
+    </unit>
+    <unit id="61.yfNy" name="log.element_edited.changed_fields.owner">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.owner</source>
+        <target>Владелец</target>
+      </segment>
+    </unit>
+    <unit id="YkZAIS8" name="log.element_edited.changed_fields.instock_unknown">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.instock_unknown</source>
+        <target>Количество неизвестно</target>
+      </segment>
+    </unit>
+    <unit id="xf7NNZ9" name="log.element_edited.changed_fields.needs_refill">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.needs_refill</source>
+        <target>Необходимо пополнить</target>
+      </segment>
+    </unit>
+    <unit id="Gfw_MWL" name="part.withdraw.access_denied">
+      <segment state="translated">
+        <source>part.withdraw.access_denied</source>
+        <target>Вы не авторизованы для выполнения желаемого действия! Пожалуйста, проверьте свои полномочия и владельца инвентаря компонентов.</target>
+      </segment>
+    </unit>
+    <unit id="Dwo4KWP" name="part.info.amount.less_than_desired">
+      <segment state="translated">
+        <source>part.info.amount.less_than_desired</source>
+        <target>Меньше, чем хотелось бы</target>
+      </segment>
+    </unit>
+    <unit id="cdnsW4q" name="log.cli_user">
+      <segment state="translated">
+        <source>log.cli_user</source>
+        <target>Пользователь CLI</target>
+      </segment>
+    </unit>
+    <unit id="4GTAJ9E" name="log.element_edited.changed_fields.part_owner_must_match">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.part_owner_must_match</source>
+        <target>Владелец компонента должен совпадать с владельцем хранилища!</target>
+      </segment>
+    </unit>
+    <unit id="u6qFa_j" name="part.filter.lessThanDesired">
+      <segment state="translated">
+        <source>part.filter.lessThanDesired</source>
+        <target>Доступно меньше, чем хотелось бы (общее количество &lt; мин. количества)</target>
+      </segment>
+    </unit>
+    <unit id="lHTN.a1" name="part.filter.lotOwner">
+      <segment state="translated">
+        <source>part.filter.lotOwner</source>
+        <target>Владелец инвентаря</target>
+      </segment>
+    </unit>
+    <unit id="47OCK_W" name="user.show_email_on_profile.label">
+      <segment state="translated">
+        <source>user.show_email_on_profile.label</source>
+        <target>Показывать e-mail на странице публичного профиля</target>
+      </segment>
+    </unit>
+    <unit id="4rkjIk2" name="log.details.title">
+      <segment state="translated">
+        <source>log.details.title</source>
+        <target>Подробности журнала</target>
+      </segment>
+    </unit>
+    <unit id="aeYMkHS" name="log.user_login.login_from_ip">
+      <segment state="translated">
+        <source>log.user_login.login_from_ip</source>
+        <target>Вход с IP адреса</target>
+      </segment>
+    </unit>
+    <unit id="9jOklgS" name="log.user_login.ip_anonymize_hint">
+      <segment state="translated">
+        <source>log.user_login.ip_anonymize_hint</source>
+        <target>Если последние цифры IP-адреса отсутствуют, то активируется режим GDPR, в котором IP-адреса анонимизируются.</target>
+      </segment>
+    </unit>
+    <unit id="kaMyDVi" name="log.user_not_allowed.unauthorized_access_attempt_to">
+      <segment state="translated">
+        <source>log.user_not_allowed.unauthorized_access_attempt_to</source>
+        <target>Попытка неавторизованного доступа к странице</target>
+      </segment>
+    </unit>
+    <unit id="EibB1Wh" name="log.user_not_allowed.hint">
+      <segment state="translated">
+        <source>log.user_not_allowed.hint</source>
+        <target>Запрос был заблокирован. Никаких дальнейших действий не требуется.</target>
+      </segment>
+    </unit>
+    <unit id="JVE17kW" name="log.no_comment">
+      <segment state="translated">
+        <source>log.no_comment</source>
+        <target>Без комментариев</target>
+      </segment>
+    </unit>
+    <unit id="5xvPvME" name="log.element_changed.field">
+      <segment state="translated">
+        <source>log.element_changed.field</source>
+        <target>Поле</target>
+      </segment>
+    </unit>
+    <unit id="vufWYhV" name="log.element_changed.data_before">
+      <segment state="translated">
+        <source>log.element_changed.data_before</source>
+        <target>Данные до изменения</target>
+      </segment>
+    </unit>
+    <unit id="qk2u9Qg" name="error_table.error">
+      <segment state="translated">
+        <source>error_table.error</source>
+        <target>Во время запроса произошла ошибка.</target>
+      </segment>
+    </unit>
+    <unit id="tLXzED2" name="part.table.invalid_regex">
+      <segment state="translated">
+        <source>part.table.invalid_regex</source>
+        <target>Неверное регулярное выражение (regex)</target>
+      </segment>
+    </unit>
+    <unit id="VKPOkNO" name="log.element_changed.data_after">
+      <segment state="translated">
+        <source>log.element_changed.data_after</source>
+        <target>Данные после изменения</target>
+      </segment>
+    </unit>
+    <unit id="DiNGTl8" name="log.element_changed.diff">
+      <segment state="translated">
+        <source>log.element_changed.diff</source>
+        <target>Разница</target>
+      </segment>
+    </unit>
+    <unit id="OB_fVDI" name="log.undo.undo.short">
+      <segment state="translated">
+        <source>log.undo.undo.short</source>
+        <target>Отмена</target>
+      </segment>
+    </unit>
+    <unit id="AvoT6DL" name="log.undo.revert.short">
+      <segment state="translated">
+        <source>log.undo.revert.short</source>
+        <target>Вернуться к версии</target>
+      </segment>
+    </unit>
+    <unit id="YdXQd2_" name="log.view_version">
+      <segment state="translated">
+        <source>log.view_version</source>
+        <target>Посмотреть версию</target>
+      </segment>
+    </unit>
+    <unit id="l47W4kt" name="log.undo.undelete.short">
+      <segment state="translated">
+        <source>log.undo.undelete.short</source>
+        <target>Восстановить</target>
+      </segment>
+    </unit>
+    <unit id="PDJYeqj" name="log.element_edited.changed_fields.id">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.id</source>
+        <target>ID</target>
+      </segment>
+    </unit>
+    <unit id="cQTNNI7" name="log.element_edited.changed_fields.id_owner">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.id_owner</source>
+        <target>Владелец</target>
+      </segment>
+    </unit>
+    <unit id="h1eBlp8" name="log.element_edited.changed_fields.parent_id">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.parent_id</source>
+        <target>Родительский элемент</target>
+      </segment>
+    </unit>
+    <unit id="GUthgcU" name="log.details.delete_entry">
+      <segment state="translated">
+        <source>log.details.delete_entry</source>
+        <target>Удалить запись журнала</target>
+      </segment>
+    </unit>
+    <unit id="Wv0WAmO" name="log.delete.message.title">
+      <segment state="translated">
+        <source>log.delete.message.title</source>
+        <target>Вы уверены, что хотите удалить эту запись из журнала ?</target>
+      </segment>
+    </unit>
+    <unit id="5tbpaLR" name="log.delete.message">
+      <segment state="translated">
+        <source>log.delete.message</source>
+        <target>Если это запись истории для элемента, то ее удаление приведет к потере данных истории! Это может привести к неожиданным результатам при использовании функции путешествия во времени.</target>
+      </segment>
+    </unit>
+    <unit id="P.c4WmY" name="log.collection_deleted.on_collection">
+      <segment state="translated">
+        <source>log.collection_deleted.on_collection</source>
+        <target>в коллекции</target>
+      </segment>
+    </unit>
+    <unit id=".wiLJk6" name="log.element_edited.changed_fields.attachments">
+      <segment state="translated">
+        <source>log.element_edited.changed_fields.attachments</source>
+        <target>Вложения</target>
+      </segment>
+    </unit>
+    <unit id="DGczoY6" name="tfa_u2f.add_key.registration_error">
+      <segment state="translated">
+        <source>tfa_u2f.add_key.registration_error</source>
+        <target>Произошла ошибка во время регистрации ключа безопасности. Попробуйте еще раз или используйте другой ключ!</target>
+      </segment>
+    </unit>
+    <unit id="ie0Ca0l" name="log.target_type.none">
+      <segment state="translated">
+        <source>log.target_type.none</source>
+        <target>Нет</target>
+      </segment>
+    </unit>
+    <unit id="R2nX4ip" name="ui.darkmode.light">
+      <segment state="translated">
+        <source>ui.darkmode.light</source>
+        <target>Светлый</target>
+      </segment>
+    </unit>
+    <unit id="3NHpuW3" name="ui.darkmode.dark">
+      <segment state="translated">
+        <source>ui.darkmode.dark</source>
+        <target>Тёмный</target>
+      </segment>
+    </unit>
+    <unit id="4TGOK5_" name="ui.darkmode.auto">
+      <segment state="translated">
+        <source>ui.darkmode.auto</source>
+        <target>Авто (в зависимости от настроек системы)</target>
+      </segment>
+    </unit>
+    <unit id="9N0N8aL" name="label_generator.no_lines_given">
+      <segment state="translated">
+        <source>label_generator.no_lines_given</source>
+        <target>Текстовое содержание не указано! Созданные ярлыки будут пустыми.</target>
+      </segment>
+    </unit>
+    <unit id="RdFvZsb" name="user.password_strength.very_weak">
+      <segment state="translated">
+        <source>user.password_strength.very_weak</source>
+        <target>Очень слабый</target>
+      </segment>
+    </unit>
+    <unit id="IBjmblZ" name="user.password_strength.weak">
+      <segment state="translated">
+        <source>user.password_strength.weak</source>
+        <target>Слабый</target>
+      </segment>
+    </unit>
+    <unit id="qSm_ID0" name="user.password_strength.medium">
+      <segment state="translated">
+        <source>user.password_strength.medium</source>
+        <target>Средний</target>
+      </segment>
+    </unit>
+    <unit id="aWAaADS" name="user.password_strength.strong">
+      <segment state="translated">
+        <source>user.password_strength.strong</source>
+        <target>Сильный</target>
+      </segment>
+    </unit>
+    <unit id="Wa9CStW" name="user.password_strength.very_strong">
+      <segment state="translated">
+        <source>user.password_strength.very_strong</source>
+        <target>Очень сильный</target>
+      </segment>
+    </unit>
+    <unit id="6OHd5fv" name="perm.users.impersonate">
+      <segment state="translated">
+        <source>perm.users.impersonate</source>
+        <target>Выдать себя за другого пользователя</target>
+      </segment>
+    </unit>
+    <unit id="ssn1H1A" name="user.impersonated_by.label">
+      <segment state="translated">
+        <source>user.impersonated_by.label</source>
+        <target>Выдано пользователем</target>
+      </segment>
+    </unit>
+    <unit id="inTlSge" name="user.stop_impersonation">
+      <segment state="translated">
+        <source>user.stop_impersonation</source>
+        <target>Прекратить «Выдавать себя за пользователя»</target>
+      </segment>
+    </unit>
+    <unit id="T3yB7KF" name="user.impersonate.btn">
+      <segment state="translated">
+        <source>user.impersonate.btn</source>
+        <target>Выдавать себя за пользователя</target>
+      </segment>
+    </unit>
+    <unit id="sFE8diE" name="user.impersonate.confirm.title">
+      <segment state="translated">
+        <source>user.impersonate.confirm.title</source>
+        <target>Вы уверены, что хотите выдать себя за этого пользователя?</target>
+      </segment>
+    </unit>
+    <unit id="MlJJSEo" name="user.impersonate.confirm.message">
+      <segment state="translated">
+        <source>user.impersonate.confirm.message</source>
+        <target>Это будет отражено в журнале. Должна быть веская причина для данного действия.
+
+Обратите внимание, что вы не можете выдавать себя за деактивированного пользователя. Если вы попробуете это сделать, вы получите сообщение «Доступ запрещен».</target>
+      </segment>
+    </unit>
+    <unit id="df2ac87" name="log.type.security.user_impersonated">
+      <segment state="translated">
+        <source>log.type.security.user_impersonated</source>
+        <target>Пользователь выдал себя за другое лицо</target>
+      </segment>
+    </unit>
+    <unit id="08SKwoy" name="info_providers.providers_list.title">
+      <segment state="translated">
+        <source>info_providers.providers_list.title</source>
+        <target>Источники информации</target>
+      </segment>
+    </unit>
+    <unit id="BnbVOSD" name="info_providers.providers_list.active">
+      <segment state="translated">
+        <source>info_providers.providers_list.active</source>
+        <target>Активный</target>
+      </segment>
+    </unit>
+    <unit id="adJnJGT" name="info_providers.providers_list.disabled">
+      <segment state="translated">
+        <source>info_providers.providers_list.disabled</source>
+        <target>Отключенный</target>
+      </segment>
+    </unit>
+    <unit id="1M7yaPw" name="info_providers.capabilities.basic">
+      <segment state="translated">
+        <source>info_providers.capabilities.basic</source>
+        <target>Основные</target>
+      </segment>
+    </unit>
+    <unit id="PSu1VtZ" name="info_providers.capabilities.footprint">
+      <segment state="translated">
+        <source>info_providers.capabilities.footprint</source>
+        <target>Посадочное место</target>
+      </segment>
+    </unit>
+    <unit id="NGbCaWh" name="info_providers.capabilities.picture">
+      <segment state="translated">
+        <source>info_providers.capabilities.picture</source>
+        <target>Картинка</target>
+      </segment>
+    </unit>
+    <unit id="a5JK5hi" name="info_providers.capabilities.datasheet">
+      <segment state="translated">
+        <source>info_providers.capabilities.datasheet</source>
+        <target>Технические данные</target>
+      </segment>
+    </unit>
+    <unit id="60AvDOv" name="info_providers.capabilities.price">
+      <segment state="translated">
+        <source>info_providers.capabilities.price</source>
+        <target>Цены</target>
+      </segment>
+    </unit>
+    <unit id="nNKOyNM" name="part.info_provider_reference.badge">
+      <segment state="translated">
+        <source>part.info_provider_reference.badge</source>
+        <target>Источник информации, использованный для создания этого компонента.</target>
+      </segment>
+    </unit>
+    <unit id="WTB_AKQ" name="part.info_provider_reference">
+      <segment state="translated">
+        <source>part.info_provider_reference</source>
+        <target>Создано на основе источника информации</target>
+      </segment>
+    </unit>
+    <unit id="Qhaj.j4" name="oauth_client.connect.btn">
+      <segment state="translated">
+        <source>oauth_client.connect.btn</source>
+        <target>Подключить OAuth</target>
+      </segment>
+    </unit>
+    <unit id="5_Z_m9s" name="info_providers.table.provider.label">
+      <segment state="translated">
+        <source>info_providers.table.provider.label</source>
+        <target>Источник</target>
+      </segment>
+    </unit>
+    <unit id="Cj5csML" name="info_providers.search.keyword">
+      <segment state="translated">
+        <source>info_providers.search.keyword</source>
+        <target>Ключевое слово</target>
+      </segment>
+    </unit>
+    <unit id="rvTOWHb" name="info_providers.search.submit">
+      <segment state="translated">
+        <source>info_providers.search.submit</source>
+        <target>Найти</target>
+      </segment>
+    </unit>
+    <unit id="Mwq891Y" name="info_providers.search.providers.help">
+      <segment state="translated">
+        <source>info_providers.search.providers.help</source>
+        <target>Выберите источники информации для поиска.</target>
+      </segment>
+    </unit>
+    <unit id="nvk25qA" name="info_providers.search.providers">
+      <segment state="translated">
+        <source>info_providers.search.providers</source>
+        <target>Источники</target>
+      </segment>
+    </unit>
+    <unit id="5kSES8M" name="info_providers.search.info_providers_list">
+      <segment state="translated">
+        <source>info_providers.search.info_providers_list</source>
+        <target>Посмотреть все доступные источники информации</target>
+      </segment>
+    </unit>
+    <unit id="Y2gg4WI" name="info_providers.search.title">
+      <segment state="translated">
+        <source>info_providers.search.title</source>
+        <target>Создать компонент из источника информации</target>
+      </segment>
+    </unit>
+    <unit id="8w3P1gW" name="oauth_client.flash.connection_successful">
+      <segment state="translated">
+        <source>oauth_client.flash.connection_successful</source>
+        <target>Соединение с приложением OAuth успешно установлено!</target>
+      </segment>
+    </unit>
+    <unit id="9ULD.eH" name="perm.part.info_providers">
+      <segment state="translated">
+        <source>perm.part.info_providers</source>
+        <target>Источники информации</target>
+      </segment>
+    </unit>
+    <unit id="En713bs" name="perm.part.info_providers.create_parts">
+      <segment state="translated">
+        <source>perm.part.info_providers.create_parts</source>
+        <target>Создание компонентов</target>
+      </segment>
+    </unit>
+    <unit id="9BvJ32n" name="entity.edit.alternative_names.label">
+      <segment state="translated">
+        <source>entity.edit.alternative_names.label</source>
+        <target>Альтернативные названия</target>
+      </segment>
+    </unit>
+    <unit id="GgN2HwP" name="entity.edit.alternative_names.help">
+      <segment state="translated">
+        <source>entity.edit.alternative_names.help</source>
+        <target>Представленные здесь альтернативные имена используются для автоматического выбора этого элемента на основе данных, полученных из источников информации.</target>
+      </segment>
+    </unit>
+    <unit id="TRmIjDN" name="info_providers.form.help_prefix">
+      <segment state="translated">
+        <source>info_providers.form.help_prefix</source>
+        <target>Источник</target>
+      </segment>
+    </unit>
+    <unit id="21tIbM2" name="update_manager.new_version_available.title">
+      <segment state="translated">
+        <source>update_manager.new_version_available.title</source>
+        <target>Доступна новая версия</target>
+      </segment>
+    </unit>
+    <unit id=".c.eoDV" name="update_manager.new_version_available.text">
+      <segment state="translated">
+        <source>update_manager.new_version_available.text</source>
+        <target>Доступна новая версия Part-DB. Здесь вы найдете больше информации</target>
+      </segment>
+    </unit>
+    <unit id="KOFGqJw" name="update_manager.new_version_available.only_administrators_can_see">
+      <segment state="translated">
+        <source>update_manager.new_version_available.only_administrators_can_see</source>
+        <target>Это сообщение могут видеть только администраторы.</target>
+      </segment>
+    </unit>
+    <unit id="IFkvJpC" name="perm.system.show_available_updates">
+      <segment state="translated">
+        <source>perm.system.show_available_updates</source>
+        <target>Показать доступные обновления Part-DB</target>
+      </segment>
+    </unit>
+    <unit id="bItnXAm" name="user.settings.api_tokens">
+      <segment state="translated">
+        <source>user.settings.api_tokens</source>
+        <target>Токены API</target>
+      </segment>
+    </unit>
+    <unit id="stkMDET" name="user.settings.api_tokens.description">
+      <segment state="translated">
+        <source>user.settings.api_tokens.description</source>
+        <target>Используя токен API, другие приложения могут получить доступ к Part-DB под вашими правами для выполнения различных действий с помощью REST API Part-DB. Если вы удалите токен API, приложение, использующее этот токен, больше не сможет получить доступ к Part-DB от его имени.</target>
+      </segment>
+    </unit>
+    <unit id="pd794fq" name="api_tokens.name">
+      <segment state="translated">
+        <source>api_tokens.name</source>
+        <target>Имя</target>
+      </segment>
+    </unit>
+    <unit id="XodVxQi" name="api_tokens.access_level">
+      <segment state="translated">
+        <source>api_tokens.access_level</source>
+        <target>Уровень доступа</target>
+      </segment>
+    </unit>
+    <unit id="kHaDSpK" name="api_tokens.expiration_date">
+      <segment state="translated">
+        <source>api_tokens.expiration_date</source>
+        <target>Дата истечения срока действия</target>
+      </segment>
+    </unit>
+    <unit id="b5uLOjr" name="api_tokens.added_date">
+      <segment state="translated">
+        <source>api_tokens.added_date</source>
+        <target>Добавлен</target>
+      </segment>
+    </unit>
+    <unit id="QPwuYKl" name="api_tokens.last_time_used">
+      <segment state="translated">
+        <source>api_tokens.last_time_used</source>
+        <target>Последний раз использован</target>
+      </segment>
+    </unit>
+    <unit id="G91glEH" name="datetime.never">
+      <segment state="translated">
+        <source>datetime.never</source>
+        <target>Никогда</target>
+      </segment>
+    </unit>
+    <unit id="xPeKpJU" name="api_token.valid">
+      <segment state="translated">
+        <source>api_token.valid</source>
+        <target>Действительный</target>
+      </segment>
+    </unit>
+    <unit id="jlBlmje" name="api_token.expired">
+      <segment state="translated">
+        <source>api_token.expired</source>
+        <target>Истекший</target>
+      </segment>
+    </unit>
+    <unit id="Kmdx4SB" name="user.settings.show_api_documentation">
+      <segment state="translated">
+        <source>user.settings.show_api_documentation</source>
+        <target>Посмотреть документацию по API</target>
+      </segment>
+    </unit>
+    <unit id="hAUCZVo" name="api_token.create_new">
+      <segment state="translated">
+        <source>api_token.create_new</source>
+        <target>Создать новый токен API</target>
+      </segment>
+    </unit>
+    <unit id="eX17pK8" name="api_token.level.read_only">
+      <segment state="translated">
+        <source>api_token.level.read_only</source>
+        <target>Только чтение</target>
+      </segment>
+    </unit>
+    <unit id="PMVjK5p" name="api_token.level.edit">
+      <segment state="translated">
+        <source>api_token.level.edit</source>
+        <target>Редактировать</target>
+      </segment>
+    </unit>
+    <unit id="1dVnGpy" name="api_token.level.admin">
+      <segment state="translated">
+        <source>api_token.level.admin</source>
+        <target>Админ</target>
+      </segment>
+    </unit>
+    <unit id="gY4wVwS" name="api_token.level.full">
+      <segment state="translated">
+        <source>api_token.level.full</source>
+        <target>Полный</target>
+      </segment>
+    </unit>
+    <unit id="OAFErYa" name="api_tokens.access_level.help">
+      <segment state="translated">
+        <source>api_tokens.access_level.help</source>
+        <target>Вы можете ограничить доступ к токену API. Доступ всегда ограничен правами вашего пользователя.</target>
+      </segment>
+    </unit>
+    <unit id="Xjs_v91" name="api_tokens.expiration_date.help">
+      <segment state="translated">
+        <source>api_tokens.expiration_date.help</source>
+        <target>После этой даты токен больше нельзя будет использовать. Если это поле оставить пустым, срок действия токена никогда не истечет.</target>
+      </segment>
+    </unit>
+    <unit id="0e7mD8q" name="api_tokens.your_token_is">
+      <segment state="translated">
+        <source>api_tokens.your_token_is</source>
+        <target>Ваш токен API</target>
+      </segment>
+    </unit>
+    <unit id="nre_kP_" name="api_tokens.please_save_it">
+      <segment state="translated">
+        <source>api_tokens.please_save_it</source>
+        <target>Пожалуйста, сохраните эту информацию - вы больше не сможете её увидеть!</target>
+      </segment>
+    </unit>
+    <unit id="b17FeDX" name="api_tokens.create_new.back_to_user_settings">
+      <segment state="translated">
+        <source>api_tokens.create_new.back_to_user_settings</source>
+        <target>Вернуться к настройкам пользователя</target>
+      </segment>
+    </unit>
+    <unit id="VVpmfIj" name="project.build.dont_check_quantity">
+      <segment state="translated">
+        <source>project.build.dont_check_quantity</source>
+        <target>Не проверять количество</target>
+      </segment>
+    </unit>
+    <unit id="AzYSIiX" name="project.build.dont_check_quantity.help">
+      <segment state="translated">
+        <source>project.build.dont_check_quantity.help</source>
+        <target>Если выбрана эта опция, выбранные количества будут удалены из запасов, без проверки фактически необходимого количества компонентов требуемых для сборки проекта.</target>
+      </segment>
+    </unit>
+    <unit id="tfOeMsC" name="part_list.action.invert_selection">
+      <segment state="translated">
+        <source>part_list.action.invert_selection</source>
+        <target>Наоборот</target>
+      </segment>
+    </unit>
+    <unit id="vvmdRvD" name="perm.api">
+      <segment state="translated">
+        <source>perm.api</source>
+        <target>API</target>
+      </segment>
+    </unit>
+    <unit id="VrWd7Fb" name="perm.api.access_api">
+      <segment state="translated">
+        <source>perm.api.access_api</source>
+        <target>Доступ через API</target>
+      </segment>
+    </unit>
+    <unit id="hLOM1pt" name="perm.api.manage_tokens">
+      <segment state="translated">
+        <source>perm.api.manage_tokens</source>
+        <target>Управление токенами API</target>
+      </segment>
+    </unit>
+    <unit id="dH8PTLd" name="user.settings.api_tokens.delete.title">
+      <segment state="translated">
+        <source>user.settings.api_tokens.delete.title</source>
+        <target>Вы уверены, что хотите удалить этот токен API?</target>
+      </segment>
+    </unit>
+    <unit id="1QAaz2a" name="user.settings.api_tokens.delete">
+      <segment state="translated">
+        <source>user.settings.api_tokens.delete</source>
+        <target>Удалить</target>
+      </segment>
+    </unit>
+    <unit id="bE8wV70" name="user.settings.api_tokens.delete.message">
+      <segment state="translated">
+        <source>user.settings.api_tokens.delete.message</source>
+        <target>Приложение, использующее этот токен, больше не будет иметь доступа к Part-DB. Это не может быть отменено!</target>
+      </segment>
+    </unit>
+    <unit id="sLAzIhh" name="api_tokens.deleted">
+      <segment state="translated">
+        <source>api_tokens.deleted</source>
+        <target>Токен API успешно удален!</target>
+      </segment>
+    </unit>
+    <unit id="TFTBy25" name="user.settings.api_tokens.no_api_tokens_yet">
+      <segment state="translated">
+        <source>user.settings.api_tokens.no_api_tokens_yet</source>
+        <target>Токены API еще не созданы.</target>
+      </segment>
+    </unit>
+    <unit id="8EdFeb6" name="api_token.ends_with">
+      <segment state="translated">
+        <source>api_token.ends_with</source>
+        <target>Заканчивается на</target>
+      </segment>
+    </unit>
+    <unit id="SgLdhCl" name="entity.select.creating_new_entities_not_allowed">
+      <segment state="translated">
+        <source>entity.select.creating_new_entities_not_allowed</source>
+        <target>Вы не имеете права создавать новые элементы этого типа! Пожалуйста, выберите один из существующих.</target>
+      </segment>
+    </unit>
+    <unit id="eUQd7dA" name="scan_dialog.mode">
+      <segment state="translated">
+        <source>scan_dialog.mode</source>
+        <target>Тип штрих-кода</target>
+      </segment>
+    </unit>
+    <unit id="7lPD8GF" name="scan_dialog.mode.auto">
+      <segment state="translated">
+        <source>scan_dialog.mode.auto</source>
+        <target>Автоматическое распознавание</target>
+      </segment>
+    </unit>
+    <unit id=".q3g3eL" name="scan_dialog.mode.ipn">
+      <segment state="translated">
+        <source>scan_dialog.mode.ipn</source>
+        <target>IPN штрих-код</target>
+      </segment>
+    </unit>
+    <unit id="jvHD3DB" name="scan_dialog.mode.internal">
+      <segment state="translated">
+        <source>scan_dialog.mode.internal</source>
+        <target>Штрих-код Part-DB</target>
+      </segment>
+    </unit>
+    <unit id="hrPuOzr" name="part_association.label">
+      <segment state="translated">
+        <source>part_association.label</source>
+        <target>Связывание компонентов</target>
+      </segment>
+    </unit>
+    <unit id="BntFEyV" name="part.edit.tab.associations">
+      <segment state="translated">
+        <source>part.edit.tab.associations</source>
+        <target>Связанные компоненты</target>
+      </segment>
+    </unit>
+    <unit id="J8xCiOb" name="part_association.edit.other_part">
+      <segment state="translated">
+        <source>part_association.edit.other_part</source>
+        <target>Связанный компонент</target>
+      </segment>
+    </unit>
+    <unit id="ov0J5BG" name="part_association.edit.type">
+      <segment state="translated">
+        <source>part_association.edit.type</source>
+        <target>Тип отношений</target>
+      </segment>
+    </unit>
+    <unit id="Rdl3E1f" name="part_association.edit.comment">
+      <segment state="translated">
+        <source>part_association.edit.comment</source>
+        <target>Примечания</target>
+      </segment>
+    </unit>
+    <unit id="rL3sVOB" name="part_association.edit.type.help">
+      <segment state="translated">
+        <source>part_association.edit.type.help</source>
+        <target>Здесь вы можете указать, как выбранный компонент связан с текущим компонентом.</target>
+      </segment>
+    </unit>
+    <unit id="ulXO3uA" name="part_association.table.from_this_part">
+      <segment state="translated">
+        <source>part_association.table.from_this_part</source>
+        <target>Ссылки из этого компонента на другие</target>
+      </segment>
+    </unit>
+    <unit id="hDksqGC" name="part_association.table.from">
+      <segment state="translated">
+        <source>part_association.table.from</source>
+        <target>От</target>
+      </segment>
+    </unit>
+    <unit id="QyRxFA7" name="part_association.table.type">
+      <segment state="translated">
+        <source>part_association.table.type</source>
+        <target>Отношение</target>
+      </segment>
+    </unit>
+    <unit id="6ZyXTCs" name="part_association.table.to">
+      <segment state="translated">
+        <source>part_association.table.to</source>
+        <target>К</target>
+      </segment>
+    </unit>
+    <unit id="Lwwff7k" name="part_association.type.compatible">
+      <segment state="translated">
+        <source>part_association.type.compatible</source>
+        <target>Совместим с</target>
+      </segment>
+    </unit>
+    <unit id="tgOSN9E" name="part_association.table.to_this_part">
+      <segment state="translated">
+        <source>part_association.table.to_this_part</source>
+        <target>Ссылки на этот компонент от других</target>
+      </segment>
+    </unit>
+    <unit id="J2hj9bY" name="part_association.type.other">
+      <segment state="translated">
+        <source>part_association.type.other</source>
+        <target>Другое (своя цена)</target>
+      </segment>
+    </unit>
+    <unit id="Sy57UAe" name="part_association.type.supersedes">
+      <segment state="translated">
+        <source>part_association.type.supersedes</source>
+        <target>Заменены</target>
+      </segment>
+    </unit>
+    <unit id="bpmECSR" name="part_association.edit.other_type">
+      <segment state="translated">
+        <source>part_association.edit.other_type</source>
+        <target>Самостоятельно выбранные отношения</target>
+      </segment>
+    </unit>
+    <unit id="JDsNNm8" name="part_association.edit.delete.confirm">
+      <segment state="translated">
+        <source>part_association.edit.delete.confirm</source>
+        <target>Вы действительно хотите удалить это отношение? Это не может быть отменено.</target>
+      </segment>
+    </unit>
+    <unit id="o3HcwZn" name="part_lot.edit.advanced">
+      <segment state="translated">
+        <source>part_lot.edit.advanced</source>
+        <target>Показать дополнительные параметры</target>
+      </segment>
+    </unit>
+    <unit id="f9LyaPM" name="part_lot.edit.vendor_barcode">
+      <segment state="translated">
+        <source>part_lot.edit.vendor_barcode</source>
+        <target>Штрих-код поставщика</target>
+      </segment>
+    </unit>
+    <unit id="wSvbQyH" name="part_lot.edit.vendor_barcode.help">
+      <segment state="translated">
+        <source>part_lot.edit.vendor_barcode.help</source>
+        <target>Если этот инвентарь уже имеет штрих-код (например, нанесенный поставщиком), вы можете ввести здесь содержимое штрих-кода, чтобы найти этот инвентарь путем сканирования штрих-кода.</target>
+      </segment>
+    </unit>
+    <unit id="2d3cSdD" name="scan_dialog.mode.vendor">
+      <segment state="translated">
+        <source>scan_dialog.mode.vendor</source>
+        <target>Штрих-код поставщика (настраивается в перечне компонентов)</target>
+      </segment>
+    </unit>
+    <unit id="ilCTQni" name="project.bom.instockAmount">
+      <segment state="translated">
+        <source>project.bom.instockAmount</source>
+        <target>Наличие на складе</target>
+      </segment>
+    </unit>
+    <unit id="2NZFail" name="collection_type.new_element.tooltip">
+      <segment state="translated">
+        <source>collection_type.new_element.tooltip</source>
+        <target>Этот элемент был создан недавно и еще не сохранен в базе данных.</target>
+      </segment>
+    </unit>
+    <unit id="USUaBZ0" name="part.merge.title">
+      <segment state="translated">
+        <source>part.merge.title</source>
+        <target>Объединить компонент</target>
+      </segment>
+    </unit>
+    <unit id="sCLZTwA" name="part.merge.title.into">
+      <segment state="translated">
+        <source>part.merge.title.into</source>
+        <target>в</target>
+      </segment>
+    </unit>
+    <unit id="nISUoQl" name="part.merge.confirm.title">
+      <segment state="translated">
+        <source>part.merge.confirm.title</source>
+        <target>Вы действительно хотите объединить &lt;b&gt;%other%&lt;/b&gt; в &lt;b&gt;%target%&lt;/b&gt;?</target>
+      </segment>
+    </unit>
+    <unit id="qxHNYfX" name="part.merge.confirm.message">
+      <segment state="translated">
+        <source>part.merge.confirm.message</source>
+        <target>&lt;b&gt;%other%&lt;/b&gt; будет удален, а текущий компонент сохранён с отображаемыми данными.</target>
+      </segment>
+    </unit>
+    <unit id="BY9.T4F" name="part.info.merge_modal.title">
+      <segment state="translated">
+        <source>part.info.merge_modal.title</source>
+        <target>Объединение компонентов</target>
+      </segment>
+    </unit>
+    <unit id="CasQeyD" name="part.info.merge_modal.other_part">
+      <segment state="translated">
+        <source>part.info.merge_modal.other_part</source>
+        <target>Другой компонент</target>
+      </segment>
+    </unit>
+    <unit id="96Qzc6H" name="part.info.merge_modal.other_into_this">
+      <segment state="translated">
+        <source>part.info.merge_modal.other_into_this</source>
+        <target>Объединить другой компонент с этим (удалить другой компонент, оставить этот)</target>
+      </segment>
+    </unit>
+    <unit id="Oe4cpRH" name="part.info.merge_modal.this_into_other">
+      <segment state="translated">
+        <source>part.info.merge_modal.this_into_other</source>
+        <target>Объединить этот компонент с другим (удалить этот компонент, оставить другой)</target>
+      </segment>
+    </unit>
+    <unit id="pO3q5CN" name="part.info.merge_btn">
+      <segment state="translated">
+        <source>part.info.merge_btn</source>
+        <target>Объединить компонент</target>
+      </segment>
+    </unit>
+    <unit id="efgWRwB" name="part.update_part_from_info_provider.btn">
+      <segment state="translated">
+        <source>part.update_part_from_info_provider.btn</source>
+        <target>Обновить компонент из источника информации</target>
+      </segment>
+    </unit>
+    <unit id="n6_Ec0h" name="info_providers.update_part.title">
+      <segment state="translated">
+        <source>info_providers.update_part.title</source>
+        <target>Обновление компонента из источника информации</target>
+      </segment>
+    </unit>
+    <unit id="lkIVIWr" name="part.merge.flash.please_review">
+      <segment state="translated">
+        <source>part.merge.flash.please_review</source>
+        <target>Данные еще не сохранены. Пожалуйста, просмотрите изменения и нажмите «Сохранить», чтобы сохранить данные.</target>
+      </segment>
+    </unit>
+    <unit id="0nL5IhK" name="user.edit.flash.permissions_fixed">
+      <segment state="translated">
+        <source>user.edit.flash.permissions_fixed</source>
+        <target>Разрешения, необходимые для других разрешений, отсутствовали. Это исправлено. Пожалуйста, проверьте, соответствуют ли разрешения вашим ожиданиям.</target>
+      </segment>
+    </unit>
+    <unit id="gjo2ZK7" name="permission.legend.dependency_note">
+      <segment state="translated">
+        <source>permission.legend.dependency_note</source>
+        <target>Обратите внимание, что некоторые операции авторизации зависят друг от друга. Если вы получили предупреждение о том, что отсутствующие разрешения были исправлены и для разрешения снова установлено значение «разрешено», вам также необходимо установить для зависимой операции значение «запрещено». Зависимости обычно располагаются справа от операции.</target>
+      </segment>
+    </unit>
+    <unit id="VFdWqOX" name="log.part_stock_changed.timestamp">
+      <segment state="translated">
+        <source>log.part_stock_changed.timestamp</source>
+        <target>Время</target>
+      </segment>
+    </unit>
+    <unit id="Hj7NX8C" name="part.info.withdraw_modal.timestamp">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.timestamp</source>
+        <target>Время действия</target>
+      </segment>
+    </unit>
+    <unit id="USYGK0J" name="part.info.withdraw_modal.timestamp.hint">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.timestamp.hint</source>
+        <target>Это поле позволяет указать действительную дату фактического выполнения складской операции, а не только дату ее регистрации. Это значение сохраняется в дополнительном поле записи журнала.</target>
+      </segment>
+    </unit>
+    <unit id="GIR36qJ" name="part.info.withdraw_modal.delete_lot_if_empty">
+      <segment state="translated">
+        <source>part.info.withdraw_modal.delete_lot_if_empty</source>
+        <target>Удалить этот инвентарь, когда он станет пустым</target>
+      </segment>
+    </unit>
+    <unit id="g_xxjdS" name="info_providers.search.error.client_exception">
+      <segment state="translated">
+        <source>info_providers.search.error.client_exception</source>
+        <target>Произошла ошибка при общении с поставщиком информации. Просмотрите конфигурацию этого поставщика и, если возможно, обновите токены OAuth.</target>
+      </segment>
+    </unit>
+    <unit id="9O_yLQy" name="eda_info.reference_prefix.placeholder">
+      <segment state="translated">
+        <source>eda_info.reference_prefix.placeholder</source>
+        <target>напр. R</target>
+      </segment>
+    </unit>
+    <unit id="3nLUWrL" name="eda_info.reference_prefix">
+      <segment state="translated">
+        <source>eda_info.reference_prefix</source>
+        <target>Ссылочный префикс</target>
+      </segment>
+    </unit>
+    <unit id="OTQU79e" name="eda_info.kicad_section.title">
+      <segment state="translated">
+        <source>eda_info.kicad_section.title</source>
+        <target>Специальные настройки KiCad</target>
+      </segment>
+    </unit>
+    <unit id="_Z4ARu6" name="eda_info.value">
+      <segment state="translated">
+        <source>eda_info.value</source>
+        <target>Стоимость</target>
+      </segment>
+    </unit>
+    <unit id="k5gOKhU" name="eda_info.value.placeholder">
+      <segment state="translated">
+        <source>eda_info.value.placeholder</source>
+        <target>напр. 100n</target>
+      </segment>
+    </unit>
+    <unit id="VphdbQ9" name="eda_info.exclude_from_bom">
+      <segment state="translated">
+        <source>eda_info.exclude_from_bom</source>
+        <target>Исключить компонент из спецификации</target>
+      </segment>
+    </unit>
+    <unit id="jDHzKDL" name="eda_info.exclude_from_board">
+      <segment state="translated">
+        <source>eda_info.exclude_from_board</source>
+        <target>Исключить деталь из печатной платы</target>
+      </segment>
+    </unit>
+    <unit id="t3P3j0i" name="eda_info.exclude_from_sim">
+      <segment state="translated">
+        <source>eda_info.exclude_from_sim</source>
+        <target>Исключить компонент из моделирования</target>
+      </segment>
+    </unit>
+    <unit id="P6keLR_" name="eda_info.kicad_symbol">
+      <segment state="translated">
+        <source>eda_info.kicad_symbol</source>
+        <target>Символ схемы KiCad</target>
+      </segment>
+    </unit>
+    <unit id="k_xjHgN" name="eda_info.kicad_symbol.placeholder">
+      <segment state="translated">
+        <source>eda_info.kicad_symbol.placeholder</source>
+        <target>напр. Transistor_BJT:BC547</target>
+      </segment>
+    </unit>
+    <unit id="TAm88A8" name="eda_info.kicad_footprint">
+      <segment state="translated">
+        <source>eda_info.kicad_footprint</source>
+        <target>посадочное место KiCad</target>
+      </segment>
+    </unit>
+    <unit id="y2hGwZr" name="eda_info.kicad_footprint.placeholder">
+      <segment state="translated">
+        <source>eda_info.kicad_footprint.placeholder</source>
+        <target>напр. Package_TO_SOT_THT:TO-92</target>
+      </segment>
+    </unit>
+    <unit id="2kt7qP7" name="part.edit.tab.eda">
+      <segment state="translated">
+        <source>part.edit.tab.eda</source>
+        <target>Информация EDA</target>
+      </segment>
+    </unit>
+    <unit id="G0dSeRY" name="api.api_endpoints.title">
+      <segment state="translated">
+        <source>api.api_endpoints.title</source>
+        <target>Конечные точки API</target>
+      </segment>
+    </unit>
+    <unit id="yFYyK5u" name="api.api_endpoints.partdb">
+      <segment state="translated">
+        <source>api.api_endpoints.partdb</source>
+        <target>Part-DB API</target>
+      </segment>
+    </unit>
+    <unit id="sb8URUl" name="api.api_endpoints.kicad_root_url">
+      <segment state="translated">
+        <source>api.api_endpoints.kicad_root_url</source>
+        <target>корневой URL KiCad API</target>
+      </segment>
+    </unit>
+    <unit id="UXT_MIM" name="eda_info.visibility">
+      <segment state="translated">
+        <source>eda_info.visibility</source>
+        <target>Принудительная видимость</target>
+      </segment>
+    </unit>
+    <unit id="NN5DZ4F" name="eda_info.visibility.help">
+      <segment state="translated">
+        <source>eda_info.visibility.help</source>
+        <target>По умолчанию видимость определяется автоматически в программном обеспечении EDA. Используя этот флажок, вы можете сделать компонент видимым или невидимым.</target>
+      </segment>
+    </unit>
+    <unit id="rBWy8Ol" name="part.withdraw.zero_amount">
+      <segment state="translated">
+        <source>part.withdraw.zero_amount</source>
+        <target>Вы пытались удалить/добавить нулевое количество! Никаких действий предпринято не было.</target>
+      </segment>
+    </unit>
+    <unit id="j_fy6Ur" name="login.flash.access_denied_please_login">
+      <segment state="translated">
+        <source>login.flash.access_denied_please_login</source>
+        <target>В доступе отказано! Пожалуйста, войдите, чтобы продолжить.</target>
+      </segment>
+    </unit>
+    <unit id="ZY3REby" name="attachment.upload_multiple_files">
+      <segment state="translated">
+        <source>attachment.upload_multiple_files</source>
+        <target>Загрузить файлы</target>
+      </segment>
+    </unit>
+    <unit id="OBO.21_" name="entity.mass_creation_flash">
+      <segment state="translated">
+        <source>entity.mass_creation_flash</source>
+        <target>Успешно создано %COUNT% элементов.</target>
       </segment>
     </unit>
   </file>

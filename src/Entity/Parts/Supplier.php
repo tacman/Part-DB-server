@@ -22,6 +22,8 @@ declare(strict_types=1);
 
 namespace App\Entity\Parts;
 
+use Doctrine\Common\Collections\Criteria;
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -33,10 +35,10 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
 use App\ApiPlatform\Filter\LikeFilter;
 use App\Entity\Attachments\Attachment;
-use App\Entity\Attachments\AttachmentTypeAttachment;
 use App\Repository\Parts\SupplierRepository;
 use App\Entity\PriceInformations\Orderdetail;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -60,8 +62,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity(repositoryClass: SupplierRepository::class)]
 #[ORM\Table('`suppliers`')]
-#[ORM\Index(name: 'supplier_idx_name', columns: ['name'])]
-#[ORM\Index(name: 'supplier_idx_parent_name', columns: ['parent_id', 'name'])]
+#[ORM\Index(columns: ['name'], name: 'supplier_idx_name')]
+#[ORM\Index(columns: ['parent_id', 'name'], name: 'supplier_idx_parent_name')]
 #[ApiResource(
     operations: [
         new Get(security: 'is_granted("read", object)'),
@@ -71,25 +73,27 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Delete(security: 'is_granted("delete", object)'),
     ],
     normalizationContext: ['groups' => ['supplier:read', 'company:read', 'api:basic:read'], 'openapi_definition_name' => 'Read'],
-    denormalizationContext: ['groups' => ['supplier:write', 'company:write', 'api:basic:write'], 'openapi_definition_name' => 'Write'],
+    denormalizationContext: ['groups' => ['supplier:write', 'company:write', 'api:basic:write', 'attachment:write', 'parameter:write'], 'openapi_definition_name' => 'Write'],
 )]
 #[ApiResource(
     uriTemplate: '/suppliers/{id}/children.{_format}',
-    operations: [new GetCollection(openapiContext: ['summary' => 'Retrieves the children elements of a supplier'],
-        security: 'is_granted("@manufacturers.read")')],
+    operations: [new GetCollection(
+        openapi: new Operation(summary: 'Retrieves the children elements of a supplier.'),
+        security: 'is_granted("@manufacturers.read")'
+    )],
     uriVariables: [
-        'id' => new Link(fromClass: Supplier::class, fromProperty: 'children')
+        'id' => new Link(fromProperty: 'children', fromClass: Supplier::class)
     ],
     normalizationContext: ['groups' => ['supplier:read', 'company:read', 'api:basic:read'], 'openapi_definition_name' => 'Read']
 )]
 #[ApiFilter(PropertyFilter::class)]
 #[ApiFilter(LikeFilter::class, properties: ["name", "comment"])]
-#[ApiFilter(DateFilter::class, strategy: DateFilter::EXCLUDE_NULL)]
+#[ApiFilter(DateFilter::class, strategy: DateFilterInterface::EXCLUDE_NULL)]
 #[ApiFilter(OrderFilter::class, properties: ['name', 'id', 'addedDate', 'lastModified'])]
 class Supplier extends AbstractCompany
 {
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
-    #[ORM\OrderBy(['name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    #[ORM\OrderBy(['name' => Criteria::ASC])]
     protected Collection $children;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
@@ -99,9 +103,9 @@ class Supplier extends AbstractCompany
     protected ?AbstractStructuralDBElement $parent = null;
 
     /**
-     * @var Collection<int, Orderdetail>|Orderdetail[]
+     * @var Collection<int, Orderdetail>
      */
-    #[ORM\OneToMany(targetEntity: Orderdetail::class, mappedBy: 'supplier')]
+    #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Orderdetail::class)]
     protected Collection $orderdetails;
 
     /**
@@ -110,23 +114,23 @@ class Supplier extends AbstractCompany
      */
     #[ORM\ManyToOne(targetEntity: Currency::class)]
     #[ORM\JoinColumn(name: 'default_currency_id')]
-    #[Selectable()]
+    #[Selectable]
     protected ?Currency $default_currency = null;
 
     /**
      * @var BigDecimal|null The shipping costs that have to be paid, when ordering via this supplier
      */
     #[Groups(['extended', 'full', 'import'])]
-    #[ORM\Column(name: 'shipping_costs', nullable: true, type: 'big_decimal', precision: 11, scale: 5)]
-    #[BigDecimalPositiveOrZero()]
+    #[ORM\Column(name: 'shipping_costs', type: 'big_decimal', precision: 11, scale: 5, nullable: true)]
+    #[BigDecimalPositiveOrZero]
     protected ?BigDecimal $shipping_costs = null;
 
     /**
      * @var Collection<int, SupplierAttachment>
      */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: SupplierAttachment::class, mappedBy: 'element', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'element', targetEntity: SupplierAttachment::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['name' => Criteria::ASC])]
     #[Groups(['supplier:read', 'supplier:write'])]
     #[ApiProperty(readableLink: false, writableLink: true)]
     protected Collection $attachments;
@@ -140,8 +144,8 @@ class Supplier extends AbstractCompany
     /** @var Collection<int, SupplierParameter>
      */
     #[Assert\Valid]
-    #[ORM\OneToMany(targetEntity: SupplierParameter::class, mappedBy: 'element', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['group' => 'ASC', 'name' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'element', targetEntity: SupplierParameter::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['group' => Criteria::ASC, 'name' => 'ASC'])]
     #[Groups(['supplier:read', 'supplier:write'])]
     #[ApiProperty(readableLink: false, writableLink: true)]
     protected Collection $parameters;

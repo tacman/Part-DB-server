@@ -67,6 +67,7 @@ class StructuralEntityType extends AbstractType
             $choice_loader = $options['choice_loader'];
             if ($choice_loader instanceof StructuralEntityChoiceLoader) {
                 $choice_loader->setAdditionalElement($data);
+                $choice_loader->setForm($form);
             }
         });
 
@@ -83,7 +84,7 @@ class StructuralEntityType extends AbstractType
             'subentities_of' => null,   //Only show entities with the given parent class
             'disable_not_selectable' => false,  //Disable entries with not selectable property
             'choice_value' => fn(?AbstractNamedDBElement $element) => $this->choice_helper->generateChoiceValue($element), //Use the element id as option value and for comparing items
-            'choice_loader' => fn(Options $options) => new StructuralEntityChoiceLoader($options, $this->builder, $this->em),
+            'choice_loader' => fn(Options $options) => new StructuralEntityChoiceLoader($options, $this->builder, $this->em, $this->translator),
             'choice_label' => fn(Options $options) => fn($choice, $key, $value) => $this->choice_helper->generateChoiceLabel($choice),
             'choice_attr' => fn(Options $options) => fn($choice, $key, $value) => $this->choice_helper->generateChoiceAttr($choice, $options),
             'group_by' => fn(AbstractNamedDBElement $element) => $this->choice_helper->generateGroupBy($element),
@@ -107,12 +108,8 @@ class StructuralEntityType extends AbstractType
         $resolver->setDefault('dto_value', null);
         $resolver->setAllowedTypes('dto_value', ['null', 'string']);
         //If no help text is explicitly set, we use the dto value as help text and show it as html
-        $resolver->setDefault('help', function (Options $options) {
-            return $this->dtoText($options['dto_value']);
-        });
-        $resolver->setDefault('help_html', function (Options $options) {
-            return $options['dto_value'] !== null;
-        });
+        $resolver->setDefault('help', fn(Options $options) => $this->dtoText($options['dto_value']));
+        $resolver->setDefault('help_html', fn(Options $options) => $options['dto_value'] !== null);
 
         $resolver->setDefault('attr', function (Options $options) {
             $tmp = [

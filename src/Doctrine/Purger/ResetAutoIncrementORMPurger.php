@@ -27,12 +27,9 @@ use Doctrine\Common\DataFixtures\Purger\PurgerInterface;
 use Doctrine\Common\DataFixtures\Sorter\TopologicalSorter;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Identifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 use function array_reverse;
 use function assert;
@@ -190,7 +187,6 @@ class ResetAutoIncrementORMPurger implements PurgerInterface, ORMPurgerInterface
 
             //Reseting autoincrement is only supported on MySQL platforms
             if ($platform instanceof AbstractMySQLPlatform ) { //|| $platform instanceof SqlitePlatform) {
-                $connection->beginTransaction();
                 $connection->executeQuery($this->getResetAutoIncrementSQL($tbl, $platform));
             }
         }
@@ -208,6 +204,8 @@ class ResetAutoIncrementORMPurger implements PurgerInterface, ORMPurgerInterface
         if ($platform instanceof AbstractMySQLPlatform) {
             return 'ALTER TABLE '.$tableIdentifier->getQuotedName($platform).' AUTO_INCREMENT = 1;';
         }
+
+        throw new \RuntimeException("Resetting autoincrement is not supported on this platform!");
 
         //This seems to cause problems somehow
         /*if ($platform instanceof SqlitePlatform) {
@@ -280,7 +278,7 @@ class ResetAutoIncrementORMPurger implements PurgerInterface, ORMPurgerInterface
 
         foreach ($classes as $class) {
             foreach ($class->associationMappings as $assoc) {
-                if (! $assoc['isOwningSide'] || $assoc['type'] !== ClassMetadataInfo::MANY_TO_MANY) {
+                if (! $assoc['isOwningSide'] || $assoc['type'] !== ClassMetadata::MANY_TO_MANY) {
                     continue;
                 }
 

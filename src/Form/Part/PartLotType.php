@@ -80,7 +80,7 @@ class PartLotType extends AbstractType
             'required' => false,
         ]);
 
-        $builder->add('expirationDate', DateType::class, [
+        $builder->add('expiration_date', DateType::class, [
             'label' => 'part_lot.edit.expiration_date',
             'attr' => [],
             'widget' => 'single_text',
@@ -101,6 +101,14 @@ class PartLotType extends AbstractType
             'label' => 'part_lot.owner',
             'required' => false,
             'help' => 'part_lot.owner.help',
+        ]);
+
+        $builder->add('user_barcode', TextType::class, [
+            'label' => 'part_lot.edit.user_barcode',
+            'help' => 'part_lot.edit.vendor_barcode.help',
+            'required' => false,
+            //Do not remove whitespace chars on the beginning and end of the string
+            'trim' => false,
         ]);
     }
 

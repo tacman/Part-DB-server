@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of Part-DB (https://github.com/Part-DB/Part-DB-symfony).
  *
@@ -17,7 +20,6 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 namespace App\Tests\Validator\Constraints;
 
 use App\Entity\UserSystem\User;
@@ -28,22 +30,21 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class ValidGoogleAuthCodeValidatorTest extends ConstraintValidatorTestCase
 {
 
-    protected function createValidator()
+    protected function createValidator(): ConstraintValidatorInterface
     {
         $googleAuth = new class implements GoogleAuthenticatorInterface
         {
 
             public function checkCode(TwoFactorInterface $user, string $code): bool
             {
-                if ($code === '123456') {
-                    return true;
-                }
-                return false;
+                return $code === '123456';
             }
 
             public function getQRContent(TwoFactorInterface $user): string
@@ -62,7 +63,7 @@ class ValidGoogleAuthCodeValidatorTest extends ConstraintValidatorTestCase
             {
                 //Leave empty
             }
-            public function getUser(): ?\Symfony\Component\Security\Core\User\UserInterface
+            public function getUser(): ?UserInterface
             {
                 return new class implements TwoFactorInterface, UserInterface {
 

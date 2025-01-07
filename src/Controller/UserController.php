@@ -45,7 +45,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route(path: '/user')]
@@ -78,7 +78,7 @@ class UserController extends BaseAdminController
      *
      * @throws Exception
      */
-    #[Route(path: '/{id}/edit/{timestamp}', requirements: ['id' => '\d+'], name: 'user_edit')]
+    #[Route(path: '/{id}/edit/{timestamp}', name: 'user_edit', requirements: ['id' => '\d+'])]
     #[Route(path: '/{id}/', requirements: ['id' => '\d+'])]
     public function edit(User $entity, Request $request, EntityManagerInterface $em,  PermissionPresetsHelper $permissionPresetsHelper,
         PermissionSchemaUpdater $permissionSchemaUpdater, ValidatorInterface $validator, ?string $timestamp = null): Response
@@ -166,11 +166,17 @@ class UserController extends BaseAdminController
         return $this->_new($request, $em, $importer, $entity);
     }
 
-    #[Route(path: '/{id}', name: 'user_delete', methods: ['DELETE'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/{id}', name: 'user_delete', requirements: ['id' => '\d+'], methods: ['DELETE'])]
     public function delete(Request $request, User $entity, StructuralElementRecursionHelper $recursionHelper): RedirectResponse
     {
+        //Disallow deleting the anonymous user
         if (User::ID_ANONYMOUS === $entity->getID()) {
-            throw new InvalidArgumentException('You can not delete the anonymous user! It is needed for permission checking without a logged in user');
+            throw new \LogicException('You can not delete the anonymous user! It is needed for permission checking without a logged in user');
+        }
+
+        //Disallow deleting the current logged-in user
+        if ($entity === $this->getUser()) {
+            throw new \LogicException('You can not delete your own user account!');
         }
 
         return $this->_delete($request, $entity, $recursionHelper);

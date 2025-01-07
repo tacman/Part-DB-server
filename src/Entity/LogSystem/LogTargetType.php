@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  * This file is part of Part-DB (https://github.com/Part-DB/Part-DB-symfony).
  *
@@ -17,7 +20,6 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 namespace App\Entity\LogSystem;
 
 use App\Entity\Attachments\Attachment;
@@ -29,6 +31,7 @@ use App\Entity\Parts\Footprint;
 use App\Entity\Parts\Manufacturer;
 use App\Entity\Parts\MeasurementUnit;
 use App\Entity\Parts\Part;
+use App\Entity\Parts\PartAssociation;
 use App\Entity\Parts\PartLot;
 use App\Entity\Parts\StorageLocation;
 use App\Entity\Parts\Supplier;
@@ -63,6 +66,8 @@ enum LogTargetType: int
     case PARAMETER = 18;
     case LABEL_PROFILE = 19;
 
+    case PART_ASSOCIATION = 20;
+
     /**
      * Returns the class name of the target type or null if the target type is NONE.
      * @return string|null
@@ -90,6 +95,7 @@ enum LogTargetType: int
             self::MEASUREMENT_UNIT => MeasurementUnit::class,
             self::PARAMETER => AbstractParameter::class,
             self::LABEL_PROFILE => LabelProfile::class,
+            self::PART_ASSOCIATION => PartAssociation::class,
         };
     }
 
@@ -116,7 +122,7 @@ enum LogTargetType: int
             }
         }
 
-        $elementClass = is_object($element) ? get_class($element) : $element;
+        $elementClass = is_object($element) ? $element::class : $element;
         //If no matching type was found, throw an exception
         throw new \InvalidArgumentException("The given class $elementClass is not a valid log target type.");
     }

@@ -28,24 +28,33 @@ use App\Entity\PriceInformations\Orderdetail;
 use App\Entity\PriceInformations\Pricedetail;
 use App\Serializer\PartNormalizer;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class PartNormalizerTest extends WebTestCase
 {
     /** @var PartNormalizer */
-    protected $service;
+    protected DenormalizerInterface&NormalizerInterface $service;
 
     protected function setUp(): void
     {
         //Get a service instance.
         self::bootKernel();
         $this->service = self::getContainer()->get(PartNormalizer::class);
+
+        //We need to inject the serializer into the normalizer, as we use it directly
+        $serializer = self::getContainer()->get('serializer');
+        $this->service->setNormalizer($serializer);
+        $this->service->setDenormalizer($serializer);
     }
 
     public function testSupportsNormalization(): void
     {
         //Normalizer must only support Part objects (and child classes)
         $this->assertFalse($this->service->supportsNormalization(new \stdClass()));
-        $this->assertTrue($this->service->supportsNormalization(new Part()));
+        //Part serialization should only work with csv
+        $this->assertFalse($this->service->supportsNormalization(new Part()));
+        $this->assertTrue($this->service->supportsNormalization(new Part(), 'csv'));
     }
 
     public function testNormalize(): void
@@ -59,11 +68,6 @@ class PartNormalizerTest extends WebTestCase
         $part->addPartLot($partLot1);
         $part->addPartLot($partLot2);
 
-        $data = $this->service->normalize($part, 'json', ['groups' => ['simple']]);
-        $this->assertSame('Test Part', $data['name']);
-        $this->assertSame(6.0, $data['total_instock']);
-        $this->assertSame('part', $data['type']);
-
         //Check that type field is not present in CSV export
         $data = $this->service->normalize($part, 'csv', ['groups' => ['simple']]);
         $this->assertSame('Test Part', $data['name']);
@@ -76,7 +80,10 @@ class PartNormalizerTest extends WebTestCase
         $this->assertFalse($this->service->supportsDenormalization(new \stdClass(), Part::class));
         $this->assertFalse($this->service->supportsDenormalization('string', Part::class));
         $this->assertFalse($this->service->supportsDenormalization(['a' => 'b'], \stdClass::class));
-        $this->assertTrue($this->service->supportsDenormalization(['a' => 'b'], Part::class));
+
+        //Only support denormalization, if CSV import
+        $this->assertFalse($this->service->supportsDenormalization(['a' => 'b'], Part::class));
+        $this->assertTrue($this->service->supportsDenormalization(['a' => 'b'], Part::class, null, ['partdb_import' => true]));
     }
 
     public function testDenormalize(): void
@@ -106,7 +113,7 @@ class PartNormalizerTest extends WebTestCase
         $this->assertCount(1, $part->getPartLots());
         /** @var PartLot $partLot */
         $partLot = $part->getPartLots()->first();
-        $this->assertSame(5.0, $partLot->getAmount());
+        $this->assertEqualsWithDelta(5.0, $partLot->getAmount(), PHP_FLOAT_EPSILON);
         $this->assertNotNull($partLot->getStorageLocation());
         $this->assertSame('Test Storage Location', $partLot->getStorageLocation()->getName());
 
@@ -126,7 +133,7 @@ class PartNormalizerTest extends WebTestCase
         //Must be in base currency
         $this->assertNull($priceDetail->getCurrency());
         //Must be for 1 part and 1 minimum order quantity
-        $this->assertSame(1.0, $priceDetail->getPriceRelatedQuantity());
-        $this->assertSame(1.0, $priceDetail->getMinDiscountQuantity());
+        $this->assertEqualsWithDelta(1.0, $priceDetail->getPriceRelatedQuantity(), PHP_FLOAT_EPSILON);
+        $this->assertEqualsWithDelta(1.0, $priceDetail->getMinDiscountQuantity(), PHP_FLOAT_EPSILON);
     }
 }

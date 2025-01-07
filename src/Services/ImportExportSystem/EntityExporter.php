@@ -23,8 +23,13 @@ declare(strict_types=1);
 namespace App\Services\ImportExportSystem;
 
 use App\Entity\Base\AbstractNamedDBElement;
+use App\Entity\Base\AbstractStructuralDBElement;
+use App\Helpers\FilenameSanatizer;
+use App\Serializer\APIPlatform\SkippableItemNormalizer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\CircularReferenceException;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use function is_array;
 use ReflectionClass;
 use ReflectionException;
@@ -96,8 +101,25 @@ class EntityExporter
                 'csv_delimiter' => $options['csv_delimiter'],
                 'xml_root_node_name' => 'PartDBExport',
                 'partdb_export' => true,
+                //Skip the item normalizer, so that we dont get IRIs in the output
+                SkippableItemNormalizer::DISABLE_ITEM_NORMALIZER => true,
+                //Handle circular references
+                AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $this->handleCircularReference(...),
             ]
         );
+    }
+
+    private function handleCircularReference(object $object, string $format, array $context): string
+    {
+        if ($object instanceof AbstractStructuralDBElement) {
+            return $object->getFullPath("->");
+        } elseif ($object instanceof AbstractNamedDBElement) {
+            return $object->getName();
+        } elseif ($object instanceof \Stringable) {
+            return $object->__toString();
+        }
+
+        throw new CircularReferenceException('Circular reference detected for object of type '.get_class($object));
     }
 
     /**
@@ -165,6 +187,9 @@ class EntityExporter
             $level = $options['level'];
 
             $filename = 'export_'.$entity_name.'_'.$level.'.'.$format;
+
+            //Sanitize the filename
+            $filename = FilenameSanatizer::sanitizeFilename($filename);
 
             // Create the disposition of the file
             $disposition = $response->headers->makeDisposition(

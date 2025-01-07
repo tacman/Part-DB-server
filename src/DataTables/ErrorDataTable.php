@@ -23,7 +23,6 @@ declare(strict_types=1);
 namespace App\DataTables;
 
 use App\DataTables\Column\RowClassColumn;
-use App\Entity\Parts\Part;
 use Omines\DataTablesBundle\Adapter\ArrayAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\DataTable;
@@ -67,8 +66,10 @@ class ErrorDataTable implements DataTableTypeInterface
 
         //Build the array containing data
         $data = [];
+        $n = 0;
         foreach ($options['errors'] as $error) {
-            $data[] = ['error' => $error];
+            $data['error_' . $n] = ['error' => $error];
+            $n++;
         }
 
         $dataTable->createAdapter(ArrayAdapter::class, $data);

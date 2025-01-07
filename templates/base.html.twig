@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ app.request.locale | replace({"_": "-"}) }}"
+      {#  For the UX translator, just use the language part (before the _. should be 2 chars), otherwise it finds no translations #}
+      data-symfony-ux-translator-locale="{{ app.request.locale|u.truncate(2)  }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,8 +19,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-starturl" content="/en/">
 
+    {# Turbo control headers #}
     <meta name="turbo-cache-control" content="no-cache">
-
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icon/apple-touch-icon.png') }}">
@@ -26,8 +30,9 @@
     <link rel="icon" type="image/png" href="{{  asset('icon/favicon-16x16.png') }}" sizes="16x16">
     <link rel="mask-icon" href="{{ asset('icon/safari-pinned-tab.svg') }}" color="#5bbad5">
 
-    <title>{% apply trim %}{% block title %}{{ partdb_title}}{% endblock %}{% endapply %}</title>
-    {% set current_page_title = block("title") %}
+    {# The content block is already escaped. so we must not escape it again. #}
+    <title>{% apply trim|raw %}{% block title %}{{ partdb_title }}{% endblock %}{% endapply %}</title>
+    {% set current_page_title = block("title")|raw %}
     {% block stylesheets %}
         {# Include the main bootstrap theme based on user/global setting #}
 
@@ -106,13 +111,13 @@
     {# Back to top buton #}
 
     <!-- Back to top button -->
-    <button id="back-to-top" class="btn btn-primary back-to-top" role="button" title="{% trans %}back_to_top{% endtrans %}"
+    <button id="back-to-top" class="btn btn-primary back-to-top btn-sm" role="button" title="{% trans %}back_to_top{% endtrans %}"
             {{ stimulus_controller('common/back_to_top') }} {{ stimulus_action('common/back_to_top', 'backToTop') }}>
         <i class="fas fa-angle-up fa-fw"></i>
     </button>
 
     {# Must be outside of the sidebar or it will be hidden too #}
-    <button class="btn btn-outline-dark btn-sm p-0 d-md-block d-none" type="button" id="sidebar-toggle-button" title="{% trans %}sidebar.big.toggle{% endtrans %}"
+    <button class="btn btn-outline-secondary btn-sm p-0 d-md-block d-none" type="button" id="sidebar-toggle-button" title="{% trans %}sidebar.big.toggle{% endtrans %}"
             {{ stimulus_controller('common/hide_sidebar') }} {{ stimulus_action('common/hide_sidebar', 'toggleSidebar') }}>
         <i class="fas fa-angle-left"></i>
     </button>

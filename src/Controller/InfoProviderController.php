@@ -23,28 +23,31 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Exceptions\AttachmentDownloadException;
+use App\Entity\Parts\Manufacturer;
+use App\Entity\Parts\Part;
 use App\Form\InfoProviderSystem\PartSearchType;
-use App\Form\Part\PartBaseType;
-use App\Services\Attachments\AttachmentSubmitHandler;
+use App\Services\InfoProviderSystem\ExistingPartFinder;
 use App\Services\InfoProviderSystem\PartInfoRetriever;
 use App\Services\InfoProviderSystem\ProviderRegistry;
-use App\Services\LogSystem\EventCommentHelper;
-use App\Services\Parts\PartFormHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Attribute\Route;
+
+use function Symfony\Component\Translation\t;
 
 #[Route('/tools/info_providers')]
 class InfoProviderController extends  AbstractController
 {
 
     public function __construct(private readonly ProviderRegistry $providerRegistry,
-        private readonly PartInfoRetriever $infoRetriever)
+        private readonly PartInfoRetriever $infoRetriever,
+        private readonly ExistingPartFinder $existingPartFinder
+    )
     {
 
     }
@@ -61,7 +64,8 @@ class InfoProviderController extends  AbstractController
     }
 
     #[Route('/search', name: 'info_providers_search')]
-    public function search(Request $request): Response
+    #[Route('/update/{target}', name: 'info_providers_update_part_search')]
+    public function search(Request $request, #[MapEntity(id: 'target')] ?Part $update_target, LoggerInterface $exceptionLogger): Response
     {
         $this->denyAccessUnlessGranted('@info_providers.create_parts');
 
@@ -70,16 +74,58 @@ class InfoProviderController extends  AbstractController
 
         $results = null;
 
+        //When we are updating a part, use its name as keyword, to make searching easier
+        //However we can only do this, if the form was not submitted yet
+        if ($update_target !== null && !$form->isSubmitted()) {
+            //Use the provider reference if available, otherwise use the manufacturer product number
+            $keyword = $update_target->getProviderReference()->getProviderId() ?? $update_target->getManufacturerProductNumber();
+            //Or the name if both are not available
+            if ($keyword === "") {
+                $keyword = $update_target->getName();
+            }
+
+            $form->get('keyword')->setData($keyword);
+
+            //If we are updating a part, which already has a provider, preselect that provider in the form
+            if ($update_target->getProviderReference()->getProviderKey() !== null) {
+                try {
+                    $form->get('providers')->setData([$this->providerRegistry->getProviderByKey($update_target->getProviderReference()->getProviderKey())]);
+                } catch (\InvalidArgumentException $e) {
+                    //If the provider is not found, just ignore it
+                }
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $keyword = $form->get('keyword')->getData();
             $providers = $form->get('providers')->getData();
 
-            $results = $this->infoRetriever->searchByKeyword(keyword: $keyword, providers: $providers);
+            $dtos = [];
+
+            try {
+                $dtos = $this->infoRetriever->searchByKeyword(keyword: $keyword, providers: $providers);
+            } catch (ClientException $e) {
+                $this->addFlash('error', t('info_providers.search.error.client_exception'));
+                $this->addFlash('error',$e->getMessage());
+                //Log the exception
+                $exceptionLogger->error('Error during info provider search: ' . $e->getMessage(), ['exception' => $e]);
+            }
+
+            // modify the array to an array of arrays that has a field for a matching local Part
+            // the advantage to use that format even when we don't look for local parts is that we
+            // always work with the same interface
+            $results = array_map(function ($result) {return ['dto' => $result, 'localPart' => null];}, $dtos);
+            if(!$update_target) {
+                foreach ($results as $index => $result) {
+                    $results[$index]['localPart'] = $this->existingPartFinder->findFirstExisting($result['dto']);
+                }
+            }
         }
 
         return $this->render('info_providers/search/part_search.html.twig', [
             'form' => $form,
             'results' => $results,
+            'update_target' => $update_target
         ]);
     }
 }

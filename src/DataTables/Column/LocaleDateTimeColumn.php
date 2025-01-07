@@ -47,7 +47,7 @@ class LocaleDateTimeColumn extends AbstractColumn
         }
 
         if (!$value instanceof DateTimeInterface) {
-            $value = new DateTime((string) $value);
+            $value = new \DateTimeImmutable((string) $value);
         }
 
         $formatValues = [
@@ -79,10 +79,7 @@ class LocaleDateTimeColumn extends AbstractColumn
         );
     }
 
-    /**
-     * @return $this
-     */
-    protected function configureOptions(OptionsResolver $resolver): self
+    protected function configureOptions(OptionsResolver $resolver): static
     {
         parent::configureOptions($resolver);
 

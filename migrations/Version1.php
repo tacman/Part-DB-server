@@ -160,7 +160,7 @@ EOD;
              21840,21840,21840,21840,21840,21520,21520,21520,20480,21520,20480,
              20480,20480,20480,20480,21504,20480),
               (
-              2,'admin', '${admin_pw}','','',
+              2,'admin', '$admin_pw','','',
               '','',1,1,21845,21845,21845,21,85,21,349525,21845,21845,21845,21845
               ,21845,21845,21845,21845,21845,21845,21845,21845,21845,21845,21845,
               21845,21845,21845,21845,21845,21845); 
@@ -234,5 +234,15 @@ EOD;
     public function sqLiteDown(Schema $schema): void
     {
         $this->warnIf(true, "Migration not needed for SQLite. Skipping...");
+    }
+
+    public function postgreSQLUp(Schema $schema): void
+    {
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
+    }
+
+    public function postgreSQLDown(Schema $schema): void
+    {
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
     }
 }

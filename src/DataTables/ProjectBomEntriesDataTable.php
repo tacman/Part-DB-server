@@ -25,7 +25,6 @@ namespace App\DataTables;
 use App\DataTables\Column\EntityColumn;
 use App\DataTables\Column\LocaleDateTimeColumn;
 use App\DataTables\Column\MarkdownColumn;
-use App\DataTables\Column\SelectColumn;
 use App\DataTables\Helpers\PartDataTableHelper;
 use App\Entity\Attachments\Attachment;
 use App\Entity\Parts\Part;
@@ -83,24 +82,31 @@ class ProjectBomEntriesDataTable implements DataTableTypeInterface
 
             ->add('name', TextColumn::class, [
                 'label' => $this->translator->trans('part.table.name'),
-                'orderField' => 'part.name',
+                'orderField' => 'NATSORT(part.name)',
                 'render' => function ($value, ProjectBOMEntry $context) {
                     if(!$context->getPart() instanceof Part) {
-                        return htmlspecialchars($context->getName());
-                    }
-                    if($context->getPart() instanceof Part) {
-                        $tmp = $this->partDataTableHelper->renderName($context->getPart());
-                        if($context->getName() !== null && $context->getName() !== '') {
-                            $tmp .= '<br><b>'.htmlspecialchars($context->getName()).'</b>';
-                        }
-                        return $tmp;
+                        return htmlspecialchars((string) $context->getName());
                     }
 
-                    //@phpstan-ignore-next-line
-                    throw new \Exception('This should never happen!');
+                    //Part exists if we reach this point
+
+                    $tmp = $this->partDataTableHelper->renderName($context->getPart());
+                    if($context->getName() !== null && $context->getName() !== '') {
+                        $tmp .= '<br><b>'.htmlspecialchars($context->getName()).'</b>';
+                    }
+                    return $tmp;
                 },
             ])
-
+            ->add('ipn', TextColumn::class, [
+                'label' => $this->translator->trans('part.table.ipn'),
+                'orderField' => 'NATSORT(part.ipn)',
+                'visible' => false,
+                'render' => function ($value, ProjectBOMEntry $context) {
+                    if($context->getPart() instanceof Part) {
+                        return $context->getPart()->getIpn();
+                    }
+                }
+            ])
             ->add('description', MarkdownColumn::class, [
                 'label' => $this->translator->trans('part.table.description'),
                 'data' => function (ProjectBOMEntry $context) {
@@ -116,18 +122,18 @@ class ProjectBomEntriesDataTable implements DataTableTypeInterface
             ->add('category', EntityColumn::class, [
                 'label' => $this->translator->trans('part.table.category'),
                 'property' => 'part.category',
-                'orderField' => 'category.name',
+                'orderField' => 'NATSORT(category.name)',
             ])
             ->add('footprint', EntityColumn::class, [
                 'property' => 'part.footprint',
                 'label' => $this->translator->trans('part.table.footprint'),
-                'orderField' => 'footprint.name',
+                'orderField' => 'NATSORT(footprint.name)',
             ])
 
             ->add('manufacturer', EntityColumn::class, [
                 'property' => 'part.manufacturer',
                 'label' => $this->translator->trans('part.table.manufacturer'),
-                'orderField' => 'manufacturer.name',
+                'orderField' => 'NATSORT(manufacturer.name)',
             ])
 
             ->add('mountnames', TextColumn::class, [
@@ -142,6 +148,28 @@ class ProjectBomEntriesDataTable implements DataTableTypeInterface
                 },
             ])
 
+            ->add('instockAmount', TextColumn::class, [
+                'label' => 'project.bom.instockAmount',
+                'visible' => false,
+                'render' => function ($value, ProjectBOMEntry $context) {
+                    if ($context->getPart() !== null) {
+                        return $this->partDataTableHelper->renderAmount($context->getPart());
+                    }
+
+                    return '';
+                }
+            ])
+            ->add('storageLocations', TextColumn::class, [
+                'label' => 'part.table.storeLocations',
+                'visible' => false,
+                'render' => function ($value, ProjectBOMEntry $context) {
+                    if ($context->getPart() !== null) {
+                        return $this->partDataTableHelper->renderStorageLocations($context->getPart());
+                    }
+
+                    return '';
+                }
+            ])
 
             ->add('addedDate', LocaleDateTimeColumn::class, [
                 'label' => $this->translator->trans('part.table.addedDate'),

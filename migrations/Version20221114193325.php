@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\Entity\UserSystem\PermissionData;
 use App\Migration\AbstractMultiPlatformMigration;
-use App\Security\Interfaces\HasPermissionsInterface;
+use App\Migration\WithPermPresetsTrait;
 use App\Services\UserSystem\PermissionPresetsHelper;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20221114193325 extends AbstractMultiPlatformMigration implements ContainerAwareInterface
 {
-    private ?ContainerInterface $container = null;
-    private ?PermissionPresetsHelper $permission_presets_helper = null;
+    use WithPermPresetsTrait;
 
     public function __construct(Connection $connection, LoggerInterface $logger)
     {
@@ -33,34 +29,6 @@ final class Version20221114193325 extends AbstractMultiPlatformMigration impleme
         return 'Update the permission system to the new system. Please note that all permissions will be reset!';
     }
 
-    private function getJSONPermDataFromPreset(string $preset): string
-    {
-        if ($this->permission_presets_helper === null) {
-            throw new \RuntimeException('PermissionPresetsHelper not set! There seems to be some issue with the dependency injection!');
-        }
-
-        //Create a virtual user on which we can apply the preset
-        $user = new class implements HasPermissionsInterface {
-
-            public PermissionData $perm_data;
-
-            public function __construct()
-            {
-                $this->perm_data = new PermissionData();
-            }
-
-            public function getPermissions(): PermissionData
-            {
-                return $this->perm_data;
-            }
-        };
-
-        //Apply the preset to the virtual user
-        $this->permission_presets_helper->applyPreset($user, $preset);
-
-        //And return the json data
-        return json_encode($user->getPermissions());
-    }
 
     private function addDataMigrationAndWarning(): void
     {
@@ -83,9 +51,12 @@ final class Version20221114193325 extends AbstractMultiPlatformMigration impleme
         //Reset the permissions of the admin user, to allow admin permissions (like the admins group)
         $this->addSql("UPDATE `users` SET permissions_data = '$admin' WHERE id = 2;");
 
+        //This warning should not be needed, anymore, as almost everybody should have updated to the new version by now, and this warning would just irritate new users of the software
+        /*
         $this->logger->warning('<bg=cyan;fg=black>!!! All permissions were reset! Please change them to the desired state, immediately !!!</>');
         $this->logger->warning('<bg=cyan;fg=black>!!! For security reasons all users (except the admin user) were disabled. Login with admin user and reenable other users after checking their permissions !!!</>');
         $this->logger->warning('<bg=cyan;fg=black>!!! For more infos see: https://github.com/Part-DB/Part-DB-symfony/discussions/193 !!!</>');
+        */
     }
 
     public function mySQLUp(Schema $schema): void
@@ -161,11 +132,15 @@ final class Version20221114193325 extends AbstractMultiPlatformMigration impleme
         $this->addSql('CREATE INDEX user_idx_username ON "users" (name)');
     }
 
-    public function setContainer(ContainerInterface $container = null)
+
+
+    public function postgreSQLUp(Schema $schema): void
     {
-        if ($container) {
-            $this->container = $container;
-            $this->permission_presets_helper = $container->get(PermissionPresetsHelper::class);
-        }
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
+    }
+
+    public function postgreSQLDown(Schema $schema): void
+    {
+        $this->warnIf(true, "Migration not needed for Postgres. Skipping...");
     }
 }

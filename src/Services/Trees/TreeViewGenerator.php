@@ -25,17 +25,19 @@ namespace App\Services\Trees;
 use App\Entity\Base\AbstractDBElement;
 use App\Entity\Base\AbstractNamedDBElement;
 use App\Entity\Base\AbstractStructuralDBElement;
-use App\Entity\ProjectSystem\Project;
 use App\Entity\Parts\Category;
 use App\Entity\Parts\Footprint;
 use App\Entity\Parts\Manufacturer;
 use App\Entity\Parts\StorageLocation;
 use App\Entity\Parts\Supplier;
+use App\Entity\ProjectSystem\Project;
 use App\Helpers\Trees\TreeViewNode;
 use App\Helpers\Trees\TreeViewNodeIterator;
+use App\Repository\NamedDBElementRepository;
 use App\Repository\StructuralDBElementRepository;
+use App\Services\Cache\ElementCacheTagGenerator;
+use App\Services\Cache\UserCacheKeyGenerator;
 use App\Services\EntityURLGenerator;
-use App\Services\UserSystem\UserCacheKeyGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use RecursiveIteratorIterator;
@@ -51,25 +53,72 @@ use function count;
  */
 class TreeViewGenerator
 {
-    public function __construct(protected EntityURLGenerator $urlGenerator, protected EntityManagerInterface $em, protected TagAwareCacheInterface $cache,
-        protected UserCacheKeyGenerator $keyGenerator, protected TranslatorInterface $translator, private UrlGeneratorInterface $router,
-        protected bool $rootNodeExpandedByDefault, protected bool $rootNodeEnabled)
+    public function __construct(
+        protected EntityURLGenerator $urlGenerator,
+        protected EntityManagerInterface $em,
+        protected TagAwareCacheInterface $cache,
+        protected ElementCacheTagGenerator $tagGenerator,
+        protected UserCacheKeyGenerator $keyGenerator,
+        protected TranslatorInterface $translator,
+        private readonly UrlGeneratorInterface $router,
+        protected bool $rootNodeExpandedByDefault,
+        protected bool $rootNodeEnabled,
+
+    ) {
+    }
+
+    /**
+     * Gets a TreeView list for the entities of the given class.
+     * The result is cached, if the full tree should be shown and no element should be selected.
+     *
+     * @param  string  $class  The class for which the treeView should be generated
+     * @param  AbstractStructuralDBElement|null  $parent  The root nodes in the tree should have this element as parent (use null, if you want to get all entities)
+     * @param  string  $mode  The link type that will be generated for the hyperlink section of each node (see EntityURLGenerator for possible values).
+     *                                                          Set to empty string, to disable href field.
+     * @param  AbstractDBElement|null  $selectedElement  The element that should be selected. If set to null, no element will be selected.
+     *
+     * @return TreeViewNode[] an array of TreeViewNode[] elements of the root elements
+     */
+    public function getTreeView(
+        string $class,
+        ?AbstractStructuralDBElement $parent = null,
+        string $mode = 'list_parts',
+        ?AbstractDBElement $selectedElement = null
+    ): array
     {
+        //If we just want a part of a tree, don't cache it or select a specific element, don't cache it
+        if ($parent instanceof AbstractStructuralDBElement || $selectedElement instanceof AbstractDBElement) {
+            return $this->getTreeViewUncached($class, $parent, $mode, $selectedElement);
+        }
+
+        $secure_class_name = $this->tagGenerator->getElementTypeCacheTag($class);
+        $key = 'sidebar_treeview_'.$this->keyGenerator->generateKey().'_'.$secure_class_name;
+        $key .= $mode;
+
+        return $this->cache->get($key, function (ItemInterface $item) use ($class, $parent, $mode, $selectedElement, $secure_class_name) {
+            // Invalidate when groups, an element with the class or the user changes
+            $item->tag(['groups', 'tree_treeview', $this->keyGenerator->generateKey(), $secure_class_name]);
+            return $this->getTreeViewUncached($class, $parent, $mode, $selectedElement);
+        });
     }
 
     /**
      * Gets a TreeView list for the entities of the given class.
      *
-     * @param string                           $class           The class for which the treeView should be generated
-     * @param AbstractStructuralDBElement|null $parent          The root nodes in the tree should have this element as parent (use null, if you want to get all entities)
-     * @param string                           $mode            The link type that will be generated for the hyperlink section of each node (see EntityURLGenerator for possible values).
+     * @param  string  $class  The class for which the treeView should be generated
+     * @param  AbstractStructuralDBElement|null  $parent  The root nodes in the tree should have this element as parent (use null, if you want to get all entities)
+     * @param  string  $mode  The link type that will be generated for the hyperlink section of each node (see EntityURLGenerator for possible values).
      *                                                          Set to empty string, to disable href field.
-     * @param AbstractDBElement|null           $selectedElement The element that should be selected. If set to null, no element will be selected.
+     * @param  AbstractDBElement|null  $selectedElement  The element that should be selected. If set to null, no element will be selected.
      *
      * @return TreeViewNode[] an array of TreeViewNode[] elements of the root elements
      */
-    public function getTreeView(string $class, ?AbstractStructuralDBElement $parent = null, string $mode = 'list_parts', ?AbstractDBElement $selectedElement = null): array
-    {
+    private function getTreeViewUncached(
+        string $class,
+        ?AbstractStructuralDBElement $parent = null,
+        string $mode = 'list_parts',
+        ?AbstractDBElement $selectedElement = null
+    ): array {
         $head = [];
 
         $href_type = $mode;
@@ -110,11 +159,11 @@ class TreeViewGenerator
             }
 
             if ($item->getNodes() !== null && $item->getNodes() !== []) {
-                $item->addTag((string) count($item->getNodes()));
+                $item->addTag((string)count($item->getNodes()));
             }
 
             if ($href_type !== '' && null !== $item->getId()) {
-                $entity = $this->em->getPartialReference($class, $item->getId());
+                $entity = $this->em->find($class, $item->getId());
                 $item->setHref($this->urlGenerator->getURL($entity, $href_type));
             }
 
@@ -155,12 +204,12 @@ class TreeViewGenerator
     {
         $icon = "fa-fw fa-treeview fa-solid ";
         return match ($class) {
-            Category::class => $icon . 'fa-tags',
-            StorageLocation::class => $icon . 'fa-cube',
-            Footprint::class => $icon . 'fa-microchip',
-            Manufacturer::class => $icon . 'fa-industry',
-            Supplier::class => $icon . 'fa-truck',
-            Project::class => $icon . 'fa-archive',
+            Category::class => $icon.'fa-tags',
+            StorageLocation::class => $icon.'fa-cube',
+            Footprint::class => $icon.'fa-microchip',
+            Manufacturer::class => $icon.'fa-industry',
+            Supplier::class => $icon.'fa-truck',
+            Project::class => $icon.'fa-archive',
             default => null,
         };
     }
@@ -170,8 +219,9 @@ class TreeViewGenerator
      * Gets a tree of TreeViewNode elements. The root elements has $parent as parent.
      * The treeview is generic, that means the href are null and ID values are set.
      *
-     * @param string                           $class  The class for which the tree should be generated
-     * @param AbstractStructuralDBElement|null $parent the parent the root elements should have
+     * @param  string  $class  The class for which the tree should be generated
+     * @phpstan-param class-string<AbstractNamedDBElement> $class
+     * @param  AbstractStructuralDBElement|null  $parent  the parent the root elements should have
      *
      * @return TreeViewNode[]
      */
@@ -184,22 +234,21 @@ class TreeViewGenerator
             throw new InvalidArgumentException('$parent must be of the type $class!');
         }
 
-        /** @var StructuralDBElementRepository $repo */
+        /** @var NamedDBElementRepository<AbstractNamedDBElement> $repo */
         $repo = $this->em->getRepository($class);
 
         //If we just want a part of a tree, don't cache it
         if ($parent instanceof AbstractStructuralDBElement) {
-            return $repo->getGenericNodeTree($parent);
+            return $repo->getGenericNodeTree($parent); //@phpstan-ignore-line PHPstan does not seem to recognize, that we have a StructuralDBElementRepository here, which have 1 argument
         }
 
-        $secure_class_name = str_replace('\\', '_', $class);
+        $secure_class_name = $this->tagGenerator->getElementTypeCacheTag($class);
         $key = 'treeview_'.$this->keyGenerator->generateKey().'_'.$secure_class_name;
 
         return $this->cache->get($key, function (ItemInterface $item) use ($repo, $parent, $secure_class_name) {
             // Invalidate when groups, an element with the class or the user changes
             $item->tag(['groups', 'tree_treeview', $this->keyGenerator->generateKey(), $secure_class_name]);
-
-            return $repo->getGenericNodeTree($parent);
+            return $repo->getGenericNodeTree($parent); //@phpstan-ignore-line
         });
     }
 }
